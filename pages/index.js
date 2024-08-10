@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 import axios from "axios";
 
 export default function Home() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState("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");
   const [prompt, setPrompt] = useState("");
   const [number, setNumber] = useState(9);
   const [results, setResults] = useState([]);
@@ -22,8 +22,7 @@ export default function Home() {
       setError(false);
       setLoading(true);
       axios
-        ///.post(`/api/images?t=${token}&p=${prompt}&n=${number}`)
-        .post(`/api/images?t=${process.env.OPENAI_API_KEY}&p=${prompt}&n=${number}`)
+        .post(`/api/images?t=${token}&p=${prompt}&n=${number}`)
         .then((res) => {
           setResults(res.data.result);
           setLoading(false);
