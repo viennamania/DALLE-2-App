@@ -5,6 +5,10 @@ import styles from "../styles/Home.module.css";
 
 import axios from "axios";
 
+import Image from "next/image";
+
+
+
 export default function Home() {
 
 
@@ -102,8 +106,20 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+
+        
+        <Image
+          src="/allga.jpg"
+          alt="Picture of the author"
+          width={400}
+          height={200}
+          className="rounded shadow"
+        />
+
+
+
         <h1 className={styles.title}>
-          Create images with <span className={styles.titleColor}>JENNA 2</span>
+          Create images with <span className={styles.titleColor}>JENNA & EVA 2.0</span>
         </h1>
         <p className={styles.description}>
           
