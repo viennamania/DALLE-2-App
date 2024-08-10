@@ -1,17 +1,25 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "../styles/Home.module.css";
 
 import axios from "axios";
 
 export default function Home() {
-  const [token, setToken] = useState("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");
+  const [token, setToken] = useState("");
   const [prompt, setPrompt] = useState("");
   const [number, setNumber] = useState(9);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+
+  useEffect(() => {
+
+    setToken(process.env.OPENAI_API_KEY);
+
+  }, []);
+
 
   function getImages() {
     if (token != "" && prompt != "") {
