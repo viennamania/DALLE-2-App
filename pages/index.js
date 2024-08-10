@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 import axios from "axios";
 
 export default function Home() {
-  const [token, setToken] = useState("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");
+  const [token, setToken] = useState("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");
   const [prompt, setPrompt] = useState("");
   const [number, setNumber] = useState(9);
   const [results, setResults] = useState([]);
@@ -18,7 +18,15 @@ export default function Home() {
 
 
   function getImages() {
+
+    console.log("token=", token);
+    console.log("prompt=", prompt);
+
     if (token != "" && prompt != "") {
+
+
+
+
       setError(false);
       setLoading(true);
       axios
@@ -28,11 +36,21 @@ export default function Home() {
           setLoading(false);
         })
         .catch((err) => {
+
           setLoading(false);
           setError(true);
+
+          console.log("err=", err);
+
+
+
         });
+
+
     } else {
+      
       setError(true);
+
     }
   }
 
@@ -63,7 +81,8 @@ export default function Home() {
           Create images with <span className={styles.titleColor}>DALL-E 2</span>
         </h1>
         <p className={styles.description}>
-          {/*}
+          
+          {/*
           <input
             id="token"
             type="text"
@@ -72,6 +91,7 @@ export default function Home() {
             placeholder={process.env.OPENAI_API_KEY}
           />
           */}
+          
           <input
             id="prompt"
             type="text"
