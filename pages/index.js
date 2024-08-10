@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 import axios from "axios";
 
 export default function Home() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState("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");
   const [prompt, setPrompt] = useState("");
   const [number, setNumber] = useState(9);
   const [results, setResults] = useState([]);
@@ -59,13 +59,15 @@ export default function Home() {
           Create images with <span className={styles.titleColor}>DALL-E 2</span>
         </h1>
         <p className={styles.description}>
+          {/*}
           <input
             id="token"
             type="text"
             value={token}
             onChange={(e) => setToken(e.target.value)}
-            placeholder="Bearer Token (sk-...)"
+            placeholder={process.env.OPENAI_API_KEY}
           />
+          */}
           <input
             id="prompt"
             type="text"
