@@ -14,11 +14,7 @@ export default function Home() {
   const [error, setError] = useState(false);
 
 
-  useEffect(() => {
 
-    setToken(process.env.OPENAI_API_KEY);
-
-  }, []);
 
 
   function getImages() {
@@ -26,7 +22,8 @@ export default function Home() {
       setError(false);
       setLoading(true);
       axios
-        .post(`/api/images?t=${token}&p=${prompt}&n=${number}`)
+        ///.post(`/api/images?t=${token}&p=${prompt}&n=${number}`)
+        .post(`/api/images?t=${process.env.OPENAI_API_KEY}&p=${prompt}&n=${number}`)
         .then((res) => {
           setResults(res.data.result);
           setLoading(false);
