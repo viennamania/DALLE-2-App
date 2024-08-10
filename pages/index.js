@@ -80,7 +80,7 @@ export default function Home() {
     // get openapi key from api
     useEffect(() => {
       axios
-        .get("/api/openapikey")
+        .get("https://dall-e.unove.space/api/openapikey")
         .then((res) => {
           setToken(res.data);
         })
@@ -91,7 +91,7 @@ export default function Home() {
     , []);
 
 
-    
+
 
   return (
 
