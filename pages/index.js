@@ -6,7 +6,9 @@ import styles from "../styles/Home.module.css";
 import axios from "axios";
 
 export default function Home() {
-  const [token, setToken] = useState("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");
+
+
+  const [token, setToken] = useState("");
   const [prompt, setPrompt] = useState("");
   const [number, setNumber] = useState(9);
   const [results, setResults] = useState([]);
@@ -18,6 +20,10 @@ export default function Home() {
 
 
   function getImages() {
+
+
+
+    
 
     console.log("token=", token);
     console.log("prompt=", prompt);
@@ -70,7 +76,26 @@ export default function Home() {
       });
   }
 
+
+    // get openapi key from api
+    useEffect(() => {
+      axios
+        .get("/api/openapikey")
+        .then((res) => {
+          setToken(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    , []);
+
+
+    
+
   return (
+
+
     <div className={styles.container}>
       <Head>
         <title>Create Images With DALL-E 2 App</title>
