@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 import axios from "axios";
 
 export default function Home() {
-  const [token, setToken] = useState("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");
+  const [token, setToken] = useState("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");
   const [prompt, setPrompt] = useState("");
   const [number, setNumber] = useState(9);
   const [results, setResults] = useState([]);
