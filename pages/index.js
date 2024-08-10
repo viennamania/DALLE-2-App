@@ -98,12 +98,12 @@ export default function Home() {
 
     <div className={styles.container}>
       <Head>
-        <title>Create Images With DALL-E 2 App</title>
+        <title>Create Images With GPGPU App</title>
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Create images with <span className={styles.titleColor}>DALL-E 2</span>
+          Create images with <span className={styles.titleColor}>JENNA 2</span>
         </h1>
         <p className={styles.description}>
           
