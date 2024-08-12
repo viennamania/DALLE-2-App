@@ -219,7 +219,22 @@ export default function Home() {
         
         {error ? ( <div className={styles.error}>Something went wrong. Try again.</div> ) : ( <></> )}
 
-        {loading && <p>Loading...</p>}
+        {loading && (
+          <>
+          
+            {/* loading image */}
+            <Image
+              src="/chatgpt-loading.gif"
+              alt="Logo"
+              width={100}
+              height={100}
+            />
+           
+
+          
+          </>
+
+        ) }
 
 
         <div className={styles.grid}>
