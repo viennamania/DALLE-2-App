@@ -12,9 +12,11 @@ import Image from "next/image";
 export default function Home() {
 
 
-  const [token, setToken] = useState("");
+  //const [token, setToken] = useState("");
+
+
   const [prompt, setPrompt] = useState("");
-  const [number, setNumber] = useState(9);
+  const [number, setNumber] = useState(1);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -26,21 +28,23 @@ export default function Home() {
   function getImages() {
 
 
-
-    
-
-    console.log("token=", token);
     console.log("prompt=", prompt);
 
-    if (token != "" && prompt != "") {
+    //if (token != "" && prompt != "") {
 
+    if (prompt != "") {
 
 
 
       setError(false);
       setLoading(true);
       axios
-        .post(`/api/images?t=${token}&p=${prompt}&n=${number}`)
+        
+        ////.post(`/api/images?t=${token}&p=${prompt}&n=${number}`)
+
+        .post(`/api/images?p=${prompt}&n=${number}`)
+
+
         .then((res) => {
           setResults(res.data.result);
           setLoading(false);
@@ -50,7 +54,12 @@ export default function Home() {
           setLoading(false);
           setError(true);
 
+          
           console.log("err=", err);
+
+          /*
+          - error Error: Your request was rejected as a result of our safety system. Your prompt may contain text that is not allowed by our safety system.
+          */
 
 
 
@@ -82,6 +91,7 @@ export default function Home() {
 
 
     // get openapi key from api
+    /*
     useEffect(() => {
       axios
         .get("/api/openapikey")
@@ -93,6 +103,7 @@ export default function Home() {
         });
     }
     , []);
+    */
 
 
 
@@ -109,19 +120,26 @@ export default function Home() {
 
         
         <Image
-          src="/allga.jpg"
-          alt="Picture of the author"
-          width={400}
-          height={200}
-          className="rounded shadow"
+          src="/logo-chatgpt.png"
+          alt="Logo"
+          width={100}
+          height={100}
         />
+        
 
 
 
         <h1 className={styles.title}>
-          Create images with <span className={styles.titleColor}>JENNA & EVA 2.0</span>
+          Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
         </h1>
-        <p className={styles.description}>
+
+        {/* margin top 20px */}
+     
+        <div
+          //className={styles.description}
+          style = {{width: "340px", marginTop: "20px"}}
+
+        >
           
           {/*
           <input
@@ -132,15 +150,36 @@ export default function Home() {
             placeholder={process.env.OPENAI_API_KEY}
           />
           */}
-          
+
+          {/* chatgpt logo small image */}
+          {/* align vertical center */}
+          {/* round full light gray border */}
+          {/* padding 1px */}
+          <Image
+            style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
+            src="/logo-chatgpt.png"
+            alt="Logo"
+            width={28}
+            height={28}
+          />
+
+          {/* width 100% */}
           <input
+            style = {{width: "80%"}}
             id="prompt"
             type="text"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Prompt"
+            //placeholder="Prompt"
+            placeholder="您想要制作的图像消息 ChatGPT 4o"
           />
+        </div>
+
+        
+        <div>
+          {/* hidden */}
           <input
+            style = {{display: "none"}}
             id="number"
             type="number"
             value={number}
@@ -148,10 +187,19 @@ export default function Home() {
             placeholder="Number of images"
             max="10"
           />
-          {"  "}
+
+
+
+
+          {/*}
           <button onClick={getImages}>Get {number} Images</button>
-        </p>
-        <small>
+          */}
+          <button onClick={getImages}>创建镜像</button>
+        </div>
+
+        <small
+          style = {{display: "none"}}
+        >
           Download as:{" "}
           <select
             id="type"
@@ -168,8 +216,12 @@ export default function Home() {
           Click the image below and save.
         </small>
         <br />
+        
         {error ? ( <div className={styles.error}>Something went wrong. Try again.</div> ) : ( <></> )}
+
         {loading && <p>Loading...</p>}
+
+
         <div className={styles.grid}>
           {results.map((result) => {
             return (
@@ -183,6 +235,16 @@ export default function Home() {
             );
           })}
         </div>
+
+        {/* allga.jpg margin top */}
+        <Image
+          style={ {marginTop: "100px"} }
+          src="/allga.jpg"
+          alt="Logo"
+          width={400}
+          height={200}
+        />
+
       </main>
     </div>
   );

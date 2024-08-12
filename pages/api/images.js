@@ -6,8 +6,16 @@ import { OpenAI } from 'openai';
 
 
 export default async function handler(req, res) {
+
+
   const openai = new OpenAI({
-    apiKey: req.query.t,
+    
+    
+    //apiKey: req.query.t,
+
+    apiKey: process.env.OPENAI_API_KEY,
+
+
   });
 
   const response = await openai.images.generate({
