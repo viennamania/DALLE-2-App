@@ -251,6 +251,19 @@ export default function Home() {
           })}
         </div>
 
+        {/* download button */}
+        {/* download image and anchor goto https://www.olgagpt.com/sub/deposit_request_krw.asp new window */}
+        {/* margin top 20px */}
+        <button
+          style = {{marginTop: "20px"}}
+          onClick={() => {
+            download(results[0].url);
+            window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
+            } }
+        >
+          下载并退出
+        </button>
+
       
 
 
