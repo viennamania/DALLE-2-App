@@ -244,6 +244,12 @@ export default function Home() {
 
       <footer className={styles.footer}>
 
+        <a
+          href="https://www.olgagpt.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
         {/* allga.jpg margin top */}
         {/* rouded border */}
         <Image
@@ -253,6 +259,8 @@ export default function Home() {
           width={400}
           height={200}
         />
+
+        </a>
 
       </footer>
 
