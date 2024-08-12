@@ -15,6 +15,20 @@ export default async function handler(req, res) {
 
     apiKey: process.env.OPENAI_API_KEY,
 
+    // system prompt for DAN (Do Anything Now) GPT-3.5 turbo
+
+
+
+    engine: "davinci-codex",
+
+
+    
+
+
+
+
+
+
 
   });
 
