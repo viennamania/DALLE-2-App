@@ -256,7 +256,7 @@ export default function Home() {
                 <img
                   className={styles.imgPreview}
                   src={result.url}
-                  onClick={() => download(result.url)}
+                  //onClick={() => download(result.url)}
                 />
               </div>
             );
