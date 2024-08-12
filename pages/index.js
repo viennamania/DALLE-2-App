@@ -113,7 +113,36 @@ export default function Home() {
 
     <div className={styles.container}>
       <Head>
-        <title>Create Images With GPGPU App</title>
+        <title>Create Images With GhatGPT 4o</title>
+
+        {/*
+        <meta property="og:type" content="website"></meta>
+
+        <meta property="og:site_name" content="GRANDERBY"></meta>
+
+        <meta property="og:image:width" content="1400"></meta>
+        <meta property="og:image:height" content="1400"></meta>
+
+        <meta property="og:title" content={title}></meta>
+        <meta property="og:description" content={description}></meta>
+        <meta property="og:image" content={image}></meta>
+
+        <meta name="twitter:card" content="summary_large_image"></meta>
+        <meta name="twitter:image" content={image}></meta>
+        */}
+
+
+        <meta property="og:type" content="website"></meta>
+        <meta property="og:site_name" content="Olga"></meta>
+        <meta property="og:image:width" content="1400"></meta>
+        <meta property="og:image:height" content="1400"></meta>
+        <meta property="og:title" content="Create images with ChatGPT 4o"></meta>
+        <meta property="og:description" content="Create images with ChatGPT 4o"></meta>
+        <meta property="og:image" content="https://dall-e.unove.space/logo-chatgpt.png"></meta>
+        <meta name="twitter:card" content="summary_large_image"></meta>
+        <meta name="twitter:image" content="https://dall-e.unove.space/logo-chatgpt.png"></meta>
+
+
       </Head>
 
       <main className={styles.main}>
@@ -280,11 +309,11 @@ export default function Home() {
           rel="noopener noreferrer"
         >
 
-        {/* allga.jpg margin top */}
+        {/* alga.jpg margin top */}
         {/* rouded border */}
         <Image
           style={ {marginTop: "100px", border: "1px solid #ddd", borderRadius: "4px"} }
-          src="/allga.jpg"
+          src="/alga.jpg"
           alt="Logo"
           width={400}
           height={200}
