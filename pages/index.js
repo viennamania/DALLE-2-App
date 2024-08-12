@@ -290,7 +290,10 @@ export default function Home() {
 
               {results.map((result) => {
                 return (
-                  <div className={styles.card}>
+                  <div
+                    key={result.url}
+                    className={styles.card}
+                  >
                     <img
                       className={styles.imgPreview}
                       src={result.url}
@@ -339,6 +342,7 @@ export default function Home() {
         <Image
           style={ {marginTop: "100px", border: "1px solid #ddd", borderRadius: "4px"} }
           src="/alga.jpg"
+          priority = {true}
           alt="Logo"
           width={400}
           height={200}
