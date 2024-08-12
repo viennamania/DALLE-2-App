@@ -71,6 +71,20 @@ export default async function handler(req, res) {
   });
 
 
+
+
+
+
+
+
+
+  const openaiForTranslation = new OpenAI({
+    
+    apiKey: process.env.OPENAI_API_KEY,
+
+    engine: "gpt-4o",
+
+  });
   const sourceText = req.query.p; // prompt from user
 
   // target language is english
@@ -102,10 +116,63 @@ export default async function handler(req, res) {
     targetLanguage: targetLanguage,
   });
   */
-  const userPrompt = sourceText;
+
+
+
+  /*
+      const { language, message } = formData;
+    const response = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `Translate this into ${language}: ${message}`,
+      temperature: 0.3,
+      max_tokens: 100,
+      top_p: 1.0,
+      frequency_penalty: 0.0,
+      presence_penalty: 0.0,
+    });
+
+    const translatedText = response.data.choices[0].text.trim();
+  */
+
+
+  const language = "en";
+  const message = sourceText;
+
+  //  error Error: This is a chat model and not supported in the v1/completions endpoint. Did you mean to use v1/chat/completions?
+
+
+
+
+  /*
+  const responsecreateCompletion = await openaiForTranslation.completions.create({
+
+
+    //model: "text-davinci-003",
+    // error Error: The model `text-davinci-003` has been deprecated, learn more here: https://platform.openai.com/docs/deprecations
+    // error Error: The model `davinci` has been deprecated, learn more here: https://platform.openai.com/docs/deprecations
+    model: "gpt-3.5-turbo",
+
+    prompt: `Translate this into ${language}: ${message}`,
+    temperature: 0.3,
+    max_tokens: 100,
+    top_p: 1.0,
+    frequency_penalty: 0.0,
+    presence_penalty: 0.0,
+  });
+
+  const translatedText = responsecreateCompletion.data.choices[0].text.trim();
+  */
+
+  const translatedText = sourceText;
+
+
+
+
+  const userPrompt = translatedText;
 
 
   console.log("userPrompt=", userPrompt);
+
 
 
 
