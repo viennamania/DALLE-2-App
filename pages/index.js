@@ -281,19 +281,29 @@ export default function Home() {
         ) }
 
 
-        <div className={styles.grid}>
-          {results.map((result) => {
-            return (
-              <div className={styles.card}>
-                <img
-                  className={styles.imgPreview}
-                  src={result.url}
-                  //onClick={() => download(result.url)}
-                />
-              </div>
-            );
-          })}
-        </div>
+        {loading ? (
+            <></>
+            
+        ) : (
+
+          <div className={styles.grid}>
+
+              {results.map((result) => {
+                return (
+                  <div className={styles.card}>
+                    <img
+                      className={styles.imgPreview}
+                      src={result.url}
+                      //onClick={() => download(result.url)}
+                    />
+                  </div>
+                );
+              })}
+
+          </div>
+
+        )}
+
 
         {/* download button */}
         {/* download image and anchor goto https://www.olgagpt.com/sub/deposit_request_krw.asp new window */}
