@@ -236,16 +236,26 @@ export default function Home() {
           })}
         </div>
 
+      
+
+
+
+      </main>
+
+      <footer className={styles.footer}>
+
         {/* allga.jpg margin top */}
+        {/* rouded border */}
         <Image
-          style={ {marginTop: "100px"} }
+          style={ {marginTop: "100px", border: "1px solid #ddd", borderRadius: "4px"} }
           src="/allga.jpg"
           alt="Logo"
           width={400}
           height={200}
         />
 
-      </main>
+      </footer>
+
     </div>
   );
 }
