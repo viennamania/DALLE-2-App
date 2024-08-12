@@ -2,7 +2,11 @@ import { OpenAI } from 'openai';
 
 
 
-
+//nextjs /pages/api
+export const config = {
+	//runtime: 'edge',
+	maxDuration: 180, // This function can run for a maximum of 60 seconds
+};
 
 
 export default async function handler(req, res) {
