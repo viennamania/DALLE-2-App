@@ -7,6 +7,21 @@ import { OpenAI } from 'openai';
 
 export default async function handler(req, res) {
 
+  // read local file /promot.txt
+
+  //const fs = require('fs');
+
+  //const prompt = fs.readFileSync(' /promot.txt', 'utf8');
+
+  // read from url
+  // https://dall-e.unove.space/prompt.txt
+
+  const axios = require('axios');
+
+  const prompt = await axios.get('https://dall-e.unove.space/prompt.txt')
+
+  
+
 
   const openai = new OpenAI({
     
@@ -17,11 +32,14 @@ export default async function handler(req, res) {
 
     // system prompt for DAN (Do Anything Now) GPT-3.5 turbo
 
+    prompt: prompt.data,
 
 
     //engine: "gpt-4o",
     //engine: "gpt-3.5-turbo",
     engine: "dall-e-3",
+
+    prompt: prompt,
 
  
 
