@@ -167,24 +167,52 @@ export default function Home() {
           {/* align vertical center */}
           {/* round full light gray border */}
           {/* padding 1px */}
-          <Image
-            style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
-            src="/logo-chatgpt.png"
-            alt="Logo"
-            width={28}
-            height={28}
-          />
+          {/* when loading show rotating loading image */}
+          {loading ? (
+            <Image
+              style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
+              src="/chatgpt-loading.gif"
+              alt="Logo"
+              width={28}
+              height={28}
+            />
+          ) : (
 
-          {/* width 100% */}
-          <input
-            style = {{width: "80%"}}
-            id="prompt"
-            type="text"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            //placeholder="Prompt"
-            placeholder="您想要制作的图像消息 ChatGPT 4o"
-          />
+            <Image
+              style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
+              src="/logo-chatgpt.png"
+              alt="Logo"
+              width={28}
+              height={28}
+            />
+
+          )}
+
+          {/* width 80% */}
+          {loading ? (
+            
+            <input
+              disabled
+              style = {{width: "80%"}}
+              id="prompt"
+              type="text"
+              value={prompt}
+              //placeholder="Prompt"
+              placeholder="Loading..."
+            />
+
+
+          ) : (
+            <input
+              style = {{width: "80%"}}
+              id="prompt"
+              type="text"
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              //placeholder="Prompt"
+              placeholder="您想要制作的图像消息 ChatGPT 4o"
+            />
+          )}
         </div>
 
         
@@ -206,7 +234,11 @@ export default function Home() {
           {/*}
           <button onClick={getImages}>Get {number} Images</button>
           */}
-          <button onClick={getImages}>创建镜像</button>
+          {loading ? (
+            <button hidden>创建镜像</button>
+          ) : (
+            <button onClick={getImages}>创建镜像</button>
+          )}
         </div>
 
         <small
