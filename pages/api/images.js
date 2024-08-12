@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     //engine: "gpt-3.5-turbo",
     engine: "dall-e-3",
 
-    prompt: prompt,
+    //prompt: prompt,
 
  
 
@@ -66,8 +66,48 @@ export default async function handler(req, res) {
 
   });
 
+
+  const sourceText = req.query.p; // prompt from user
+
+  // target language is english
+  const targetLanguage = "en"; 
+
+  /*
+  openai.translate({
+    text: sourceText,
+    targetLanguage: targetLanguage,
+  })
+    .then((response) => {
+      console.log(response.data.translations[0].translatedText);
+
+    } )
+    .catch((err) => {
+      console.error("Error:", err);
+    });
+  */
+
+  /*
+  const userPrompt = openai.translate({
+    text: sourceText,
+    targetLanguage: targetLanguage,
+  });
+  */
+  /*
+  const userPrompt = openai.images.targetLanguage({
+    text: sourceText,
+    targetLanguage: targetLanguage,
+  });
+  */
+  const userPrompt = sourceText;
+
+
+  console.log("userPrompt=", userPrompt);
+
+
+
   const response = await openai.images.generate({
-    prompt: req.query.p,
+    model: "dall-e-3",
+    prompt: userPrompt,
     n: parseInt(req.query.n),
     size: "1024x1024",
   });
