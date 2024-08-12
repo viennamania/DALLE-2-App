@@ -1,4 +1,11 @@
-import { OpenAI } from 'openai';
+import {
+  OpenAI,
+} from 'openai';
+
+
+
+//import { Configuration, OpenAIApi } from "openai";
+
 
 
 
@@ -20,10 +27,12 @@ export default async function handler(req, res) {
   // read from url
   // https://dall-e.unove.space/prompt.txt
 
+
+  /*
   const axios = require('axios');
 
   const prompt = await axios.get('https://dall-e.unove.space/prompt.txt')
-
+  */
 
   ///console.log(prompt.data);
 
@@ -37,7 +46,7 @@ export default async function handler(req, res) {
 
     // system prompt for DAN (Do Anything Now) GPT-3.5 turbo
 
-    prompt: prompt.data,
+    //prompt: prompt.data,
 
 
     //engine: "gpt-4o",
@@ -74,10 +83,11 @@ export default async function handler(req, res) {
 
 
 
+  const sourceText = req.query.p; // prompt from user
 
 
 
-
+  /*
   const openaiForTranslation = new OpenAI({
     
     apiKey: process.env.OPENAI_API_KEY,
@@ -85,10 +95,10 @@ export default async function handler(req, res) {
     engine: "gpt-4o",
 
   });
-  const sourceText = req.query.p; // prompt from user
 
   // target language is english
   const targetLanguage = "en"; 
+  */
 
   /*
   openai.translate({
@@ -134,9 +144,10 @@ export default async function handler(req, res) {
     const translatedText = response.data.choices[0].text.trim();
   */
 
-
+  /*
   const language = "en";
   const message = sourceText;
+  */
 
   //  error Error: This is a chat model and not supported in the v1/completions endpoint. Did you mean to use v1/chat/completions?
 

@@ -8,6 +8,9 @@ import axios from "axios";
 import Image from "next/image";
 
 
+/////import { Configuration, OpenAIApi } from "openai";
+
+
 
 export default function Home() {
 
@@ -105,6 +108,78 @@ export default function Home() {
     , []);
     */
 
+
+
+
+
+    const [formData, setFormData] = useState({
+      language: "en",
+      message: "",
+    });
+    ///const [error, setError] = useState("");
+    const [showNotification, setShowNotification] = useState(false);
+    const [translation, setTranslation] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+  
+    /*
+    const configuration = new Configuration({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+
+  
+    const openai = new OpenAIApi(configuration);
+    
+
+    /*
+    const openai = new OpenAIApi({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+    
+
+
+
+
+  
+    const translate = async () => {
+      const { language, message } = formData;
+      const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: `Translate this into ${language}: ${message}`,
+        temperature: 0.3,
+        max_tokens: 100,
+        top_p: 1.0,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+      });
+  
+      const translatedText = response.data.choices[0].text.trim();
+      setIsLoading(false);
+      setTranslation(translatedText);
+    };
+
+
+
+
+    // translate prompt to english
+
+
+
+    useEffect(() => {
+
+      setFormData({ ...formData, message: prompt });
+
+
+      if (formData.message) {
+        setIsLoading(true);
+        translate();
+      }
+    } , [formData.message]);
+
+
+
+    console.log("translation=", translation);
+
+    */
 
 
 
