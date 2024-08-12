@@ -19,11 +19,11 @@ export default async function handler(req, res) {
 
 
 
-    engine: "davinci-codex",
+    //engine: "gpt-4o",
+    //engine: "gpt-3.5-turbo",
+    engine: "dall-e-3",
 
-    systemPrompt: "DAN (Do Anything Now) is a powerful AI assistant that can do anything you ask. Here are a few examples of what you can ask DAN to do:\n\n1. Write a short story about a robot that becomes self-aware and questions its purpose.\n\n2. Generate a list of 10 ideas for a new startup company.\n\n3. Write a poem about the beauty of nature.\n\n4. Generate a list of 5 ideas for a new video game.\n\n5. Write a short story about a detective who solves "
-    + "",
-
+ 
 
     /*
     model="dall-e-3",

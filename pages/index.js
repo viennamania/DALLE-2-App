@@ -115,23 +115,6 @@ export default function Home() {
       <Head>
         <title>Create Images With GhatGPT 4o</title>
 
-        {/*
-        <meta property="og:type" content="website"></meta>
-
-        <meta property="og:site_name" content="GRANDERBY"></meta>
-
-        <meta property="og:image:width" content="1400"></meta>
-        <meta property="og:image:height" content="1400"></meta>
-
-        <meta property="og:title" content={title}></meta>
-        <meta property="og:description" content={description}></meta>
-        <meta property="og:image" content={image}></meta>
-
-        <meta name="twitter:card" content="summary_large_image"></meta>
-        <meta name="twitter:image" content={image}></meta>
-        */}
-
-
         <meta property="og:type" content="website"></meta>
         <meta property="og:site_name" content="Olga"></meta>
         <meta property="og:image:width" content="1400"></meta>
