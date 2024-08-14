@@ -13,7 +13,7 @@ import Replicate from "replicate";
 //nextjs /pages/api
 export const config = {
 	//runtime: 'edge',
-	maxDuration: 180, // This function can run for a maximum of 60 seconds
+	maxDuration: 180, // This function can run for a maximum of 180 seconds
 };
 
 export const maxDuration = 180; // 추가한 코드
@@ -124,7 +124,13 @@ undefined
   
   const output = await replicate.run(
 
-    "black-forest-labs/flux-dev", { input }
+    
+    //"black-forest-labs/flux-dev",
+
+    "black-forest-labs/flux-pro",
+
+
+    { input }
   );
   
 
@@ -141,9 +147,13 @@ undefined
   // openai image generation result format
   let  result = [];
 
+  /*
   output.forEach((element) => {
     result.push({ url: element });
   } );
+  */
+
+  result.push({ url: output });
 
 
 
