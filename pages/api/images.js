@@ -125,9 +125,9 @@ undefined
   const output = await replicate.run(
 
     
-    //"black-forest-labs/flux-dev",
+    "black-forest-labs/flux-dev",
 
-    "black-forest-labs/flux-pro",
+    //"black-forest-labs/flux-pro",
 
 
     { input }
@@ -147,13 +147,13 @@ undefined
   // openai image generation result format
   let  result = [];
 
-  /*
+  
   output.forEach((element) => {
     result.push({ url: element });
   } );
-  */
+  
 
-  result.push({ url: output });
+  //result.push({ url: output });
 
 
 
