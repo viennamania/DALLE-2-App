@@ -31,7 +31,7 @@ export default function Home() {
   function getImages() {
 
 
-    console.log("prompt=", prompt);
+    //console.log("prompt=", prompt);
 
     //if (token != "" && prompt != "") {
 
@@ -49,6 +49,9 @@ export default function Home() {
 
 
         .then((res) => {
+
+          //console.log("res=", res);
+
           setResults(res.data.result);
           setLoading(false);
         })
@@ -366,7 +369,9 @@ export default function Home() {
               {results.map((result) => {
                 return (
                   <div
-                    key={result.url}
+                    
+                  key={result.url}
+
                     className={styles.card}
                   >
                     <img

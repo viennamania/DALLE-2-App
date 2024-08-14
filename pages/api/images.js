@@ -2,6 +2,7 @@ import {
   OpenAI,
 } from 'openai';
 
+import Replicate from "replicate";
 
 
 //import { Configuration, OpenAIApi } from "openai";
@@ -35,6 +36,54 @@ export default async function handler(req, res) {
   */
 
   ///console.log(prompt.data);
+
+
+
+
+  const replicate = new Replicate({
+    auth: process.env.REPLICATE_API_TOKEN,
+
+    disable_safety_checker: true,
+  });
+
+
+  const input = {
+      prompt: req.query.p,
+  };
+
+
+  
+  const output = await replicate.run(
+
+    "black-forest-labs/flux-dev", { input }
+  );
+  
+
+  /*
+  const output = await replicate.run(
+    "zsxkib/stable-diffusion-safety-checker:8b5d150f3203e94cea146de593213f812fd3211993ac5dde89955783c5918583"
+    , { input }
+  );
+  */
+
+  console.log(output);
+
+
+  // openai image generation result format
+  let  result = [];
+
+  output.forEach((element) => {
+    result.push({ url: element });
+  } );
+
+
+
+  res.status(200).json({ result: result });
+
+  return;
+
+
+
 
 
   const openai = new OpenAI({
