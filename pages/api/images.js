@@ -106,13 +106,12 @@ undefined
 
   const replicate = new Replicate({
     auth: process.env.REPLICATE_API_TOKEN,
-
-    disable_safety_checker: true,
   });
 
 
   const input = {
       prompt: englishPrompt,
+      disable_safety_checker: true,
   };
 
 
