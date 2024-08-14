@@ -60,8 +60,14 @@ export default async function handler(req, res) {
   const completion = await openai.chat.completions.create({
     model: "gpt-4o",
     messages: [
-      {"role": "system", "content": "Translate this to English: " + prompt},
-      {"role": "user", "content": "Translate this to English: " + prompt},
+
+      {"role": "system", "content": "Translate this to English: " + prompt
+        + " and generate just translated text in English."},
+
+      {"role": "user", "content": "Translate this to English: " + prompt
+        + " and generate just translated text in English."},
+
+
     ],
     stream: true,
   });
