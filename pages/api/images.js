@@ -42,6 +42,67 @@ export default async function handler(req, res) {
 
 
 
+  let englishPrompt = '';
+
+  // translate prompt to english using OpenAI API
+  
+  const prompt = req.query.p; // prompt from user
+
+
+
+
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+
+  // translate prompt to english using OpenAI API
+
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4o",
+    messages: [
+      {"role": "system", "content": "Translate this to English: " + prompt},
+      {"role": "user", "content": "Translate this to English: " + prompt},
+    ],
+    stream: true,
+  });
+
+  for await (const chunk of completion) {
+    
+    console.log(
+      chunk.choices[0].delta.content + '\n'
+    );
+    /*
+    "
+Please
+ create
+ a
+ woman
+ with
+ a
+ beautiful
+ figure
+ standing
+."
+undefined
+    */
+
+    
+    if (chunk.choices[0].delta.content  != undefined && chunk.choices[0].delta.content  != null && chunk.choices[0].delta.content  != '') {
+      englishPrompt = englishPrompt + chunk.choices[0].delta.content;
+    }
+  
+  }
+
+
+  console.log("englishPrompt=", englishPrompt);
+
+
+
+
+
+
+
+
 
   const replicate = new Replicate({
     auth: process.env.REPLICATE_API_TOKEN,
@@ -51,7 +112,7 @@ export default async function handler(req, res) {
 
 
   const input = {
-      prompt: req.query.p,
+      prompt: englishPrompt,
   };
 
 
@@ -88,7 +149,7 @@ export default async function handler(req, res) {
 
 
 
-
+  /*
   const openai = new OpenAI({
     
     
@@ -109,11 +170,11 @@ export default async function handler(req, res) {
 
  
 
-    /*
-    model="dall-e-3",
-    prompt={"bad":"A computer engineer is in a datacenter in an aisle of rack\
-    servers, looking for the fault in a computer rack system."},
-    */
+    
+    //model="dall-e-3",
+    //prompt={"bad":"A computer engineer is in a datacenter in an aisle of rack\
+    //servers, looking for the fault in a computer rack system."},
+    
 
 
 
@@ -131,6 +192,7 @@ export default async function handler(req, res) {
 
   });
 
+  */
 
 
 
