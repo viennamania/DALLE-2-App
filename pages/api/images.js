@@ -49,6 +49,18 @@ export default async function handler(req, res) {
   const prompt = req.query.p; // prompt from user
 
 
+  // check prompt is english or not
+
+  // if prompt is not english, translate it to english
+
+  // paterm = [\u0600-\u06FF\u0750-\u077F] // Arabic
+  const isEnglish = prompt.match(/[\u0600-\u06FF\u0750-\u077F]/) == null
+
+
+
+
+
+  if (isEnglish) {
 
 
   const openai = new OpenAI({
@@ -100,12 +112,17 @@ undefined
   }
 
 
+
+
+  } else {
+
+    englishPrompt = prompt;
+
+  }
+
+
+
   console.log("englishPrompt=", englishPrompt);
-
-
-
-
-
 
 
 
