@@ -16,6 +16,9 @@ export const config = {
 	maxDuration: 180, // This function can run for a maximum of 60 seconds
 };
 
+export const maxDuration = 180; // 추가한 코드
+export const dynamic = 'force-dynamic'; // 추가한 코드
+
 
 export default async function handler(req, res) {
 
