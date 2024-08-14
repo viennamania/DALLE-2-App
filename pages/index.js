@@ -348,8 +348,8 @@ export default function Home() {
             <Image
               src="/chatbot-loading.gif"
               alt="Logo"
-              width={500}
-              height={300}
+              width={400}
+              height={200}
             />
            
 
