@@ -346,9 +346,9 @@ export default function Home() {
           
             {/* loading image */}
             <Image
-              src="/chatgpt-loading.gif"
+              src="/chatbot-loading.gif"
               alt="Logo"
-              width={100}
+              width={200}
               height={100}
             />
            
@@ -391,7 +391,7 @@ export default function Home() {
         {/* download button */}
         {/* download image and anchor goto https://www.olgagpt.com/sub/deposit_request_krw.asp new window */}
         {/* margin top 20px */}
-        {results.length > 0 && (
+        {!loading && results.length > 0 && (
           <button
             style = {{marginTop: "20px"}}
             onClick={() => {
