@@ -99,9 +99,11 @@ export default async function handler(req, res) {
 
     for await (const chunk of completion) {
       
-      console.log(
-        chunk.choices[0].delta.content + '\n'
-      );
+      //console.log(
+      //  chunk.choices[0].delta.content + '\n'
+      //);
+
+
       /*
       "
   Please
@@ -138,7 +140,7 @@ export default async function handler(req, res) {
 
 
 
-  console.log("englishPrompt=", englishPrompt);
+  //console.log("englishPrompt=", englishPrompt);
 
 
   //const negative_prompt = "bra, covered nipples, underwear, EasyNegative, paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, glans, extra fingers, fewer fingers, ((watermark:2)), (white letters:1), (multi nipples), lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, bad feet, {Multiple people}, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worstquality, low quality, normal quality, jpegartifacts, signature, watermark, blurry, bad feet, cropped, poorly drawn hands, poorly drawn face,mutation,deformed,worst quality,low quality,normal quality, jpeg artifacts, signature, extra fingers, fewer digits, extra limbs,extra arms,extra legs,malformed limbs,fused fingers, too many fingers, long neck, cross-eyed, mutated hands, polar lowres, bad body, bad proportions, gross proportions, text, error, missing fingers, missing arms, extra arms, missing legs, wrong feet bottom render,extra digit, abdominal stretch, glans, pants, briefs, knickers, kecks, thong, {{fused fingers}}, {{bad body}}";
@@ -171,9 +173,9 @@ export default async function handler(req, res) {
   // random model
 
   
-  let randomModel = Math.floor(Math.random() * 10);
+  let randomModel = Math.floor(Math.random() * 8);
 
-  ///randomModel = 5;
+  ////randomModel = 5;
 
 
   console.log("randomModel=", randomModel);
@@ -227,6 +229,7 @@ export default async function handler(req, res) {
 
     const data = await fal.subscribe("fal-ai/flux-realism", {
       input: {
+        ///seed: 4072637067,
         prompt: englishPrompt,
         num_images: 1,
         enable_safety_checker: false,
@@ -239,6 +242,8 @@ export default async function handler(req, res) {
         }
       },
     });
+
+    ///console.log(data);
 
     //const output = data.images[0]?.url;
     // output is array of images
