@@ -173,7 +173,7 @@ export default async function handler(req, res) {
   
   let randomModel = Math.floor(Math.random() * 10);
 
-  randomModel = 5;
+  ///randomModel = 5;
 
 
   console.log("randomModel=", randomModel);
