@@ -53,72 +53,71 @@ export default async function handler(req, res) {
 
   // if prompt is not english, translate it to english
 
-  // paterm = [\u0600-\u06FF\u0750-\u077F] // Arabic
-  const isEnglish = prompt.match(/[\u0600-\u06FF\u0750-\u077F]/) == null
+  // prompt = [\u0600-\u06FF\u0750-\u077F] // Arabic
+  //const isEnglish = prompt.match(/[\u0600-\u06FF\u0750-\u077F]/) == null
 
 
 
 
 
-  if (isEnglish) {
+  //if (!isEnglish) {
+
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+
+    // translate prompt to english using OpenAI API
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+
+        {"role": "system", "content": "Translate this to English: " + prompt
+          + " and generate just translated text in English. If this prompt: " + prompt + " is already in English, please respond with just the original prompt."},
+
+        {"role": "user", "content": "Translate this to English: " + prompt
+          + " and generate just translated text in English. If this prompt: " + prompt + " is already in English, please respond with just the original prompt."},
 
 
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
+      ],
+      stream: true,
+    });
 
-  // translate prompt to english using OpenAI API
+    for await (const chunk of completion) {
+      
+      console.log(
+        chunk.choices[0].delta.content + '\n'
+      );
+      /*
+      "
+  Please
+  create
+  a
+  woman
+  with
+  a
+  beautiful
+  figure
+  standing
+  ."
+  undefined
+      */
 
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4o",
-    messages: [
-
-      {"role": "system", "content": "Translate this to English: " + prompt
-        + " and generate just translated text in English."},
-
-      {"role": "user", "content": "Translate this to English: " + prompt
-        + " and generate just translated text in English."},
-
-
-    ],
-    stream: true,
-  });
-
-  for await (const chunk of completion) {
+      
+      if (chunk.choices[0].delta.content  != undefined && chunk.choices[0].delta.content  != null && chunk.choices[0].delta.content  != '') {
+        englishPrompt = englishPrompt + chunk.choices[0].delta.content;
+      }
     
-    console.log(
-      chunk.choices[0].delta.content + '\n'
-    );
-    /*
-    "
-Please
- create
- a
- woman
- with
- a
- beautiful
- figure
- standing
-."
-undefined
-    */
-
-    
-    if (chunk.choices[0].delta.content  != undefined && chunk.choices[0].delta.content  != null && chunk.choices[0].delta.content  != '') {
-      englishPrompt = englishPrompt + chunk.choices[0].delta.content;
     }
-  
-  }
 
 
 
 
-  } else {
+  //} else {
 
-    englishPrompt = prompt;
+  //  englishPrompt = prompt;
 
-  }
+  //}
 
 
 
