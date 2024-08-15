@@ -79,7 +79,8 @@ export default function Home() {
     }
   }
 
-  const [type, setType] = useState("webp");
+  //const [type, setType] = useState("webp");
+  const [type, setType] = useState("png");
 
   function download(url) {
     axios

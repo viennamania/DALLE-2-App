@@ -5,9 +5,7 @@ import {
 import Replicate from "replicate";
 
 
-//import { Configuration, OpenAIApi } from "openai";
-
-
+import * as fal from "@fal-ai/serverless-client";
 
 
 //nextjs /pages/api
@@ -18,6 +16,24 @@ export const config = {
 
 export const maxDuration = 180; // 추가한 코드
 export const dynamic = 'force-dynamic'; // 추가한 코드
+
+
+
+
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const replicate = new Replicate({
+  auth: process.env.REPLICATE_API_TOKEN,
+});
+
+fal.config({
+  credentials: process.env.FAL_KEY,
+});
+
+
 
 
 export default async function handler(req, res) {
@@ -62,9 +78,7 @@ export default async function handler(req, res) {
 
   //if (!isEnglish) {
 
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
+
 
     // translate prompt to english using OpenAI API
 
@@ -136,12 +150,10 @@ export default async function handler(req, res) {
   + "text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck";
 
 
-  const replicate = new Replicate({
-    auth: process.env.REPLICATE_API_TOKEN,
-  });
 
 
-  const input = {
+
+  let input = {
       ///seed: 4234234,
 
       prompt: englishPrompt,
@@ -158,9 +170,11 @@ export default async function handler(req, res) {
 
   // random model
 
-  const randomModel = Math.floor(Math.random() * 5);
+  const randomModel = Math.floor(Math.random() * 6);
 
   console.log("randomModel=", randomModel);
+
+  let hosting = "replicate";
 
   if (randomModel == 0) {
     model = "black-forest-labs/flux-schnell";
@@ -179,6 +193,11 @@ export default async function handler(req, res) {
     //model = "lucataco/dreamshaper-xl-turbo:0a1710e0187b01a255302738ca0158ff02a22f4638679533e111082f9dd1b615";
   
     model = "black-forest-labs/flux-schnell";
+  } else if (randomModel == 5) {
+
+    hosting = "fal";
+
+    model = "fal-ai/flux-realism";
   }
 
   ////model = "lucataco/realistic-vision-v5:8aeee50b868f06a1893e3b95a8bb639a8342e846836f3e0211d6a13c158505b1";
@@ -189,21 +208,41 @@ export default async function handler(req, res) {
 
 
 
-  const output = await replicate.run(
+  let output = [];
 
-    model,
+  if (hosting == "replicate") {
+    output = await replicate.run(
 
-    //"bytedance/sdxl-lightning-4step:5f24084160c9089501c1b3545d9be3c27883ae2239b6f412990e82d4a6210f8f",
-
-    //"black-forest-labs/flux-schnell",
-    
-    //"black-forest-labs/flux-dev",
-
-    //"black-forest-labs/flux-pro",
+      model,
+      { input }
+    );
+  
+  } else if (hosting == "fal") {
 
 
-    { input }
-  );
+
+    const data = await fal.subscribe("fal-ai/flux-realism", {
+      input: {
+        prompt: englishPrompt,
+        num_images: 1,
+        enable_safety_checker: false,
+
+      },
+      logs: true,
+      onQueueUpdate: (update) => {
+        if (update.status === "IN_PROGRESS") {
+          update.logs.map((log) => log.message).forEach(console.log);
+        }
+      },
+    });
+
+    //const output = data.images[0]?.url;
+    // output is array of images
+    output = [
+      data.images[0]?.url,
+    ];
+
+  }
   
   
 
