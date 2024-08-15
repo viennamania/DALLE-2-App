@@ -140,8 +140,9 @@ export default async function handler(req, res) {
   
   const output = await replicate.run(
 
+    "black-forest-labs/flux-schnell",
     
-    "black-forest-labs/flux-dev",
+    //"black-forest-labs/flux-dev",
 
     //"black-forest-labs/flux-pro",
 
