@@ -170,7 +170,11 @@ export default async function handler(req, res) {
 
   // random model
 
-  const randomModel = Math.floor(Math.random() * 6);
+  
+  let randomModel = Math.floor(Math.random() * 10);
+
+  randomModel = 5;
+
 
   console.log("randomModel=", randomModel);
 
@@ -193,7 +197,7 @@ export default async function handler(req, res) {
     //model = "lucataco/dreamshaper-xl-turbo:0a1710e0187b01a255302738ca0158ff02a22f4638679533e111082f9dd1b615";
   
     model = "black-forest-labs/flux-schnell";
-  } else if (randomModel == 5) {
+  } else if (randomModel >= 5) {
 
     hosting = "fal";
 
