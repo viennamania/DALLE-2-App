@@ -65,6 +65,9 @@ export default async function handler(req, res) {
   const prompt = req.query.p; // prompt from user
 
 
+
+  const userid = req.query?.userid;
+
   // check prompt is english or not
 
   // if prompt is not english, translate it to english
@@ -288,6 +291,19 @@ export default async function handler(req, res) {
   
 
   //result.push({ url: output });
+
+
+  /// https://www.olgagpt.com/sub/createNFT.asp?userid=aaaa2&image=https://fal.media/files/tiger/ibDYR3ayLebb0wzzlKIPH.png
+
+  const url = "https://www.olgagpt.com/sub/createNFT.asp?userid=" + userid + "&image=" + output[0];
+
+  console.log(url);
+
+
+  const callback = await fetch(url);
+
+  //console.log(callback);
+
 
 
 

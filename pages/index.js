@@ -7,12 +7,25 @@ import axios from "axios";
 
 import Image from "next/image";
 
+import { useSearchParams } from 'next/navigation'
+ 
 
 /////import { Configuration, OpenAIApi } from "openai";
 
 
 
 export default function Home() {
+
+  // get parameter from url
+
+  const searchParams = useSearchParams()
+ 
+
+  const userid = searchParams.get('userid')
+
+  console.log("userid=", userid);
+
+
 
 
   //const [token, setToken] = useState("");
@@ -45,7 +58,7 @@ export default function Home() {
         
         ////.post(`/api/images?t=${token}&p=${prompt}&n=${number}`)
 
-        .post(`/api/images?p=${prompt}&n=${number}`)
+        .post(`/api/images?p=${prompt}&n=${number}&userid=${userid}`)
 
 
         .then((res) => {
@@ -225,10 +238,16 @@ export default function Home() {
         </h1>
 
         {/* margin top 20px */}
+        {/* 镜像制作费用 50 POWER */}
+        <div
+          style = {{marginTop: "20px"}}
+        >
+          <h3>* 镜像制作费用 50 POWER</h3>
+        </div>
      
         <div
           //className={styles.description}
-          style = {{width: "340px", marginTop: "20px"}}
+          style = {{width: "340px", marginTop: "10px"}}
 
         >
           
