@@ -96,6 +96,7 @@ export default function Home() {
   const [type, setType] = useState("png");
 
   function download(url) {
+
     axios
       .post(`/api/download`, { url: url, type: type })
       .then((res) => {
@@ -103,10 +104,14 @@ export default function Home() {
         link.href = res.data.result;
         link.download = `${prompt}.${type.toLowerCase()}`;
         link.click();
+
+        window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
+
       })
       .catch((err) => {
         console.log(err);
       });
+
   }
 
 
@@ -415,8 +420,10 @@ export default function Home() {
           <button
             style = {{marginTop: "20px"}}
             onClick={() => {
+
               download(results[0].url);
-              window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
+
+              //window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
               } }
           >
             下载并退出
