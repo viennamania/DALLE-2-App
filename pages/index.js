@@ -100,12 +100,30 @@ export default function Home() {
     axios
       .post(`/api/download`, { url: url, type: type })
       .then((res) => {
-        const link = document.createElement("a");
-        link.href = res.data.result;
-        link.download = `${prompt}.${type.toLowerCase()}`;
-        link.click();
 
-        window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
+        
+        const link = document.createElement("a");
+
+        link.href = res.data.result;
+
+        link.download = `${prompt}.${type.toLowerCase()}`;
+
+        link.click();
+        
+        // save image to local album in mobile
+
+        // res.data.result is base64 image
+
+        ////console.log("res.data.result=", res.data.result);
+
+        
+        
+
+
+
+
+        //window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
+
 
       })
       .catch((err) => {
