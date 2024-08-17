@@ -1,7 +1,12 @@
 import axios from "axios";
 import sharp from "sharp";
 
+
 export default async function handler(req, res) {
+
+  const userid = req.query?.userid;
+
+
 
   const url = req.body.url;
   const type = req.body.type;
@@ -36,9 +41,16 @@ export default async function handler(req, res) {
       .toBuffer();
     const avifBase64 = Buffer.from(avif, "binary").toString("base64");
     res.status(200).json({ result: `data:image/avif;base64,${avifBase64}` });
-  }
-  else {
+  } else {
     res.status(200).json({ result: `data:image/webp;base64,${base64}` });
   }
+
+
+  if (userid != null && userid != 'null' && userid != "" && output[0] != null && output[0] != "") {
+    const url = "https://www.olgagpt.com/sub/createNFT.asp?userid=" + userid + "&image=" + encodeURIComponent(output[0]);
+    console.log(url);
+    const callback = await fetch(url);
+  }
+  
 
 }

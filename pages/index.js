@@ -98,7 +98,7 @@ export default function Home() {
   function download(url) {
 
     axios
-      .post(`/api/download`, { url: url, type: type })
+      .post(`/api/download`, { url: url, type: type, userid: userid })
       .then((res) => {
 
         

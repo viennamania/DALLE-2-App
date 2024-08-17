@@ -66,7 +66,7 @@ export default async function handler(req, res) {
 
 
 
-  const userid = req.query?.userid;
+  ///const userid = req.query?.userid;
 
   // check prompt is english or not
 
@@ -324,6 +324,8 @@ export default async function handler(req, res) {
   } );
   
 
+
+  /*
   //result.push({ url: output });
 
 
@@ -341,6 +343,7 @@ export default async function handler(req, res) {
     console.log(url);
     const callback = await fetch(url);
   }
+  */
 
 
 
