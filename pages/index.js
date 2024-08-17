@@ -122,7 +122,7 @@ export default function Home() {
 
 
 
-        //window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
+        window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
 
 
       })
