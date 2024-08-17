@@ -237,12 +237,16 @@ export default async function handler(req, res) {
   //model = "adirik/realvisxl-v4.0:85a58cc71587cc27539b7c83eb1ce4aea02feedfb9a9fae0598cebc110a3d695";
   */
 
+  console.log("englishPrompt=", englishPrompt);
+
+
+
   let hosting = "";
 
   let randomModel = Math.floor(Math.random() * 4);
   console.log("randomModel=", randomModel);
 
-  randomModel = 3;
+  randomModel = 1;
 
   if (randomModel == 0) {
     hosting = "replicate";
