@@ -4,7 +4,8 @@ import sharp from "sharp";
 
 export default async function handler(req, res) {
 
-  const userid = req.query?.userid;
+  const userid = req.body?.userid;
+
 
 
 
@@ -50,6 +51,8 @@ export default async function handler(req, res) {
     const url = "https://www.olgagpt.com/sub/createNFT.asp?userid=" + userid + "&image=" + encodeURIComponent(output[0]);
     console.log(url);
     const callback = await fetch(url);
+
+
   }
   
 
