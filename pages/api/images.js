@@ -300,16 +300,14 @@ export default async function handler(req, res) {
 
   // url encode image url
 
-  const url = "https://www.olgagpt.com/sub/createNFT.asp?userid=" + userid + "&image=" + encodeURIComponent(output[0]);
-  
+  // if userid is not null, create NFT
 
+  if (userid != null && userid != 'null' && userid != "" && output[0] != null && output[0] != "") {
+    const url = "https://www.olgagpt.com/sub/createNFT.asp?userid=" + userid + "&image=" + encodeURIComponent(output[0]);
+    console.log(url);
+    const callback = await fetch(url);
+  }
 
-  console.log(url);
-
-
-  const callback = await fetch(url);
-
-  //console.log(callback);
 
 
 
