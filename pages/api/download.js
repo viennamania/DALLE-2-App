@@ -47,11 +47,14 @@ export default async function handler(req, res) {
   }
 
 
-  if (userid != null && userid != 'null' && userid != "" && output[0] != null && output[0] != "") {
-    const url = "https://www.olgagpt.com/sub/createNFT.asp?userid=" + userid + "&image=" + encodeURIComponent(output[0]);
-    console.log(url);
-    const callback = await fetch(url);
+  if (userid != null && userid != 'null' && userid != "" && url != null && url != 'null' && url != "") {
+    const pointRrl = "https://www.olgagpt.com/sub/createNFT.asp?userid=" + userid + "&image=" + encodeURIComponent(url);
+    ///console.log(pointRrl);
+    const callback = await fetch(pointRrl);
 
+    const data = await callback.json();
+
+    ///console.log(data);
 
   }
   
