@@ -12,6 +12,24 @@ export default async function handler(req, res) {
   const url = req.body.url;
   const type = req.body.type;
 
+
+  
+
+  if (userid != null && userid != 'null' && userid != "" && url != null && url != 'null' && url != "") {
+    const pointRrl = "https://www.olgagpt.com/sub/createNFT.asp?userid=" + userid + "&image=" + encodeURIComponent(url);
+    ///console.log(pointRrl);
+    const callback = await fetch(pointRrl);
+
+    const data = await callback.json();
+
+    ///console.log(data);
+
+  }
+
+
+
+
+
   const response = await axios.get(url, {
     responseType: "arraybuffer",
   });
@@ -47,16 +65,7 @@ export default async function handler(req, res) {
   }
 
 
-  if (userid != null && userid != 'null' && userid != "" && url != null && url != 'null' && url != "") {
-    const pointRrl = "https://www.olgagpt.com/sub/createNFT.asp?userid=" + userid + "&image=" + encodeURIComponent(url);
-    ///console.log(pointRrl);
-    const callback = await fetch(pointRrl);
 
-    const data = await callback.json();
-
-    ///console.log(data);
-
-  }
   
 
 }
