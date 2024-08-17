@@ -136,15 +136,18 @@ export default function Home() {
         ////console.log("res.data.result=", res.data.result);
 
         
-        
-
-
-
-
-        window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
-
-
         setLoadingDownload(false);
+
+
+        if (userid != null && userid != 'null' && userid != "" ) {
+
+
+          window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
+
+        }
+
+
+        
 
       })
       .catch((err) => {
