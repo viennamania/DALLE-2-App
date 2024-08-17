@@ -239,13 +239,23 @@ export default async function handler(req, res) {
 
   let hosting = "";
 
-  let randomModel = Math.floor(Math.random() * 2);
+  let randomModel = Math.floor(Math.random() * 4);
+  console.log("randomModel=", randomModel);
+
+  randomModel = 3;
+
   if (randomModel == 0) {
     hosting = "replicate";
     model = "datacte/proteus-v0.2:06775cd262843edbde5abab958abdbb65a0a6b58ca301c9fd78fa55c775fc019";
-  } else {
+  } else if (randomModel == 1) {
     hosting = "replicate";
     model = "playgroundai/playground-v2.5-1024px-aesthetic:a45f82a1382bed5c7aeb861dac7c7d191b0fdf74d8d57c4a0e6ed7d4d0bf7d24";
+  } else if (randomModel == 2) {
+    hosting = "fal";
+    model = "fal-ai/flux-realism";
+  } else if (randomModel == 3) {
+    hosting = "fal";
+    model = "fal-ai/flux-pro";
   }
 
 
