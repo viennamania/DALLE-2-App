@@ -95,7 +95,12 @@ export default function Home() {
   //const [type, setType] = useState("webp");
   const [type, setType] = useState("png");
 
+
+  const [loadingDownload, setLoadingDownload] = useState(false);
+
   function download(url) {
+
+    setLoadingDownload(true);
 
     axios
       .post(`/api/download`, { url: url, type: type, userid: userid })
@@ -129,6 +134,9 @@ export default function Home() {
       .catch((err) => {
         console.log(err);
       });
+
+
+    setLoadingDownload(false);
 
   }
 
@@ -444,7 +452,17 @@ export default function Home() {
               //window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
               } }
           >
-            下载并退出
+            {loadingDownload ?
+              <Image
+                src="/chatgpt-loading.gif"
+                alt="Logo"
+                width={28}
+                height={28}
+              />
+              :
+              <span>下载并退出</span>
+
+            }
           </button>
         )}
 
