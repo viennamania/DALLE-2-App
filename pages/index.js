@@ -13,6 +13,9 @@ import { useSearchParams } from 'next/navigation'
 /////import { Configuration, OpenAIApi } from "openai";
 
 
+import { PutBlobResult } from '@vercel/blob';
+
+
 
 export default function Home() {
 
@@ -106,6 +109,13 @@ export default function Home() {
       .post(`/api/download`, { url: url, type: type, userid: userid })
       .then((res) => {
 
+
+        ///console.log("res.data.result=", res.data.result);
+
+
+
+
+
         
         const link = document.createElement("a");
 
@@ -114,6 +124,10 @@ export default function Home() {
         link.download = `${prompt}.${type.toLowerCase()}`;
 
         link.click();
+
+        
+
+
         
         // save image to local album in mobile
 
@@ -130,31 +144,17 @@ export default function Home() {
         window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
 
 
+        setLoadingDownload(false);
+
       })
       .catch((err) => {
         console.log(err);
       });
 
 
-    setLoadingDownload(false);
+    
 
   }
-
-
-    // get openapi key from api
-    /*
-    useEffect(() => {
-      axios
-        .get("/api/openapikey")
-        .then((res) => {
-          setToken(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    , []);
-    */
 
 
 
@@ -275,6 +275,9 @@ export default function Home() {
         >
           <h3>* 镜像制作费用 50 POWER</h3>
         </div>
+
+
+
      
         <div
           //className={styles.description}
@@ -449,16 +452,19 @@ export default function Home() {
 
               download(results[0].url);
 
+
+
+
               //window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
+
+
+
+
               } }
           >
-            {loadingDownload ?
-              <Image
-                src="/chatgpt-loading.gif"
-                alt="Logo"
-                width={28}
-                height={28}
-              />
+            {
+            loadingDownload ?
+              <span>下载中...</span>
               :
               <span>下载并退出</span>
 

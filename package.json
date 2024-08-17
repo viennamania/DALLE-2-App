@@ -10,13 +10,15 @@
   },
   "dependencies": {
     "@fal-ai/serverless-client": "^0.14.2",
+    "@vercel/blob": "^0.23.4",
     "axios": "^1.5.0",
     "next": "13.4.19",
     "openai": "^4.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "replicate": "^0.32.0",
-    "sharp": "^0.32.5"
+    "sharp": "^0.32.5",
+    "thirdweb": "^5.46.1"
   },
   "devDependencies": {
     "@types/react": "18.3.3",
