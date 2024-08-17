@@ -447,6 +447,7 @@ export default function Home() {
         {/* margin top 20px */}
         {!loading && results.length > 0 && (
           <button
+            disabled={loadingDownload}
             style = {{marginTop: "20px"}}
             onClick={() => {
 
