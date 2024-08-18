@@ -8,6 +8,9 @@ import Replicate from "replicate";
 import * as fal from "@fal-ai/serverless-client";
 
 
+import { insertOne } from '../../lib/api/prompt';
+
+
 //nextjs /pages/api
 export const config = {
 	//runtime: 'edge',
@@ -158,6 +161,13 @@ export default async function handler(req, res) {
 
 
 
+  const resultInsertOne = await insertOne({
+    prompt: prompt,
+    englishPrompt: englishPrompt,
+    negativePrompt: negative_prompt,
+  });
+
+  console.log("resultInsertOne=", resultInsertOne);
 
 
   let input = {
