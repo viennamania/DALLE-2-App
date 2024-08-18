@@ -19,9 +19,6 @@ export async function insertOne(data: any) {
     return null;
   }
 
-  if (!data.negativePrompt) {
-    return null;
-  }
 
 
   const client = await clientPromise;

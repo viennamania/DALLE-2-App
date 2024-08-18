@@ -32,12 +32,18 @@ import {
   totalSupply,
   nextTokenIdToMint,
 
+  //nextTokenIdToClaim,
+
+  getTotalClaimedSupply,
+
   safeTransferFrom,
 
   tokenUri,
 
 } from "thirdweb/extensions/erc721";
  
+
+
 
 
 import {
@@ -113,6 +119,12 @@ export default async function handler(req, res) {
 
 
 
+  if (!image) {
+    return res.status(400).json({
+      result: "error",
+      message: "image is required",
+    });
+  }
 
 
 
@@ -203,9 +215,9 @@ export default async function handler(req, res) {
 
 
   const transactionClaimTo = claimTo({
-    contract,
+    contract: contract,
     to: toAddress,
-    amount: 1,
+    quantity: BigInt(1),
   });
 
 
@@ -220,13 +232,13 @@ export default async function handler(req, res) {
   console.log("Claimed successfully!");
 
 
-  console.log(`sendData: ${sendData}`);
+  ///console.log("sendData: ", sendData);
 
   
 
 
 
-  
+  /*
   const nextTokenId = await nextTokenIdToMint({
     contract: contract,
   });
@@ -234,10 +246,16 @@ export default async function handler(req, res) {
   console.log("Next Token ID to mint: ", nextTokenId);
   // BigInt to string
   console.log("Next Token ID to mint: ", nextTokenId.toString());
+  */
+
+  const totalClaimedSupply = await getTotalClaimedSupply({
+    contract: contract,
+  });
+
 
   
 
-  const tokenId = parseInt(nextTokenId.toString(), 10) - 1;
+  const tokenId = parseInt(totalClaimedSupply.toString(), 10) - 1;
 
   console.log("Token ID: ", tokenId);
   

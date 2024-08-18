@@ -84,15 +84,20 @@ export async function findOne(data: any) {
     return null;
   }
 
+  const tokenid = parseInt(data.tokenid);
+
 
   const client = await clientPromise;
   const collection = client.db('vienna').collection('images');
 
   const result = await collection.findOne<ImageProps>(
     {
-      tokenid: data.tokenid,
+      tokenid: tokenid,
     },
   );
+
+  ///console.log('findOne result: ' + JSON.stringify(result));
+
 
   return result;
 }

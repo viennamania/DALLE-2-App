@@ -1,5 +1,11 @@
 
 
+import {
+	findOne,
+} from '../../../lib/api/image';
+
+
+
 // [tokenid].js
 
 export default async function handler(req, res) {
@@ -9,6 +15,27 @@ export default async function handler(req, res) {
     } = req // tokenid is the dynamic route parameter
 
     console.log(tokenid)
+
+
+    let image = null;
+
+    // get the nft from the database
+
+    const imageData = await findOne(
+      {
+        tokenid: tokenid,
+      }
+    );
+
+    //console.log(imageData);
+
+
+    if (imageData) {
+        image = imageData.image;
+    } else {
+        image = "https://vzrcy5vcsuuocnf3.public.blob.vercel-storage.com/IQS6RgA-hGAebGLABjxbpjfbaI6LG7RUkP7u56.png";
+    }
+
 
     /*
     {
@@ -30,11 +57,12 @@ export default async function handler(req, res) {
 
     // response json
 
+
     const nft = {
         "id": tokenid,
         "name": "Olga NFT",
         "description": "Olga NFT",
-        "image": "https://vzrcy5vcsuuocnf3.public.blob.vercel-storage.com/IQS6RgA-hGAebGLABjxbpjfbaI6LG7RUkP7u56.png",
+        "image": image,
         "attributes": [
             {
                 "trait_type": "prompt",

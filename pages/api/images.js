@@ -160,6 +160,7 @@ export default async function handler(req, res) {
 
   const negative_prompt = "easynegative,ng_deepnegative_v1_75t,((monochrome)),((grayscale)),bad-picture-chill-75v, (worst quality, low quality:1.4), monochrome, grayscale, sketches, paintings, lowres, normalres, blurry, acnes on face, {{sperm}}, {{bra}}";
 
+  //const negative_prompt = "";
 
 
   const resultInsertOne = await insertOne({
@@ -256,6 +257,8 @@ export default async function handler(req, res) {
 
   let randomModel = Math.floor(Math.random() * 4);
   console.log("randomModel=", randomModel);
+
+  ////randomModel = 1;
 
   randomModel = 1;
 
