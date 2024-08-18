@@ -64,13 +64,13 @@ export async function findOne(data: any) {
   return result;
 }
 
-// all the prompts order by createdAt desc
+// all the prompts order by createdAt desc last 500
 export async function findAll() {
 
   const client = await clientPromise;
   const collection = client.db('vienna').collection('prompts');
 
-  const result = await collection.find<PromptProps>({}).sort({ createdAt: -1 }).toArray();
+  const result = await collection.find<PromptProps>({}).sort({ createdAt: -1 }).limit(500).toArray();
 
   return result;
 }
