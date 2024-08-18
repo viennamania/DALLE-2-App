@@ -94,6 +94,12 @@ const nftContractAddress = "0x6329fa5Ae4Fc8122A29D3DE4e346366fbE3E7358";
 export default async function handler(req, res) {
 
 
+  // get parameters from the request
+
+  const image = req.query.image;
+
+  console.log("image: ", image);
+
 
   // smartwallet account
   const personalAccount = privateKeyToAccount({
@@ -141,7 +147,7 @@ export default async function handler(req, res) {
 
 
 
-  const image = 'https://replicate.delivery/yhqm/3rghd0H9eVSjJaUCFqu5EDYjPxfXfjBbknUFMviqtroYM9mmA/out-0.png';
+  //const image = 'https://vzrcy5vcsuuocnf3.public.blob.vercel-storage.com/G3GYQwQ-wyenYZzp3CNgNZo7MWZqKONinhm0sq.png';
 
 
 
@@ -197,8 +203,11 @@ export default async function handler(req, res) {
   
 
   const tokenId = parseInt(nextTokenId.toString(), 10) - 1;
+
+  console.log("Token ID: ", tokenId);
   
 
+  /*
   //  get tokenUri
   const TokenUri = await tokenUri({
     contract,
@@ -207,9 +216,17 @@ export default async function handler(req, res) {
 
   console.log("TokenUri: ", TokenUri);
 
+  */
 
 
 
+  res.status(200).json({
+    result: "success",
+    message: "Minted successfully!",
+    transactionHash: sendData.transactionHash,
+    tokenId: tokenId,
+    opensea: `https://opensea.io/assets/matic/${nftContractAddress}/${tokenId}`,
+  });
 
-  res.status(200).json({ result: "ok" });
+
 }
