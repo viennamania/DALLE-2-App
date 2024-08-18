@@ -367,6 +367,7 @@ export default function Home() {
           />
 
           {/* check box for real picture */}
+          {/*}
           <input
             type="checkbox"
             id="checkIsRealPicture"
@@ -375,7 +376,7 @@ export default function Home() {
           />
           <label htmlFor="checkIsRealPicture">真实图片</label>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      
+          */}
 
 
 
