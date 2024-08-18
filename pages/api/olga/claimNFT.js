@@ -47,6 +47,7 @@ import {
 
 
 import {
+  findOneByImage,
 	insertOne,
 } from '../../../lib/api/image';
 
@@ -127,6 +128,24 @@ export default async function handler(req, res) {
   }
 
 
+  // if already minted, return the token id
+
+  const existingData = await findOneByImage(
+    {
+      image: image,
+    }
+  );
+
+  if (existingData) {
+
+    return res.status(200).json({
+      result: "success",
+      message: "Already minted",
+      tokenId: existingData.tokenid,
+      opensea: `https://opensea.io/assets/matic/${nftContractAddress}/${existingData.tokenid}`,
+    });
+
+  }
 
 
 
