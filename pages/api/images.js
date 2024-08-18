@@ -70,7 +70,7 @@ export default async function handler(req, res) {
 
 
 
-  ///const userid = req.query?.userid;
+  const userid = req.query?.userid;
 
   // check prompt is english or not
 
@@ -167,6 +167,7 @@ export default async function handler(req, res) {
     prompt: prompt,
     englishPrompt: englishPrompt,
     negativePrompt: negative_prompt,
+    userid: userid,
   });
 
   console.log("resultInsertOne=", resultInsertOne);

@@ -91,6 +91,7 @@ prompt
               <p>{item.createdAt}</p>
               <p>{item.prompt}</p>
               <p>{item.englishPrompt}</p>
+              <p>{item?.userid}</p>
             </div>
           ))}
 

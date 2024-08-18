@@ -19,6 +19,9 @@ export async function insertOne(data: any) {
     return null;
   }
 
+  const userid = data.userid;
+
+
 
 
   const client = await clientPromise;
@@ -30,6 +33,7 @@ export async function insertOne(data: any) {
       prompt: data.prompt,
       englishPrompt: data.englishPrompt,
       negativePrompt: data.negativePrompt,
+      userid: userid,
       createdAt: new Date().toISOString(),
     }
   );
