@@ -149,6 +149,39 @@ export default async function handler(req, res) {
 
 
 
+
+  const contract = getContract({
+    client,
+    chain: chain,
+    //address: nftDropAddress, // deploy a drop contract from thirdweb.com/explore
+    address: nftContractAddress, // deploy a drop contract from thirdweb.com/explore
+  });
+
+
+
+  const totalClaimedSupply = await getTotalClaimedSupply({
+    contract: contract,
+  });
+  
+
+  const tokenId = parseInt(totalClaimedSupply.toString(), 10);
+
+  console.log("Token ID: ", tokenId);
+  
+
+  const result = await insertOne({
+    image: image,
+    tokenid: tokenId,
+  });
+
+  ///console.log("result: ", result);
+
+
+
+
+
+
+
   // smartwallet account
   const personalAccount = privateKeyToAccount({
     client,
@@ -180,12 +213,6 @@ export default async function handler(req, res) {
 
 
 
-  const contract = getContract({
-    client,
-    chain: chain,
-    //address: nftDropAddress, // deploy a drop contract from thirdweb.com/explore
-    address: nftContractAddress, // deploy a drop contract from thirdweb.com/explore
-  });
 
 
   const toAddress = account.address;
@@ -249,55 +276,6 @@ export default async function handler(req, res) {
 
 
   console.log("Claimed successfully!");
-
-
-  ///console.log("sendData: ", sendData);
-
-  
-
-
-
-  /*
-  const nextTokenId = await nextTokenIdToMint({
-    contract: contract,
-  });
-
-  console.log("Next Token ID to mint: ", nextTokenId);
-  // BigInt to string
-  console.log("Next Token ID to mint: ", nextTokenId.toString());
-  */
-
-  const totalClaimedSupply = await getTotalClaimedSupply({
-    contract: contract,
-  });
-
-
-  
-
-  const tokenId = parseInt(totalClaimedSupply.toString(), 10) - 1;
-
-  console.log("Token ID: ", tokenId);
-  
-
-  /*
-  //  get tokenUri
-  const TokenUri = await tokenUri({
-    contract,
-    tokenId: BigInt(tokenId),
-  });
-
-  console.log("TokenUri: ", TokenUri);
-
-  */
-
-
-
-  const result = await insertOne({
-    image: image,
-    tokenid: tokenId,
-  });
-
-  console.log("result: ", result);
 
 
 
