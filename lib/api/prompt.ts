@@ -50,15 +50,15 @@ export async function findOne(data: any) {
 
   console.log('findOne data: ' + JSON.stringify(data));
 
-  if (!data.tokenid) {
+  if (!data.prompt) {
     return null;
   }
 
 
   const client = await clientPromise;
-  const collection = client.db('vienna').collection('images');
+  const collection = client.db('vienna').collection('prompts');
 
-  const result = await collection.findOne<ImageProps>(
+  const result = await collection.findOne<PromptProps>(
     {
       tokenid: data.tokenid,
     },
@@ -66,5 +66,17 @@ export async function findOne(data: any) {
 
   return result;
 }
+
+// all the prompts order by createdAt desc
+export async function findAll() {
+
+  const client = await clientPromise;
+  const collection = client.db('vienna').collection('prompts');
+
+  const result = await collection.find<PromptProps>({}).sort({ createdAt: -1 }).toArray();
+
+  return result;
+}
+
 
 
