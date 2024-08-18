@@ -41,6 +41,9 @@ export default function Home() {
   const [error, setError] = useState(false);
 
 
+  // check if prompt is real picture
+  // 真实图片
+  const [checkIsRealPicture, setCheckIsRealPicture] = useState(false);
 
 
 
@@ -61,7 +64,7 @@ export default function Home() {
         
         ////.post(`/api/images?t=${token}&p=${prompt}&n=${number}`)
 
-        .post(`/api/images?p=${prompt}&n=${number}&userid=${userid}`)
+        .post(`/api/images?p=${prompt}&n=${number}&userid=${userid}&real=${checkIsRealPicture}`)
 
 
         .then((res) => {
@@ -247,9 +250,9 @@ export default function Home() {
         <meta property="og:image:height" content="1400"></meta>
         <meta property="og:title" content="Create images with ChatGPT 4o"></meta>
         <meta property="og:description" content="Create images with ChatGPT 4o"></meta>
-        <meta property="og:image" content="https://dall-e.unove.space/logo-chatgpt.png"></meta>
+        <meta property="og:image" content="https://image.unove.space/logo-chatgpt.png"></meta>
         <meta name="twitter:card" content="summary_large_image"></meta>
-        <meta name="twitter:image" content="https://dall-e.unove.space/logo-chatgpt.png"></meta>
+        <meta name="twitter:image" content="https://image.unove.space/logo-chatgpt.png"></meta>
 
 
       </Head>
@@ -363,6 +366,16 @@ export default function Home() {
             max="10"
           />
 
+          {/* check box for real picture */}
+          <input
+            type="checkbox"
+            id="checkIsRealPicture"
+            value={checkIsRealPicture}
+            onChange={(e) => setCheckIsRealPicture(e.target.checked)}
+          />
+          <label htmlFor="checkIsRealPicture">真实图片</label>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
 
 
 

@@ -72,6 +72,12 @@ export default async function handler(req, res) {
 
   const userid = req.query?.userid;
 
+  const isReal = req.query?.real;
+
+  console.log("isReal=", isReal);
+
+
+
   // check prompt is english or not
 
   // if prompt is not english, translate it to english
@@ -259,9 +265,11 @@ export default async function handler(req, res) {
   let randomModel = Math.floor(Math.random() * 4);
   console.log("randomModel=", randomModel);
 
-  ////randomModel = 1;
-
   randomModel = 1;
+
+  if (isReal == "true") {
+    randomModel = 3;
+  }
 
   if (randomModel == 0) {
     hosting = "replicate";
