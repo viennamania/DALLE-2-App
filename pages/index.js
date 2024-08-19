@@ -605,14 +605,14 @@ export default function Home() {
         {/* if userid is 'songpa', show my images */}
         {userid != null && userid != 'null' && userid != "" && userid === 'songpa' ? (
 
-          <div className={styles.grid}>
+          <div className={styles.grid} style = {{marginTop: "20px"}}>
           
 
             {myImages.map((myImage) => {
               return (
                 <div
                   key={myImage._id}
-                  style={ { width: "80px", height: "80px", margin: "10px"} }
+                  style={ { width: "200px", height: "200px", margin: "10px"} }
 
                   //className={styles.card}
                 >
