@@ -235,6 +235,46 @@ export default function Home() {
 
     */
 
+  
+  /* if userid is not null,
+  get erc721ContractAddress from api */
+
+  const [erc721ContractAddress, setErc721ContractAddress] = useState("");
+  const [totalSupply, setTotalSupply] = useState(0);
+  // loading erc721ContractAddress
+  const [loadingErc721ContractAddress, setLoadingErc721ContractAddress] = useState(false);
+
+  useEffect(() => {
+      
+    if (userid != null && userid != 'null' && userid != "" ) {
+
+      setLoadingErc721ContractAddress(true);
+
+      axios
+        .get(`/api/erc721ContractAddress?userid=${userid}`)
+        .then((res) => {
+
+          ///console.log("res", res);
+
+          setErc721ContractAddress(res.data.erc721ContractAddress);
+
+          setTotalSupply(res.data.totalSupply);
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      setLoadingErc721ContractAddress(false);
+
+    }
+
+  }, [ userid ]);
+
+
+  console.log("erc721ContractAddress=", erc721ContractAddress);
+  console.log("totalSupply=", totalSupply);
+
 
 
   return (
@@ -274,10 +314,36 @@ export default function Home() {
           Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
         </h1>
 
+        {/* if userid is not null, show userid */}
+        {userid != null && userid != 'null' && userid != "" ? (
+
+          <div className={styles.description}>
+            <h3>您的用户ID: {userid}</h3>
+
+            {/* opensea link */}
+            {totalSupply > 0 && erc721ContractAddress != "" ? (
+              <a
+                href={`https://opensea.io/assets/matic/${erc721ContractAddress}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/icon-opensea.png"
+                  alt="Logo"
+                  width={32}
+                  height={32}
+                />
+              </a>
+            ) : ( <></> )}
+
+          </div>
+          
+          ) : ( <></> )}
+
         {/* margin top 20px */}
         {/* 镜像制作费用 50 POWER */}
         <div
-          style = {{marginTop: "20px"}}
+          style = {{marginTop: "0px"}}
         >
           <h3>* 镜像制作费用 50 POWER</h3>
         </div>
