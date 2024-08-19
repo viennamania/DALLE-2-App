@@ -315,8 +315,8 @@ export default function Home() {
         </h1>
 
         {/* if userid is not null, show userid */}
-        {/*
-        {userid != null && userid != 'null' && userid != "" ? (
+        
+        {userid != null && userid != 'null' && userid != "" && userid === 'songpa' ? (
 
           <div className={styles.description}>
             <h3>您的用户ID: {userid}</h3>
@@ -340,7 +340,7 @@ export default function Home() {
           </div>
           
           ) : ( <></> )}
-        */}
+        
 
 
         {/* margin top 10px */}
