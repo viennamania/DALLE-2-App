@@ -315,12 +315,13 @@ export default function Home() {
         </h1>
 
         {/* if userid is not null, show userid */}
+        {/*
         {userid != null && userid != 'null' && userid != "" ? (
 
           <div className={styles.description}>
             <h3>您的用户ID: {userid}</h3>
 
-            {/* opensea link */}
+           
             {totalSupply > 0 && erc721ContractAddress != "" ? (
               <a
                 href={`https://opensea.io/assets/matic/${erc721ContractAddress}`}
@@ -339,11 +340,13 @@ export default function Home() {
           </div>
           
           ) : ( <></> )}
+        */}
 
-        {/* margin top 20px */}
+
+        {/* margin top 10px */}
         {/* 镜像制作费用 50 POWER */}
         <div
-          style = {{marginTop: "0px"}}
+          style = {{marginTop: "10px"}}
         >
           <h3>* 镜像制作费用 50 POWER</h3>
         </div>
