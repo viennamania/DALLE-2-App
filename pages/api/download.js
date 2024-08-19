@@ -9,6 +9,7 @@ import { put } from '@vercel/blob';
 import { customAlphabet } from 'nanoid';
 
 import {
+  findOneByUrl,
 	insertOne as insertOneImage,
 } from '../../lib/api/image';
 
@@ -21,6 +22,8 @@ const nanoid = customAlphabet(
   '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
   7
 ) // 7-character random string
+
+
 
 
 export default async function handler(req, res) {
@@ -36,6 +39,21 @@ export default async function handler(req, res) {
   if (!url) {
     return res.status(400).json({ error: "Please provide a url" });
   }
+
+
+
+  // check if the image already exists by url
+  const existingImage = await findOneByUrl(
+    {
+      url: url,
+    }
+  );
+
+  // return error if the image already exists
+  if (existingImage) {
+    return res.status(400).json({ error: "Image already exists" });
+  }
+
 
 
 

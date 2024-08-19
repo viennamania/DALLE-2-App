@@ -139,7 +139,7 @@ export default function Home() {
         ////console.log("res.data.result=", res.data.result);
 
         
-        setLoadingDownload(false);
+    
 
 
         // get my images from api
@@ -163,16 +163,18 @@ export default function Home() {
 
         }
 
-
+        setLoadingDownload(false);
         
 
       })
       .catch((err) => {
         console.log(err);
+        setLoadingDownload(false);
       });
 
 
-    
+
+      
 
   }
 

@@ -96,6 +96,32 @@ export async function findOne(data: any) {
 }
 
 
+// find one by url
+export async function findOneByUrl(data: any) {
+
+  console.log('findOne data: ' + JSON.stringify(data));
+
+  if (!data.url) {
+    return null;
+  }
+
+  const client = await clientPromise;
+
+  const collection = client.db('vienna').collection('images');
+
+  const result = await collection.findOne<ImageProps>(
+    {
+      url: data.url,
+    },
+  );
+
+  ///console.log('findOne result: ' + JSON.stringify(result));
+
+
+  return result;
+
+}
+
 
 
 export async function findOneByImage(data: any) {
