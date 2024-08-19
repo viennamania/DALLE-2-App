@@ -186,6 +186,10 @@ export default async function handler(req, res) {
 
       output_quality: 90,
 
+      //image_size: "square",
+      //image_size: "square",
+      image_size: "square_hd",
+
       disable_safety_checker: true,
 
       negative_prompt: negative_prompt,
@@ -268,7 +272,7 @@ export default async function handler(req, res) {
   randomModel = 1;
 
   if (isReal == "true") {
-    randomModel = 3;
+    randomModel = 4;
   }
 
   if (randomModel == 0) {
@@ -283,6 +287,9 @@ export default async function handler(req, res) {
   } else if (randomModel == 3) {
     hosting = "fal";
     model = "fal-ai/flux-pro";
+  } else if (randomModel == 4) {
+    hosting = "fal";
+    model = "fal-ai/flux/dev";
   }
 
 
