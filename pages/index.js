@@ -109,7 +109,7 @@ export default function Home() {
     setLoadingDownload(true);
 
     axios
-      .post(`/api/download`, { url: url, type: type, userid: userid })
+      .post(`/api/download`, {prompt: prompt,  url: url, type: type, userid: userid })
       .then((res) => {
 
 
@@ -142,7 +142,7 @@ export default function Home() {
         setLoadingDownload(false);
 
 
-        if (userid != null && userid != 'null' && userid != "" ) {
+        if (userid != null && userid != 'null' && userid != "" && userid != "songpa") {
 
 
           window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
@@ -531,7 +531,7 @@ export default function Home() {
         {/* download button */}
         {/* download image and anchor goto https://www.olgagpt.com/sub/deposit_request_krw.asp new window */}
         {/* margin top 20px */}
-        {!loading && results.length > 0 && userid != null && userid != 'null' && userid != "" && userid != "songpa" && (
+        {!loading && results.length > 0 && userid != null && userid != 'null' && userid != ""  && (
           <button
             disabled={loadingDownload}
             style = {{marginTop: "20px"}}

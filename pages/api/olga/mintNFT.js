@@ -49,7 +49,8 @@ import { ethers } from "ethers";
 
 import {
   findOneByImage,
-	insertOne as insertOneImage,
+	//insertOne as insertOneImage,
+  updateOneByImage,
 } from '../../../lib/api/image';
 
 
@@ -164,7 +165,9 @@ export default async function handler(req, res) {
 
 
   
-  if (existingData) {
+  if (
+    existingData && existingData?.erc721ContractAddress && existingData?.tokenid
+  ) {
 
     return res.status(200).json({
       result: "success",
@@ -465,14 +468,21 @@ export default async function handler(req, res) {
 
   
 
-
+  /*
   const result = await insertOneImage({
     image: image,
     erc721ContractAddress: erc721ContractAddress,
     tokenid: tokenid,
   });
+  */
 
-
+  const updatedData = await updateOneByImage(
+    {
+      image: image,
+      erc721ContractAddress: erc721ContractAddress,
+      tokenid: tokenid,
+    }
+  );
 
 
 

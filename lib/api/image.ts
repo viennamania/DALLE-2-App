@@ -1,7 +1,10 @@
 import clientPromise from '../mongodb';
 
 export interface ImageProps {
+  _id: string;
+  prompt: string;
   image: string;
+  erc721ContractAddress: string;
   tokenid: number;
   createdAt: string;
   updatedAt: string;
@@ -11,28 +14,43 @@ export async function insertOne(data: any) {
 
   //console.log('insertOne data: ' + JSON.stringify(data));
 
+  if (!data.prompt) {
+    return null;
+  }
+
+
+  if (!data.url) {
+    return null;
+  }
+
   if (!data.image) {
     return null;
   }
 
-  if (!data.erc721ContractAddress) {
-    return null;
-  }
 
-  if (!data.tokenid) {
-    return null;
-  }
 
 
   const client = await clientPromise;
   const collection = client.db('vienna').collection('images');
 
 
+  // check if image already exists
+  const existing = await collection.findOne<ImageProps>(
+    {
+      url: data.url,
+    },
+  );
 
+  if (existing) {
+    console.log('image already exists');
+    return null;
+  }
 
   
   const result = await collection.insertOne(
     {
+      prompt: data.prompt,
+      url: data.url,
       image: data.image,
       erc721ContractAddress: data.erc721ContractAddress,
       tokenid: data.tokenid,
@@ -104,3 +122,45 @@ export async function findOneByImage(data: any) {
   return result;
 }
 
+
+// update image by image
+export async function updateOneByImage(data: any) {
+  
+  console.log('updateOneByImage data: ' + JSON.stringify(data));
+
+
+  if (!data.image) {
+    return null;
+  }
+
+  if (!data.erc721ContractAddress) {
+    return null;
+  }
+
+  if (!data.tokenid) {
+    return null;
+  }
+
+  const tokenid = parseInt(data.tokenid);
+
+  const client = await clientPromise;
+  const collection = client.db('vienna').collection('images');
+
+  const result = await collection.updateOne(
+    {
+      image: data.image,
+    },
+    {
+      $set: {
+        erc721ContractAddress: data.erc721ContractAddress,
+        tokenid: tokenid,
+        updatedAt: new Date().toISOString(),
+      },
+    },
+  );
+
+  return {
+    result: result,
+  };
+
+}

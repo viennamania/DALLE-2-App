@@ -8,6 +8,12 @@ import { put } from '@vercel/blob';
 
 import { customAlphabet } from 'nanoid';
 
+import {
+	insertOne as insertOneImage,
+} from '../../lib/api/image';
+
+
+
 ///export const runtime = 'edge'
 
 
@@ -21,11 +27,15 @@ export default async function handler(req, res) {
 
   const userid = req.body?.userid;
 
-
-
-
   const url = req.body.url;
+
+  const prompt = req.body.prompt;
+
   const type = req.body.type;
+
+  if (!url) {
+    return res.status(400).json({ error: "Please provide a url" });
+  }
 
 
 
@@ -64,14 +74,26 @@ export default async function handler(req, res) {
 
 
 
+  const image = blob.url;
+  const erc721ContractAddress = '';
+  const tokenid = 0;
 
 
+  const result = await insertOneImage({
+    prompt: prompt,
+    url: url,
+    image: image,
+    erc721ContractAddress: erc721ContractAddress,
+    tokenid: tokenid,
+  });
+
+  console.log("result", result);
 
 
 
   
 
-  if (userid != null && userid != 'null' && userid != "" && blob.url != null && blob.url != 'null' && blob.url != "") {
+  if (userid != null && userid != 'null' && userid != "" && blob.url != null && blob.url != 'null' && blob.url != "" && userid != "songpa") {
     const pointRrl = "https://www.olgagpt.com/sub/createNFT.asp?userid=" + userid + "&image=" + encodeURIComponent(blob.url);
     ///console.log(pointRrl);
     const callback = await fetch(pointRrl);
