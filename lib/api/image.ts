@@ -14,6 +14,7 @@ export async function insertOne(data: any) {
 
   //console.log('insertOne data: ' + JSON.stringify(data));
 
+
   if (!data.prompt) {
     return null;
   }
@@ -49,6 +50,7 @@ export async function insertOne(data: any) {
   
   const result = await collection.insertOne(
     {
+      userid: data.userid,
       prompt: data.prompt,
       url: data.url,
       image: data.image,
@@ -163,4 +165,28 @@ export async function updateOneByImage(data: any) {
     result: result,
   };
 
+}
+
+
+// find all (image) by userid ordr by createdAt desc recent 5 images
+export async function findAllByUserid(data: any) {
+  
+  ///console.log('findAllByUserid data: ' + JSON.stringify(data));
+
+  if (!data.userid) {
+    return null;
+  }
+
+  const client = await clientPromise;
+  const collection = client.db('vienna').collection('images');
+
+  const result = await collection.find<ImageProps>(
+    {
+      userid: data.userid,
+    },
+
+
+  ).sort({createdAt: -1}).limit(5).toArray();
+
+  return result;
 }

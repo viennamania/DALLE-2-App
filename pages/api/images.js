@@ -66,7 +66,7 @@ export default async function handler(req, res) {
   // translate prompt to english using OpenAI API
   
   // prompt from user and trim left and right spaces
-  const prompt = req.query.p.trim();
+  const prompt = req.query.p?.trim();
 
 
 

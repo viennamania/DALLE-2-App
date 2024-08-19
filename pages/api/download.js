@@ -80,6 +80,7 @@ export default async function handler(req, res) {
 
 
   const result = await insertOneImage({
+    userid: userid,
     prompt: prompt,
     url: url,
     image: image,

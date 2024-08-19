@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 import styles from "../styles/Home.module.css";
 
@@ -109,7 +109,7 @@ export default function Home() {
     setLoadingDownload(true);
 
     axios
-      .post(`/api/download`, {prompt: prompt,  url: url, type: type, userid: userid })
+      .post(`/api/download`, {prompt: prompt, url: url, type: type, userid: userid })
       .then((res) => {
 
 
@@ -140,6 +140,20 @@ export default function Home() {
 
         
         setLoadingDownload(false);
+
+
+        // get my images from api
+        axios
+          .get(`/api/getImages?userid=${userid}`)
+          .then((res) => {
+            setMyImages(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          }
+        );
+
+
 
 
         if (userid != null && userid != 'null' && userid != "" && userid != "songpa") {
@@ -274,6 +288,32 @@ export default function Home() {
 
   console.log("erc721ContractAddress=", erc721ContractAddress);
   console.log("totalSupply=", totalSupply);
+
+
+
+  // my images from api
+  const [myImages, setMyImages] = useState([]);
+  // loading my images
+  const [loadingMyImages, setLoadingMyImages] = useState(false);
+  useEffect(() => {
+    if (userid != null && userid != 'null' && userid != "" ) {
+      setLoadingMyImages(true);
+      axios
+        .get(`/api/getImages?userid=${userid}`)
+        .then((res) => {
+          setMyImages(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        }
+      );
+      setLoadingMyImages(false);
+    }
+  }, [ userid ]);
+
+
+  console.log("myImages=", myImages);
+
 
 
 
@@ -560,6 +600,32 @@ export default function Home() {
         )}
 
       
+        {/* if userid is 'songpa', show my images */}
+        {userid != null && userid != 'null' && userid != "" && userid === 'songpa' ? (
+
+          <div className={styles.grid}>
+          
+
+            {myImages.map((myImage) => {
+              return (
+                <div
+                  key={myImage._id}
+                  style={ { width: "80px", height: "80px", margin: "10px"} }
+
+                  //className={styles.card}
+                >
+                  <img
+                    className={styles.imgPreview}
+                    src={myImage.image}
+                    //onClick={() => download(myImage.image)}
+                  />
+                </div>
+              );
+            })}
+
+          </div>
+
+        ) : ( <></> )}
 
 
 
