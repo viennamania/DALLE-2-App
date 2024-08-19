@@ -15,6 +15,10 @@ export async function insertOne(data: any) {
     return null;
   }
 
+  if (!data.erc721ContractAddress) {
+    return null;
+  }
+
   if (!data.tokenid) {
     return null;
   }
@@ -26,49 +30,18 @@ export async function insertOne(data: any) {
 
 
 
-  const check = await collection.findOne<ImageProps>(
-    {
-      image: data.image,
-
-    },
-  );
-
-  ///console.log('checkUser: ' + checkUser);
-
-
-  if (check) {
-
-    const result = await collection.updateOne(
-      { image: data.image },
-      { $set: { tokenid: data.tokenid, updatedAt: new Date().toISOString() } }
-    );
-
-    if (result.modifiedCount === 0) {
-      return null;
-    } else {
-      return {
-        image: data.image,
-        tokenid: data.tokenid,
-        updatedAt: new Date().toISOString(),
-      };
-    }
-
-  }
-
-
   
   const result = await collection.insertOne(
     {
       image: data.image,
+      erc721ContractAddress: data.erc721ContractAddress,
       tokenid: data.tokenid,
       createdAt: new Date().toISOString(),
     }
   );
 
   return {
-    image: data.image,
-    tokenid: data.tokenid,
-    createdAt: new Date().toISOString(),
+    result: result,
   };
 
 }
