@@ -29,7 +29,27 @@ export default function Home() {
   console.log("userid=", userid);
 
 
+  // wallet address
+  const [walletAddress, setWalletAddress] = useState("");
+  const [erc721ContractAddress, setErc721ContractAddress] = useState("");
 
+
+  useEffect(() => {
+    if (userid != null && userid != 'null' && userid != "" ) {
+      axios
+        .get(`/api/walletByUserid?userid=${userid}`)
+        .then((res) => {
+          setWalletAddress(res.data.walletAddress);
+          setErc721ContractAddress(res.data.erc721ContractAddress);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  } , [ userid ]);
+
+  console.log("walletAddress=", walletAddress);
+  console.log("erc721ContractAddress=", erc721ContractAddress);
 
   //const [token, setToken] = useState("");
 
@@ -255,6 +275,7 @@ export default function Home() {
   /* if userid is not null,
   get erc721ContractAddress from api */
 
+  /*
   const [erc721ContractAddress, setErc721ContractAddress] = useState("");
   const [totalSupply, setTotalSupply] = useState(0);
   // loading erc721ContractAddress
@@ -286,10 +307,11 @@ export default function Home() {
     }
 
   }, [ userid ]);
+  */
 
 
-  console.log("erc721ContractAddress=", erc721ContractAddress);
-  console.log("totalSupply=", totalSupply);
+  //console.log("erc721ContractAddress=", erc721ContractAddress);
+  //console.log("totalSupply=", totalSupply);
 
 
 
@@ -315,6 +337,110 @@ export default function Home() {
 
 
   console.log("myImages=", myImages);
+
+
+  // deploy ERC721 contract
+  const [loadingDeployErc721Contract, setLoadingDeployErc721Contract] = useState(false);
+  const deployErc721Contract = () => {
+    setLoadingDeployErc721Contract(true);
+    axios
+      .get(`/api/deployErc721Contract?userid=${userid}`)
+      .then((res) => {
+        setErc721ContractAddress(res.data.erc721ContractAddress);
+        setLoadingDeployErc721Contract(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoadingDeployErc721Contract(false);
+      });
+  };
+
+
+
+
+
+
+  // mint nft array of images
+  const [loadingMintNFTs, setLoadingMintNFTs] = useState([]);
+  useEffect(() => {
+      setLoadingMintNFTs(
+          new Array(myImages.length).fill(false)
+      );
+  } , [myImages]);
+  
+
+
+  const mintNFT = async (image, index) => {
+
+    if (userid == null || userid == 'null' || userid == "" ) {
+      return;
+    }
+
+
+      setLoadingMintNFTs(
+          loadingMintNFTs.map((value, i) => {
+              return i === index ? true : value;
+          }
+      ));
+
+      try {
+
+        const response = await fetch("/api/mintNFTByUserid?userid=" + userid + "&image=" + image, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to mint NFT");
+        }
+
+
+        const data = await response.json();
+
+
+        setLoadingMintNFTs(
+            loadingMintNFTs.map((value, i) => {
+                return i === index ? false : value;
+            }
+        ));
+
+
+        if (userid != null && userid != 'null' && userid != "" ) {
+          setLoadingMyImages(true);
+          axios
+            .get(`/api/getImages?userid=${userid}`)
+            .then((res) => {
+              setMyImages(res.data);
+            })
+            .catch((err) => {
+              console.log(err);
+            }
+          );
+          setLoadingMyImages(false);
+        }
+
+
+
+      } catch (error) {
+
+        console.error("Error: ", error);
+
+        //toast.error("Failed to mint NFT");
+
+        setLoadingMintNFTs( false );
+
+      }
+
+
+  }
+
+
+
+
+
+
 
 
 
@@ -515,10 +641,10 @@ export default function Home() {
         
         <div>
 
-
-
-
         </div>
+
+
+
 
         <div className="xl:w-1/2 flex flex-col items-center justify-center gap-2 ">
           <small
@@ -543,21 +669,20 @@ export default function Home() {
         
           {error ? ( <div className={styles.error}>Something went wrong. Try again.</div> ) : ( <></> )}
 
-          {loading ? (
-         
-            
 
+
+
+          
+
+
+          {loading ? (
+    
               <Image
                 src="/chatbot-loading.gif"
                 alt="Logo"
                 width={400}
                 height={200}
               />
-            
-
-            
-          
-
               
           ) : (
 
@@ -585,6 +710,8 @@ export default function Home() {
           )}
 
         </div>
+
+   
 
 
         {/* download button */}
@@ -619,13 +746,62 @@ export default function Home() {
         )}
 
       
+
+
+          {/* erc721ContractAddress */}
+          {erc721ContractAddress != "" && erc721ContractAddress != null && erc721ContractAddress != undefined ? (
+            <div className="mt-10 flex flex-col items-center justify-center gap-2">
+              {/* button for new window goto opensea */}
+              <button
+                onClick={() => {
+                  window.open(`https://opensea.io/assets/matic/${erc721ContractAddress}`, "_blank");
+                }}
+              >
+                <Image
+                  src="/icon-opensea.png"
+                  alt="Logo"
+                  width={32}
+                  height={32}
+                />
+              </button>
+              <span className="text-center text-sm text-gray-500">
+                {erc721ContractAddress}
+              </span>
+            </div>
+          ) : (
+            <div className="mt-10 text-center text-sm text-gray-500 p-2">
+      
+              {/* button for deploy ERC721 contract */}
+
+              <button
+                disabled={loadingDeployErc721Contract}
+                onClick={() => {
+
+                  deployErc721Contract();
+
+                }}
+                className={`
+                  ${loadingDeployErc721Contract ? "bg-gray-200" : "bg-blue-500"
+                  } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+              >
+                {loadingDeployErc721Contract ?
+                  "部署中..." :
+                  "部署ERC721合约"
+                }
+                
+              </button>
+
+            </div>
+          )}
+
+
         {/* if userid is 'songpa', show my images */}
         {userid != null && userid != 'null' && userid != "" && (
 
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-4">
           
 
-            {myImages.map((myImage) => {
+            {myImages.map((myImage, index) => {
               return (
                 <div
                   key={myImage._id}
@@ -680,6 +856,36 @@ export default function Home() {
                   <div className="text-center text-xs text-gray-500 p-2"> 
                     {new Date(myImage.createdAt).toLocaleString()}
                   </div>
+
+                  {/* mint NFT button */}
+
+                  {myImage.erc721ContractAddress === "" || myImage.erc721ContractAddress === null || myImage.erc721ContractAddress === undefined ? (
+                    <button
+                      disabled={loadingMintNFTs[index]}
+                      onClick={() => mintNFT(myImage.image, index)}
+                      className={`
+                        ${loadingMintNFTs[index] ? "bg-gray-200" : "bg-blue-500"
+                        } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                    >
+                      {loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint NFT"}
+                    </button>
+                  ) : (
+                    <button
+                      // goto opensea
+                      onClick={() => {
+                        window.open(`https://opensea.io/assets/matic/${myImage.erc721ContractAddress}/${myImage.tokenid}`, "_blank");
+                      }}
+                    >
+                      <Image
+                        src="/icon-opensea.png"
+                        alt="Logo"
+                        width={20}
+                        height={20}
+                      />
+                     
+                    </button>
+                  )}
+
                 </div>
               );
             })}
@@ -704,7 +910,7 @@ export default function Home() {
         {/* rouded border */}
         <Image
           style={ {marginTop: "100px", border: "1px solid #ddd", borderRadius: "4px"} }
-          src="/alga.jpg"
+          src="/olga.jpg"
           priority = {true}
           alt="Logo"
           width={400}

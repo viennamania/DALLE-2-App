@@ -155,6 +155,11 @@ export async function findOneByImage(data: any) {
 export async function updateOneByImage(data: any) {
   
   console.log('updateOneByImage data: ' + JSON.stringify(data));
+  /*
+  {"image":"https://vzrcy5vcsuuocnf3.public.blob.vercel-storage.com/OYTpmpp-X3KKAlnTGfjRPjMRo1ViE2fGJfwk4w.png",
+  "erc721ContractAddress":"0x004dAa3329b00572A6dF3E63A22Ee791dA700b1a",
+  "tokenId":1}
+  */
 
 
   if (!data.image) {
@@ -168,6 +173,7 @@ export async function updateOneByImage(data: any) {
   if (!data.tokenid) {
     return null;
   }
+
 
   const tokenid = parseInt(data.tokenid);
 
@@ -186,6 +192,11 @@ export async function updateOneByImage(data: any) {
       },
     },
   );
+
+  console.log('updateOneByImage result: ' + JSON.stringify(result));
+
+
+
 
   return {
     result: result,

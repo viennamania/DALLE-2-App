@@ -5,6 +5,8 @@ export interface WalletProps {
   userid: string;
   walletAddress: string;
   walletPrivateKey: string;
+  factoryAddress: string;
+  erc721ContractAddress: string;
 }
 
 export async function insertOne(data: any) {
@@ -23,6 +25,10 @@ export async function insertOne(data: any) {
     return null;
   }
 
+  if (!data.factoryAddress) {
+    return null;
+  }
+
 
   const client = await clientPromise;
   const collection = client.db('vienna').collection('wallets');
@@ -35,6 +41,7 @@ export async function insertOne(data: any) {
       userid: data.userid,
       walletAddress: data.walletAddress,
       walletPrivateKey: data.walletPrivateKey,
+      factoryAddress: data.factoryAddress,
       createdAt: new Date().toISOString(),
     }
   );
@@ -48,7 +55,7 @@ export async function insertOne(data: any) {
 
 
 
-export async function findOne(data: any) {
+export async function findOneByUserid(data: any) {
 
   console.log('findOne data: ' + JSON.stringify(data));
 
@@ -66,8 +73,12 @@ export async function findOne(data: any) {
     },
   );
 
+  ///console.log('findOne result: ' + JSON.stringify(result));
+
+
 
   return result;
+
 }
 
 
