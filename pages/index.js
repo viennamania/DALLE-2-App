@@ -968,7 +968,7 @@ export default function Home() {
                             onClick={() => mintNFT(myImage.image, index)}
                             className={`
                               ${loadingMintNFTs[index] ? "bg-gray-200" : "bg-blue-500"
-                              } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                              } text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
                           >
                             {loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint NFT"}
                           </button>
@@ -979,7 +979,7 @@ export default function Home() {
                             onClick={() => deleteMyImage(myImage.image, index)}
                             className={`
                               ${loadingDeleteMyImage[index] ? "bg-gray-200" : "bg-red-500"
-                              } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                              } text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
                           >
                             {loadingDeleteMyImage[myImages.indexOf(myImage)] ? "Deleting..." : "Delete"}
                           </button>
