@@ -12,15 +12,18 @@
     "@fal-ai/serverless-client": "^0.14.2",
     "@thirdweb-dev/sdk": "^4.0.99",
     "@vercel/blob": "^0.23.4",
+    "autoprefixer": "^10.4.20",
     "axios": "^1.5.0",
     "ethers": "^6.13.2",
     "mongodb": "^6.8.0",
     "next": "13.4.19",
     "openai": "^4.3.1",
+    "postcss": "^8.4.41",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "replicate": "^0.32.0",
     "sharp": "^0.32.5",
+    "tailwindcss": "^3.4.10",
     "thirdweb": "^5.46.1"
   },
   "devDependencies": {

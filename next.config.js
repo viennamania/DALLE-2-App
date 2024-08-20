@@ -6,6 +6,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "fal.media",
+      },
+      {
+        protocol: "https",
         hostname: "replicate.com",
       },
       {

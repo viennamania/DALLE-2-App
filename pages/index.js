@@ -156,7 +156,7 @@ export default function Home() {
 
 
 
-        if (userid != null && userid != 'null' && userid != "" && userid != "songpa") {
+        if (userid != null && userid != 'null' && userid != "" ) {
 
 
           window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
@@ -358,12 +358,14 @@ export default function Home() {
 
         {/* if userid is not null, show userid */}
         
-        {userid != null && userid != 'null' && userid != "" && userid === 'songpa' ? (
+        {userid != null && userid != 'null' && userid != "" ? (
 
-          <div className={styles.description}>
+          <div className="mt-2 flex flex-col items-center justify-center gap-2">
+
             <h3>您的用户ID: {userid}</h3>
+          
 
-           
+            {/*}
             {totalSupply > 0 && erc721ContractAddress != "" ? (
               <a
                 href={`https://opensea.io/assets/matic/${erc721ContractAddress}`}
@@ -378,6 +380,7 @@ export default function Home() {
                 />
               </a>
             ) : ( <></> )}
+             */}
 
           </div>
           
@@ -388,7 +391,7 @@ export default function Home() {
         {/* margin top 10px */}
         {/* 镜像制作费用 50 POWER */}
         <div
-          style = {{marginTop: "10px"}}
+          className="mt-2"
         >
           <h3>* 镜像制作费用 50 POWER</h3>
         </div>
@@ -397,9 +400,7 @@ export default function Home() {
 
      
         <div
-          //className={styles.description}
-          style = {{width: "340px", marginTop: "10px"}}
-
+          className="mt-4 w-full lg:w-1/2 xl:w-1/3 flex flex-col xl:flex-row items-center justify-center gap-2 border border-gray-200 rounded-lg p-2"
         >
           
           {/*
@@ -417,157 +418,173 @@ export default function Home() {
           {/* round full light gray border */}
           {/* padding 1px */}
           {/* when loading show rotating loading image */}
-          {loading ? (
-            <Image
-              style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
-              src="/chatgpt-loading.gif"
-              alt="Logo"
-              width={28}
-              height={28}
-            />
-          ) : (
 
-            <Image
-              style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
-              src="/logo-chatgpt.png"
-              alt="Logo"
-              width={28}
-              height={28}
-            />
-
-          )}
-
-          {/* width 80% */}
-          {loading ? (
+          <div className="w-full flex flex-row items-center justify-center gap-2">
             
-            <input
-              disabled
-              style = {{width: "80%"}}
-              id="prompt"
-              type="text"
-              value={prompt}
-              //placeholder="Prompt"
-              placeholder="Loading..."
-            />
+            {loading ? (
+              <Image
+                style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
+                src="/chatgpt-loading.gif"
+                alt="Logo"
+                width={28}
+                height={28}
+              />
+            ) : (
 
+              <Image
+                style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
+                src="/logo-chatgpt.png"
+                alt="Logo"
+                width={28}
+                height={28}
+              />
 
-          ) : (
-            <input
-              style = {{width: "80%"}}
-              id="prompt"
-              type="text"
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              //placeholder="Prompt"
-              placeholder="您想要制作的图像消息 ChatGPT 4o"
-            />
-          )}
-        </div>
+            )}
 
-        
-        <div>
-          {/* hidden */}
-          <input
-            style = {{display: "none"}}
-            id="number"
-            type="number"
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
-            placeholder="Number of images"
-            max="10"
-          />
-
-          {/* check box for real picture */}
-          
-          <input
-            type="checkbox"
-            id="checkIsRealPicture"
-            value={checkIsRealPicture}
-            onChange={(e) => setCheckIsRealPicture(e.target.checked)}
-          />
-          <label htmlFor="checkIsRealPicture">真实图片</label>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          
+            {/* width 80% */}
+            {loading ? (
+              
+              
+              <input
+                disabled
+                style = {{width: "80%"}}
+                id="prompt"
+                type="text"
+                value={prompt}
+                //placeholder="Prompt"
+                placeholder="Loading..."
+              />
 
 
 
-          {/*}
-          <button onClick={getImages}>Get {number} Images</button>
-          */}
-          {loading ? (
-            <button hidden>创建镜像</button>
-          ) : (
-            <button onClick={getImages}>创建镜像</button>
-          )}
-        </div>
-
-        <small
-          style = {{display: "none"}}
-        >
-          Download as:{" "}
-          <select
-            id="type"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-          >
-            <option value="webp">Webp</option>
-            <option value="png">Png</option>
-            <option value="jpg">Jpg</option>
-            <option value="gif">Gif</option>
-            <option value="avif">Avif</option>
-          </select>
-          {" "}
-          Click the image below and save.
-        </small>
-        <br />
-        
-        {error ? ( <div className={styles.error}>Something went wrong. Try again.</div> ) : ( <></> )}
-
-        {loading && (
-          <>
-          
-            {/* loading image */}
-            <Image
-              src="/chatbot-loading.gif"
-              alt="Logo"
-              width={400}
-              height={200}
-            />
-           
-
-          
-          </>
-
-        ) }
-
-
-        {loading ? (
-            <></>
-            
-        ) : (
-
-          <div className={styles.grid}>
-
-              {results.map((result) => {
-                return (
-                  <div
-                    
-                  key={result.url}
-
-                    className={styles.card}
-                  >
-                    <img
-                      className={styles.imgPreview}
-                      src={result.url}
-                      //onClick={() => download(result.url)}
-                    />
-                  </div>
-                );
-              })}
+            ) : (
+              <input
+                className=" w-full"
+                id="prompt"
+                type="text"
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                //placeholder="Prompt"
+                placeholder="您想要制作的图像消息 ChatGPT 4o"
+              />
+            )}
 
           </div>
 
-        )}
+
+          <div className=" xl:w-40 flex flex-row xl:flex-col items-center justify-center gap-2">
+
+            {/* hidden */}
+            <input
+              style = {{display: "none"}}
+              id="number"
+              type="number"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+              placeholder="Number of images"
+              max="10"
+            />
+
+            {/* check box for real picture */}
+
+            <div className=" text-sm flex flex-row items-center justify-center gap-2">
+              <input
+                type="checkbox"
+                id="checkIsRealPicture"
+                value={checkIsRealPicture}
+                onChange={(e) => setCheckIsRealPicture(e.target.checked)}
+              />
+              真实图片
+            </div>
+
+
+            {/*}
+            <button onClick={getImages}>Get {number} Images</button>
+            */}
+            {loading ? (
+              <button hidden>创建镜像</button>
+            ) : (
+              <button onClick={getImages}>创建镜像</button>
+            )}
+
+          </div>
+
+
+
+        </div>
+        
+        <div>
+
+
+
+
+        </div>
+
+        <div className="xl:w-1/2 flex flex-col items-center justify-center gap-2 ">
+          <small
+            style = {{display: "none"}}
+          >
+            Download as:{" "}
+            <select
+              id="type"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            >
+              <option value="webp">Webp</option>
+              <option value="png">Png</option>
+              <option value="jpg">Jpg</option>
+              <option value="gif">Gif</option>
+              <option value="avif">Avif</option>
+            </select>
+            {" "}
+            Click the image below and save.
+          </small>
+          <br />
+        
+          {error ? ( <div className={styles.error}>Something went wrong. Try again.</div> ) : ( <></> )}
+
+          {loading ? (
+         
+            
+
+              <Image
+                src="/chatbot-loading.gif"
+                alt="Logo"
+                width={400}
+                height={200}
+              />
+            
+
+            
+          
+
+              
+          ) : (
+
+            <>
+
+                {results.map((result) => {
+                  return (
+                    <div
+                      
+                    key={result.url}
+
+                      className="w-full border border-gray-200 rounded-lg overflow-hidden"
+                    >
+                      <img
+                        className={styles.imgPreview}
+                        src={result.url}
+                        //onClick={() => download(result.url)}
+                      />
+                    </div>
+                  );
+                })}
+
+            </>
+
+          )}
+
+        </div>
 
 
         {/* download button */}
@@ -603,31 +620,73 @@ export default function Home() {
 
       
         {/* if userid is 'songpa', show my images */}
-        {userid != null && userid != 'null' && userid != "" && userid === 'songpa' ? (
+        {userid != null && userid != 'null' && userid != "" && (
 
-          <div className={styles.grid} style = {{marginTop: "20px"}}>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-4">
           
 
             {myImages.map((myImage) => {
               return (
                 <div
                   key={myImage._id}
-                  style={ { width: "200px", height: "200px", margin: "10px"} }
-
-                  //className={styles.card}
+                  className="border border-gray-200 rounded-lg overflow-hidden flex flex-col items-center justify-center gap-2"
                 >
-                  <img
-                    className={styles.imgPreview}
+                  <Image
+                    
                     src={myImage.image}
+                    alt="My Image"
+                    width={400}
+                    height={400}
                     //onClick={() => download(myImage.image)}
+                    // object-fit: cover;
+
+                    //style = {{objectFit: "cover"}}
+
+                    //className={styles.imgPreview}
+                    /*
+                    .imgPreview {
+                      width: 100%;
+                      border-radius: 10px;
+                    }
+
+                    .imgPreview:hover,
+                    .imgPreview:focus,
+                    .imgPreview:active {
+                      transform: scale(1.1);
+                      cursor: pointer;
+                      transition-duration: 1s;
+                    }
+                    */
+
+                    className="
+                    hover:scale-110
+                    cursor-pointer
+                    transition-transform
+                    duration-1000
+                    "
+                  
+
+                    style = {
+                      {
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                      }
+                    }
+
                   />
+
+                  {/* myImage.created_at */}
+                  <div className="text-center text-xs text-gray-500 p-2"> 
+                    {new Date(myImage.createdAt).toLocaleString()}
+                  </div>
                 </div>
               );
             })}
 
           </div>
 
-        ) : ( <></> )}
+        )}
 
 
 
