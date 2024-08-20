@@ -233,7 +233,7 @@ export default async function handler(req, res) {
 
     const sendData = await sendAndConfirmTransaction({
         transaction: transactionMintTo,
-        account: smartAccount,
+        account: account,
     });
 
 

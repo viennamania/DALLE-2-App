@@ -859,31 +859,44 @@ export default function Home() {
 
                   {/* mint NFT button */}
 
-                  {myImage.erc721ContractAddress === "" || myImage.erc721ContractAddress === null || myImage.erc721ContractAddress === undefined ? (
-                    <button
-                      disabled={loadingMintNFTs[index]}
-                      onClick={() => mintNFT(myImage.image, index)}
-                      className={`
-                        ${loadingMintNFTs[index] ? "bg-gray-200" : "bg-blue-500"
-                        } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-                    >
-                      {loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint NFT"}
-                    </button>
-                  ) : (
-                    <button
-                      // goto opensea
-                      onClick={() => {
-                        window.open(`https://opensea.io/assets/matic/${myImage.erc721ContractAddress}/${myImage.tokenid}`, "_blank");
-                      }}
-                    >
-                      <Image
-                        src="/icon-opensea.png"
-                        alt="Logo"
-                        width={20}
-                        height={20}
-                      />
-                     
-                    </button>
+                  {erc721ContractAddress !== "" && erc721ContractAddress !== null && erc721ContractAddress !== undefined && (
+
+                    <>
+
+                      {myImage.erc721ContractAddress === "" || myImage.erc721ContractAddress === null || myImage.erc721ContractAddress === undefined ? (
+                        
+                        <button
+                          disabled={loadingMintNFTs[index]}
+                          onClick={() => mintNFT(myImage.image, index)}
+                          className={`
+                            ${loadingMintNFTs[index] ? "bg-gray-200" : "bg-blue-500"
+                            } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                        >
+                          {loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint NFT"}
+                        </button>
+                      
+
+
+                      ) : (
+                        <button
+                          // goto opensea
+                          onClick={() => {
+                            window.open(`https://opensea.io/assets/matic/${myImage.erc721ContractAddress}/${myImage.tokenid}`, "_blank");
+                          }}
+                        >
+                          <Image
+                            src="/icon-opensea.png"
+                            alt="Logo"
+                            width={20}
+                            height={20}
+                          />
+                        
+                        </button>
+                      )}
+
+                    </>
+
+
                   )}
 
                 </div>
