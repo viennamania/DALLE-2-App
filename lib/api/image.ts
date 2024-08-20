@@ -223,7 +223,52 @@ export async function findAllByUserid(data: any) {
     },
 
 
-  ).sort({createdAt: -1}).limit(5).toArray();
+  ).sort({createdAt: -1}).toArray();
 
   return result;
+}
+
+
+// delete image by image
+export async function deleteOneByImage(data: any) {
+  
+  console.log('deleteOneByImage data: ' + JSON.stringify(data));
+
+  if (!data.image) {
+    return null;
+  }
+
+  const client = await clientPromise;
+  const collection = client.db('vienna').collection('images');
+
+  // when erc721ContractAddress is null, delete image
+
+  // check erc721ContractAddress is null
+
+  const resultCheck = await collection.findOne<ImageProps>(
+    {
+      image: data.image,
+    },
+  );
+
+  if (!resultCheck) {
+    return null;
+  }
+
+  if (resultCheck.erc721ContractAddress) {
+    return null;
+  }
+
+  const result = await collection.deleteOne(
+    {
+      image: data.image,
+    },
+  );
+
+  
+
+  return {
+    result: result,
+  };
+
 }

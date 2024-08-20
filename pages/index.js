@@ -438,6 +438,80 @@ export default function Home() {
 
 
 
+  // delete my image
+  const [loadingDeleteMyImage, setLoadingDeleteMyImage] = useState([]);
+  useEffect(() => {
+      setLoadingDeleteMyImage(
+          new Array(myImages.length).fill(false)
+      );
+  } , [myImages]);
+
+  const deleteMyImage = async (image, index) => {
+      
+      if (userid == null || userid == 'null' || userid == "" ) {
+        return;
+      }
+  
+      if (confirm("Are you sure you want to delete this image?")) {
+  
+        setLoadingDeleteMyImage(
+            loadingDeleteMyImage.map((value, i) => {
+                return i === index ? true : value;
+            }
+        ));
+  
+        try {
+  
+          const response = await fetch("/api/removeOneImage?userid=" + userid + "&image=" + image, {
+              method: "GET",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+          });
+  
+          if (!response.ok) {
+              throw new Error("Failed to delete image");
+          }
+
+          const data = await response.json();
+
+          setLoadingDeleteMyImage(
+              loadingDeleteMyImage.map((value, i) => {
+                  return i === index ? false : value;
+              }
+          ));
+
+          if (userid != null && userid != 'null' && userid != "" ) {
+
+            setLoadingMyImages(true);
+
+            axios
+              .get(`/api/getImages?userid=${userid}`)
+              .then((res) => {
+                setMyImages(res.data);
+              })
+              .catch((err) => {
+                console.log(err);
+              }
+            );
+
+            setLoadingMyImages(false);
+
+          }
+
+        } catch (error) {
+
+          console.error("Error: ", error);
+
+          //toast.error("Failed to delete image");
+
+          setLoadingDeleteMyImage( false );
+
+        }
+
+      }
+
+  }
 
 
 
@@ -526,7 +600,7 @@ export default function Home() {
 
      
         <div
-          className="mt-4 w-full lg:w-1/2 xl:w-1/3 flex flex-col xl:flex-row items-center justify-center gap-2 border border-gray-200 rounded-lg p-2"
+          className="mt-4 w-full lg:w-1/2 xl:w-1/2 flex flex-col xl:flex-row items-center justify-center gap-2 border border-gray-200 rounded-lg p-2"
         >
           
           {/*
@@ -598,7 +672,7 @@ export default function Home() {
           </div>
 
 
-          <div className=" xl:w-40 flex flex-row xl:flex-col items-center justify-center gap-2">
+          <div className=" xl:w-52 flex flex-row xl:flex-col items-center justify-center gap-2">
 
             {/* hidden */}
             <input
@@ -630,8 +704,27 @@ export default function Home() {
             {loading ? (
               <button hidden>创建镜像</button>
             ) : (
-              <button onClick={getImages}>创建镜像</button>
+              <div className="flex flex-row items-center justify-center gap-2">
+                <button
+                  disabled={loading || prompt === ""}
+                  onClick={getImages}>创建镜像
+                </button>
+                {/* reset button */}
+                <button
+                  onClick={() => {
+                    setResults([]);
+                    setPrompt("");
+                    setNumber(1);
+                    setCheckIsRealPicture(false);
+                  }}
+                >
+                  重置
+                </button>
+
+              </div>
             )}
+
+
 
           </div>
 
@@ -853,8 +946,12 @@ export default function Home() {
                   />
 
                   {/* myImage.created_at */}
-                  <div className="text-center text-xs text-gray-500 p-2"> 
+                  <div className="text-center text-xs xl:text-sm text-gray-500 p-1"> 
                     {new Date(myImage.createdAt).toLocaleString()}
+                  </div>
+                  {/* prompt */}
+                  <div className="text-center text-xs xl:text-sm text-gray-500 p-2"> 
+                    {myImage.prompt}
                   </div>
 
                   {/* mint NFT button */}
@@ -865,15 +962,30 @@ export default function Home() {
 
                       {myImage.erc721ContractAddress === "" || myImage.erc721ContractAddress === null || myImage.erc721ContractAddress === undefined ? (
                         
-                        <button
-                          disabled={loadingMintNFTs[index]}
-                          onClick={() => mintNFT(myImage.image, index)}
-                          className={`
-                            ${loadingMintNFTs[index] ? "bg-gray-200" : "bg-blue-500"
-                            } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-                        >
-                          {loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint NFT"}
-                        </button>
+                        <div className="flex flex-row items-center justify-center gap-2">
+                          <button
+                            disabled={loadingMintNFTs[index]}
+                            onClick={() => mintNFT(myImage.image, index)}
+                            className={`
+                              ${loadingMintNFTs[index] ? "bg-gray-200" : "bg-blue-500"
+                              } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                          >
+                            {loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint NFT"}
+                          </button>
+
+                          {/* delete button */}
+                          <button
+                            disabled={loadingDeleteMyImage[index]}
+                            onClick={() => deleteMyImage(myImage.image, index)}
+                            className={`
+                              ${loadingDeleteMyImage[index] ? "bg-gray-200" : "bg-red-500"
+                              } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                          >
+                            {loadingDeleteMyImage[myImages.indexOf(myImage)] ? "Deleting..." : "Delete"}
+                          </button>
+
+
+                        </div>
                       
 
 
