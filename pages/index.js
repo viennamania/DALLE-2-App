@@ -24,7 +24,10 @@ export default function Home() {
   const searchParams = useSearchParams()
  
 
-  const userid = searchParams.get('userid')
+  ///const userid = searchParams.get('userid')
+
+  const userid = searchParams.get('token');
+
 
   console.log("userid=", userid);
 
