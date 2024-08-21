@@ -996,7 +996,7 @@ export default function Home() {
                               ${loadingMintNFTs[index] ? "bg-gray-200" : "bg-blue-500"
                               } text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
                           >
-                            {loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint NFT"}
+                            {loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint"}
                           </button>
 
                           {/* delete button */}
