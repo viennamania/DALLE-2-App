@@ -113,7 +113,7 @@ export default async function handler(req, res) {
   
 
   if (userid != null && userid != 'null' && userid != "" && blob.url != null && blob.url != 'null' && blob.url != "" && userid != "songpa") {
-    const pointRrl = "https://www.olgagpt.com/sub/createNFT.asp?userid=" + userid + "&image=" + encodeURIComponent(blob.url);
+    const pointRrl = "https://www.olgagpt.com/sub/createNFT.asp?token=" + userid + "&image=" + encodeURIComponent(blob.url);
     ///console.log(pointRrl);
     const callback = await fetch(pointRrl);
 
