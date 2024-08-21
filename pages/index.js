@@ -342,17 +342,29 @@ export default function Home() {
   // deploy ERC721 contract
   const [loadingDeployErc721Contract, setLoadingDeployErc721Contract] = useState(false);
   const deployErc721Contract = () => {
-    setLoadingDeployErc721Contract(true);
-    axios
-      .get(`/api/deployErc721Contract?userid=${userid}`)
-      .then((res) => {
-        setErc721ContractAddress(res.data.erc721ContractAddress);
-        setLoadingDeployErc721Contract(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoadingDeployErc721Contract(false);
-      });
+
+    if (userid == null || userid == 'null' || userid == "" ) {
+      return;
+    }
+    
+    //if (confirm("Are you sure you want to deploy ERC721 contract?")) {
+    // chinese confirm
+    if (confirm("您确定要部署ERC721合约吗？")) {
+
+      setLoadingDeployErc721Contract(true);
+      axios
+        .get(`/api/deployErc721Contract?userid=${userid}`)
+        .then((res) => {
+          setErc721ContractAddress(res.data.erc721ContractAddress);
+          setLoadingDeployErc721Contract(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoadingDeployErc721Contract(false);
+        });
+
+    }
+
   };
 
 
@@ -370,12 +382,17 @@ export default function Home() {
   
 
 
-  const mintNFT = async (image, index) => {
+  const mintNFT = async (image, prompt, index) => {
 
     if (userid == null || userid == 'null' || userid == "" ) {
       return;
     }
 
+
+    // confirm mint NFT
+    //if (confirm("Are you sure you want to mint NFT?")) {
+    // chinese confirm
+    if (confirm("您确定要铸造NFT吗？")) {
 
       setLoadingMintNFTs(
           loadingMintNFTs.map((value, i) => {
@@ -385,7 +402,10 @@ export default function Home() {
 
       try {
 
-        const response = await fetch("/api/mintNFTByUserid?userid=" + userid + "&image=" + image, {
+        const response = await fetch("/api/mintNFTByUserid?userid=" 
+          + userid 
+          + "&image=" + image
+          + "&prompt=" + prompt ,{
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -433,6 +453,7 @@ export default function Home() {
 
       }
 
+    }
 
   }
 
@@ -452,7 +473,9 @@ export default function Home() {
         return;
       }
   
-      if (confirm("Are you sure you want to delete this image?")) {
+      //if (confirm("Are you sure you want to delete this image?")) {
+      // chinese confirm
+      if (confirm("您确定要删除这张图片吗？")) {
   
         setLoadingDeleteMyImage(
             loadingDeleteMyImage.map((value, i) => {
@@ -965,7 +988,7 @@ export default function Home() {
                         <div className="flex flex-row items-center justify-center gap-2">
                           <button
                             disabled={loadingMintNFTs[index]}
-                            onClick={() => mintNFT(myImage.image, index)}
+                            onClick={() => mintNFT(myImage.image, myImage.prompt, index)}
                             className={`
                               ${loadingMintNFTs[index] ? "bg-gray-200" : "bg-blue-500"
                               } text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline`}

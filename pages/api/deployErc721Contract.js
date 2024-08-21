@@ -58,10 +58,10 @@ import { deployERC721Contract } from 'thirdweb/deploys';
 //nextjs /pages/api
 export const config = {
 	//runtime: 'edge',
-	maxDuration: 60, // This function can run for a maximum of 60 seconds
+	maxDuration: 120, // This function can run for a maximum of 60 seconds
 };
 
-export const maxDuration = 60; // 추가한 코드
+export const maxDuration = 120; // 추가한 코드
 export const dynamic = 'force-dynamic'; // 추가한 코드
 
 

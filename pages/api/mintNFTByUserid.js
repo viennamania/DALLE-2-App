@@ -119,6 +119,9 @@ export default async function handler(req, res) {
     });
   }
 
+  const prompt = req.query.prompt;
+
+
 
   ///console.log("image: ", image);
 
@@ -198,7 +201,7 @@ export default async function handler(req, res) {
     to: toAddress,
     nft: {
       name: "NFT",
-      description: "NFT",
+      description: prompt,
 
 
       image: image,

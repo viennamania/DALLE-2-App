@@ -98,6 +98,16 @@ export default async function handler(req, res) {
 
   const image = req.query.image;
 
+  if (!image) {
+    return res.status(400).json({
+      result: "error",
+      message: "image is required",
+    });
+  }
+
+  const prompt = req.query.prompt;
+  
+
   console.log("image: ", image);
 
 
