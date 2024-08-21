@@ -24,7 +24,7 @@ export default function Home() {
   const searchParams = useSearchParams()
  
 
-  ///const userid = searchParams.get('userid')
+  const username = searchParams.get('userid')
 
   const userid = searchParams.get('token');
 
@@ -588,7 +588,7 @@ export default function Home() {
 
           <div className="mt-2 flex flex-col items-center justify-center gap-2">
 
-            <h3>您的用户ID: {userid}</h3>
+            <h3>您的用户ID: {username}</h3>
           
 
             {/*}
