@@ -170,15 +170,22 @@ export default function Home() {
 
 
         // get my images from api
+
+        /*
+        
         axios
           .get(`/api/getImages?userid=${userid}`)
           .then((res) => {
             setMyImages(res.data);
+
           })
           .catch((err) => {
             console.log(err);
           }
         );
+        
+        */
+        
 
 
 
@@ -186,7 +193,7 @@ export default function Home() {
         if (userid != null && userid != 'null' && userid != "" ) {
 
 
-          window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_self");
+          window.open("https://olgagpt.com/sub/deposit_request_krw.asp", "_self");
 
         }
 
