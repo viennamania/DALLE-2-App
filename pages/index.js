@@ -724,7 +724,7 @@ export default function Home() {
 
               {/* check box for real picture */}
 
-              <div className=" text-sm flex flex-row items-center justify-center gap-2">
+              <div className="mb-2 text-sm flex flex-row items-center justify-center gap-2">
                 <input
                   type="checkbox"
                   id="checkIsRealPicture"
@@ -1099,10 +1099,12 @@ export default function Home() {
         left-0
         bottom-0 w-full 
       ">
-        <div className="grid grid-cols-5 border border-gray-200 xl:w-1/2 mx-auto">
+        <div className="grid grid-cols-5 border border-gray-200 lg:w-1/2 xl:w-1/2 mx-auto">
 
           <button
-            className=" h-24 flex flex-col items-center justify-start"
+            className=" h-24 flex flex-col items-center justify-start
+            hover:bg-gray-200 hover:text-black"
+
             onClick={() => {
               // Coming soon
 
@@ -1123,7 +1125,14 @@ export default function Home() {
 
           <button
             // selected
-            className=" h-24 flex flex-col items-center justify-start bg-gray-200"
+            //className=" h-24 flex flex-col items-center justify-start  bg-cadetblue "
+
+            className="
+              h-24 flex flex-col items-center justify-start text-white
+            "
+
+            style = {{backgroundColor: "cadetblue"}}
+             
             /*
             onClick={() => {
               // '/?userid=${userid}&token=${token}'
@@ -1149,6 +1158,7 @@ export default function Home() {
               Image<br/>Generator
             </span>
           </button>
+
           <button
             className=" h-24 flex flex-col items-center justify-start"
             onClick={() => {
@@ -1166,6 +1176,7 @@ export default function Home() {
               Chat GPT
             </span>
           </button>
+
           <button
             className=" h-24 flex flex-col items-center justify-start"
             onClick={() => {
