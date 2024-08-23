@@ -879,7 +879,7 @@ export default function Home() {
             <>
 
               {erc721ContractAddress != "" && erc721ContractAddress != null && erc721ContractAddress != undefined ? (
-                <div className="mt-10 flex flex-col items-center justify-center gap-2">
+                <div className="mt-2 flex flex-col items-center justify-center gap-2">
                   {/* button for new window goto opensea */}
                   <button
                     onClick={() => {
@@ -889,8 +889,8 @@ export default function Home() {
                     <Image
                       src="/icon-opensea.png"
                       alt="Logo"
-                      width={100}
-                      height={100}
+                      width={80}
+                      height={80}
                     />
                   </button>
                   <span className="text-center text-sm text-gray-500">
@@ -898,7 +898,7 @@ export default function Home() {
                   </span>
                 </div>
               ) : (
-                <div className="mt-10 text-center text-sm text-gray-500 p-2">
+                <div className="mt-2 text-center text-sm text-gray-500 p-2">
           
                   {/* button for deploy ERC721 contract */}
 
@@ -1075,7 +1075,8 @@ export default function Home() {
 
       <div className=" fixed bg-white z-50 text-black
         left-0
-        bottom-0 w-full border-t border-gray-200 grid grid-cols-5 gap-0">
+        bottom-0 w-full border-t border-gray-200 grid grid-cols-5 gap-0
+      ">
           <button
             onClick={() => {
               // Coming soon
@@ -1123,7 +1124,7 @@ export default function Home() {
           <button
             onClick={() => {
               // Coming soon
-              alert("Coming soon");
+              window.open("https://olgagpt.unove.space/?userid=" + username + "&token=" + userid, "_blank");
             }}
           >
             <div className="h-20 flex flex-col items-center justify-start">
