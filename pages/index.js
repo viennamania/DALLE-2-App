@@ -16,6 +16,8 @@ import { useSearchParams } from 'next/navigation'
 import { PutBlobResult } from '@vercel/blob';
 
 
+import { usePathname, useRouter } from 'next/navigation'
+
 
 export default function Home() {
 
@@ -30,6 +32,8 @@ export default function Home() {
 
 
   console.log("userid=", userid);
+
+  const router = useRouter();
 
 
   // wallet address
@@ -548,7 +552,8 @@ export default function Home() {
   return (
 
 
-    <div className={styles.container}>
+    <div className="container mx-auto p-4">
+
       <Head>
         <title>Create Images With GhatGPT 4o</title>
 
@@ -565,7 +570,8 @@ export default function Home() {
 
       </Head>
 
-      <main className={styles.main}>
+
+      <main className="flex flex-col items-center justify-center gap-4">
 
         
         <Image
@@ -610,153 +616,153 @@ export default function Home() {
 
           </div>
           
-          ) : ( <></> )}
+        ) : ( <></> )}
         
 
 
-        {/* margin top 10px */}
-        {/* 镜像制作费用 50 POWER */}
-        <div
-          className="mt-2"
-        >
-          <h3>* 镜像制作费用 50 POWER</h3>
-        </div>
+          {/* margin top 10px */}
+          {/* 镜像制作费用 50 POWER */}
+          <div
+            className="mt-2"
+          >
+            <h3>* 镜像制作费用 50 POWER</h3>
+          </div>
 
 
 
      
-        <div
-          className="mt-4 w-full lg:w-1/2 xl:w-1/2 flex flex-col xl:flex-row items-center justify-center gap-2 border border-gray-200 rounded-lg p-2"
-        >
+          <div
+            className="mt-4 w-full lg:w-1/2 xl:w-1/2 flex flex-col xl:flex-row items-center justify-center gap-2 border border-gray-200 rounded-lg p-2"
+          >
           
-          {/*
-          <input
-            id="token"
-            type="text"
-            value={token}
-            onChange={(e) => setToken(e.target.value)}
-            placeholder={process.env.OPENAI_API_KEY}
-          />
-          */}
-
-          {/* chatgpt logo small image */}
-          {/* align vertical center */}
-          {/* round full light gray border */}
-          {/* padding 1px */}
-          {/* when loading show rotating loading image */}
-
-          <div className="w-full flex flex-row items-center justify-center gap-2">
-            
-            {loading ? (
-              <Image
-                style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
-                src="/chatgpt-loading.gif"
-                alt="Logo"
-                width={28}
-                height={28}
-              />
-            ) : (
-
-              <Image
-                style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
-                src="/logo-chatgpt.png"
-                alt="Logo"
-                width={28}
-                height={28}
-              />
-
-            )}
-
-            {/* width 80% */}
-            {loading ? (
-              
-              
-              <input
-                disabled
-                style = {{width: "80%"}}
-                id="prompt"
-                type="text"
-                value={prompt}
-                //placeholder="Prompt"
-                placeholder="Loading..."
-              />
-
-
-
-            ) : (
-              <input
-                className=" w-full"
-                id="prompt"
-                type="text"
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                //placeholder="Prompt"
-                placeholder="您想要制作的图像消息 ChatGPT 4o"
-              />
-            )}
-
-          </div>
-
-
-          <div className=" xl:w-52 flex flex-row xl:flex-col items-center justify-center gap-2">
-
-            {/* hidden */}
+            {/*
             <input
-              style = {{display: "none"}}
-              id="number"
-              type="number"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-              placeholder="Number of images"
-              max="10"
+              id="token"
+              type="text"
+              value={token}
+              onChange={(e) => setToken(e.target.value)}
+              placeholder={process.env.OPENAI_API_KEY}
             />
+            */}
 
-            {/* check box for real picture */}
+            {/* chatgpt logo small image */}
+            {/* align vertical center */}
+            {/* round full light gray border */}
+            {/* padding 1px */}
+            {/* when loading show rotating loading image */}
 
-            <div className=" text-sm flex flex-row items-center justify-center gap-2">
-              <input
-                type="checkbox"
-                id="checkIsRealPicture"
-                value={checkIsRealPicture}
-                onChange={(e) => setCheckIsRealPicture(e.target.checked)}
-              />
-              真实图片
+            <div className="w-full flex flex-row items-center justify-center gap-2">
+              
+              {loading ? (
+                <Image
+                  style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
+                  src="/chatgpt-loading.gif"
+                  alt="Logo"
+                  width={28}
+                  height={28}
+                />
+              ) : (
+
+                <Image
+                  style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
+                  src="/logo-chatgpt.png"
+                  alt="Logo"
+                  width={28}
+                  height={28}
+                />
+
+              )}
+
+              {/* width 80% */}
+              {loading ? (
+                
+                
+                <input
+                  disabled
+                  style = {{width: "80%"}}
+                  id="prompt"
+                  type="text"
+                  value={prompt}
+                  //placeholder="Prompt"
+                  placeholder="Loading..."
+                />
+
+
+
+              ) : (
+                <input
+                  className=" w-full"
+                  id="prompt"
+                  type="text"
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  //placeholder="Prompt"
+                  placeholder="您想要制作的图像消息 ChatGPT 4o"
+                />
+              )}
+
             </div>
 
 
-            {/*}
-            <button onClick={getImages}>Get {number} Images</button>
-            */}
-            {loading ? (
-              <button hidden>创建镜像</button>
-            ) : (
-              <div className="flex flex-row items-center justify-center gap-2">
-                <button
-                  disabled={loading || prompt === ""}
-                  onClick={getImages}>创建镜像
-                </button>
-                {/* reset button */}
-                <button
-                  onClick={() => {
-                    setResults([]);
-                    setPrompt("");
-                    setNumber(1);
-                    setCheckIsRealPicture(false);
-                  }}
-                >
-                  重置
-                </button>
+            <div className=" xl:w-52 flex flex-row xl:flex-col items-center justify-center gap-2">
 
+              {/* hidden */}
+              <input
+                style = {{display: "none"}}
+                id="number"
+                type="number"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+                placeholder="Number of images"
+                max="10"
+              />
+
+              {/* check box for real picture */}
+
+              <div className=" text-sm flex flex-row items-center justify-center gap-2">
+                <input
+                  type="checkbox"
+                  id="checkIsRealPicture"
+                  value={checkIsRealPicture}
+                  onChange={(e) => setCheckIsRealPicture(e.target.checked)}
+                />
+                真实图片
               </div>
-            )}
+
+
+              {/*}
+              <button onClick={getImages}>Get {number} Images</button>
+              */}
+              {loading ? (
+                <button hidden>创建镜像</button>
+              ) : (
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <button
+                    disabled={loading || prompt === ""}
+                    onClick={getImages}>创建镜像
+                  </button>
+                  {/* reset button */}
+                  <button
+                    onClick={() => {
+                      setResults([]);
+                      setPrompt("");
+                      setNumber(1);
+                      setCheckIsRealPicture(false);
+                    }}
+                  >
+                    重置
+                  </button>
+
+                </div>
+              )}
+
+
+
+            </div>
 
 
 
           </div>
-
-
-
-        </div>
         
         <div>
 
@@ -766,6 +772,7 @@ export default function Home() {
 
 
         <div className="xl:w-1/2 flex flex-col items-center justify-center gap-2 ">
+
           <small
             style = {{display: "none"}}
           >
@@ -833,91 +840,99 @@ export default function Home() {
    
 
 
-        {/* download button */}
-        {/* download image and anchor goto https://www.olgagpt.com/sub/deposit_request_krw.asp new window */}
-        {/* margin top 20px */}
-        {!loading && results.length > 0 && userid != null && userid != 'null' && userid != ""  && (
-          <button
-            disabled={loadingDownload}
-            style = {{marginTop: "20px"}}
-            onClick={() => {
+          {/* download button */}
+          {/* download image and anchor goto https://www.olgagpt.com/sub/deposit_request_krw.asp new window */}
+          {/* margin top 20px */}
+          {!loading && results.length > 0 && userid != null && userid != 'null' && userid != ""  && (
+            <button
+              disabled={loadingDownload}
+              style = {{marginTop: "20px"}}
+              onClick={() => {
 
-              download(results[0].url);
-
-
-
-
-              //window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
+                download(results[0].url);
 
 
 
 
-              } }
-          >
-            {
-            loadingDownload ?
-              <span>下载中...</span>
-              :
-              <span>下载并退出</span>
+                //window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
 
-            }
-          </button>
-        )}
+
+
+
+                } }
+            >
+              {
+              loadingDownload ?
+                <span>下载中...</span>
+                :
+                <span>下载并退出</span>
+
+              }
+            </button>
+          )}
 
       
 
 
           {/* erc721ContractAddress */}
-          {erc721ContractAddress != "" && erc721ContractAddress != null && erc721ContractAddress != undefined ? (
-            <div className="mt-10 flex flex-col items-center justify-center gap-2">
-              {/* button for new window goto opensea */}
-              <button
-                onClick={() => {
-                  window.open(`https://opensea.io/assets/matic/${erc721ContractAddress}`, "_blank");
-                }}
-              >
-                <Image
-                  src="/icon-opensea.png"
-                  alt="Logo"
-                  width={32}
-                  height={32}
-                />
-              </button>
-              <span className="text-center text-sm text-gray-500">
-                {erc721ContractAddress}
-              </span>
-            </div>
-          ) : (
-            <div className="mt-10 text-center text-sm text-gray-500 p-2">
-      
-              {/* button for deploy ERC721 contract */}
+          {walletAddress && walletAddress != "" && (
+            <>
 
-              <button
-                disabled={loadingDeployErc721Contract}
-                onClick={() => {
+              {erc721ContractAddress != "" && erc721ContractAddress != null && erc721ContractAddress != undefined ? (
+                <div className="mt-10 flex flex-col items-center justify-center gap-2">
+                  {/* button for new window goto opensea */}
+                  <button
+                    onClick={() => {
+                      window.open(`https://opensea.io/assets/matic/${erc721ContractAddress}`, "_blank");
+                    }}
+                  >
+                    <Image
+                      src="/icon-opensea.png"
+                      alt="Logo"
+                      width={32}
+                      height={32}
+                    />
+                  </button>
+                  <span className="text-center text-sm text-gray-500">
+                    {erc721ContractAddress}
+                  </span>
+                </div>
+              ) : (
+                <div className="mt-10 text-center text-sm text-gray-500 p-2">
+          
+                  {/* button for deploy ERC721 contract */}
 
-                  deployErc721Contract();
+                  <button
+                    disabled={loadingDeployErc721Contract}
+                    onClick={() => {
 
-                }}
-                className={`
-                  ${loadingDeployErc721Contract ? "bg-gray-200" : "bg-blue-500"
-                  } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-              >
-                {loadingDeployErc721Contract ?
-                  "部署中..." :
-                  "部署ERC721合约"
-                }
-                
-              </button>
+                      deployErc721Contract();
 
-            </div>
+                    }}
+                    className={`
+                      ${loadingDeployErc721Contract ? "bg-gray-200" : "bg-blue-500"
+                      } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                  >
+                    {loadingDeployErc721Contract ?
+                      "部署中..." :
+                      "部署ERC721合约"
+                    }
+                    
+                  </button>
+
+                </div>
+              )}
+
+            </>
+
           )}
 
 
         {/* if userid is 'songpa', show my images */}
         {userid != null && userid != 'null' && userid != "" && (
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-4">
+          <div className="
+          xl:w-1/2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-4">
           
 
             {myImages.map((myImage, index) => {
@@ -1049,6 +1064,119 @@ export default function Home() {
 
       </main>
 
+      {/* footer */}
+      {/* fixed bottom */}
+      {/* menu01.png => Coming Soon */}
+      {/* menu02.png => current page */}
+      {/* menu03.png => 'https://olgagpt.unove.space/' */}
+      {/* menu04.png => 'https://olgagpt.com/sub/order_list.asp' */}
+      {/* menu05.png => 'https://olgagpt.com/main.asp' */}
+ 
+
+      <div className=" fixed bg-white z-50 text-black
+        left-0
+        bottom-0 w-full border-t border-gray-200  p-2 flex flex-row items-center justify-center gap-2">
+          <button
+            onClick={() => {
+              // Coming soon
+
+              alert("Coming soon");
+            }}
+          >
+            <div className="flex flex-col items-center justify-center">
+              <Image
+                src="/menu01.png"
+                alt="Logo"
+                width={40}
+                height={40}
+              />
+              <span className="text-xs xl:text-sm font-bold">
+                SNS
+              </span>
+            </div>
+          </button>
+          <button
+            onClick={() => {
+              // '/?userid=${userid}&token=${token}'
+
+              router.push(
+                {
+                  pathname: "/",
+                  search: `?userid=${username}&token=${userid}`,
+                }
+              );
+
+            }}
+          >
+            <div className="flex flex-col items-center justify-center">
+              <Image
+                src="/menu02.png"
+                alt="Logo"
+                width={40}
+                height={40}
+              />
+              <span className="text-xs xl:text-sm font-bold">
+                Image Generator
+              </span>
+            </div>
+          </button>
+          <button
+            onClick={() => {
+              // Coming soon
+              alert("Coming soon");
+            }}
+          >
+            <div className="flex flex-col items-center justify-center">
+              <Image
+                src="/menu03.png"
+                alt="Logo"
+                width={40}
+                height={40}
+              />
+              <span className="text-xs xl:text-sm font-bold">
+                Chat GPT
+              </span>
+            </div>
+          </button>
+          <button
+            onClick={() => {
+              window.open("https://olgagpt.com/sub/order_list.asp", "_blank");
+            }}
+          >
+            <div className="flex flex-col items-center justify-center">
+              <Image
+                src="/menu04.png"
+                alt="Logo"
+                width={40}
+                height={40}
+              />
+              <span className="text-xs xl:text-sm font-bold">
+                My NFT
+              </span>
+            </div>
+          </button>
+          <button
+            onClick={() => {
+              window.open("https://olgagpt.com/main.asp", "_blank");
+            }}
+          >
+            <div className="flex flex-col items-center justify-center">
+              <Image
+                src="/menu05.png"
+                alt="Logo"
+                width={40}
+                height={40}
+              />
+              <span className="text-xs xl:text-sm font-bold">
+                OLGA
+              </span>
+            </div>
+          </button>
+
+      </div>
+
+
+      {/*
       <footer className={styles.footer}>
 
         <a
@@ -1057,8 +1185,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
 
-        {/* alga.jpg margin top */}
-        {/* rouded border */}
+
         <Image
           style={ {marginTop: "100px", border: "1px solid #ddd", borderRadius: "4px"} }
           src="/olga.jpg"
@@ -1071,6 +1198,7 @@ export default function Home() {
         </a>
 
       </footer>
+      */}
 
     </div>
   );
