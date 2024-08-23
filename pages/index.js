@@ -1099,7 +1099,7 @@ export default function Home() {
         left-0
         bottom-0 w-full 
       ">
-        <div className="grid grid-cols-5 border border-gray-200 lg:w-1/2 xl:w-1/2 mx-auto">
+        <div className="grid grid-cols-5 border border-gray-200 lg:w-1/2 xl:w-1/2 mx-auto gap-2">
 
           <button
             className=" h-24 flex flex-col items-center justify-start
@@ -1160,7 +1160,8 @@ export default function Home() {
           </button>
 
           <button
-            className=" h-24 flex flex-col items-center justify-start"
+            className=" h-24 flex flex-col items-center justify-start
+            hover:bg-gray-200 hover:text-black"
             onClick={() => {
               // Coming soon
               window.open("https://olgagpt.unove.space/" + userid + "/" + username, "_self");
@@ -1178,7 +1179,8 @@ export default function Home() {
           </button>
 
           <button
-            className=" h-24 flex flex-col items-center justify-start"
+            className=" h-24 flex flex-col items-center justify-start
+            hover:bg-gray-200 hover:text-black"
             onClick={() => {
               window.open("https://olgagpt.com/sub/order_list.asp", "_self");
             }}
@@ -1194,7 +1196,8 @@ export default function Home() {
             </span>
           </button>
           <button
-            className=" h-24 flex flex-col items-center justify-start"
+            className=" h-24 flex flex-col items-center justify-start
+            hover:bg-gray-200 hover:text-black"
             onClick={() => {
               window.open("https://olgagpt.com/main.asp", "_self");
             }}
