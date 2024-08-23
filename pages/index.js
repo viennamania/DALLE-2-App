@@ -186,7 +186,7 @@ export default function Home() {
         if (userid != null && userid != 'null' && userid != "" ) {
 
 
-          window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
+          window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_self");
 
         }
 
@@ -1124,7 +1124,7 @@ export default function Home() {
           <button
             onClick={() => {
               // Coming soon
-              window.open("https://olgagpt.unove.space/?userid=" + username + "&token=" + userid, "_blank");
+              window.open("https://olgagpt.unove.space/?userid=" + username + "&token=" + userid, "_self");
             }}
           >
             <div className="h-20 flex flex-col items-center justify-start">
@@ -1141,7 +1141,7 @@ export default function Home() {
           </button>
           <button
             onClick={() => {
-              window.open("https://olgagpt.com/sub/order_list.asp", "_blank");
+              window.open("https://olgagpt.com/sub/order_list.asp", "_self");
             }}
           >
             <div className="h-20 flex flex-col items-center justify-start">
@@ -1158,7 +1158,7 @@ export default function Home() {
           </button>
           <button
             onClick={() => {
-              window.open("https://olgagpt.com/main.asp", "_blank");
+              window.open("https://olgagpt.com/main.asp", "_self");
             }}
           >
             <div className="h-20 flex flex-col items-center justify-start">
