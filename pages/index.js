@@ -889,8 +889,8 @@ export default function Home() {
                     <Image
                       src="/icon-opensea.png"
                       alt="Logo"
-                      width={32}
-                      height={32}
+                      width={100}
+                      height={100}
                     />
                   </button>
                   <span className="text-center text-sm text-gray-500">
@@ -1075,7 +1075,7 @@ export default function Home() {
 
       <div className=" fixed bg-white z-50 text-black
         left-0
-        bottom-0 w-full border-t border-gray-200  p-2 flex flex-row items-center justify-center gap-2">
+        bottom-0 w-full border-t border-gray-200 grid grid-cols-5 gap-0">
           <button
             onClick={() => {
               // Coming soon
@@ -1083,7 +1083,7 @@ export default function Home() {
               alert("Coming soon");
             }}
           >
-            <div className="flex flex-col items-center justify-center">
+            <div className="h-20 flex flex-col items-center justify-start ">
               <Image
                 src="/menu01.png"
                 alt="Logo"
@@ -1108,7 +1108,7 @@ export default function Home() {
 
             }}
           >
-            <div className="flex flex-col items-center justify-center">
+            <div className=" h-20 flex flex-col items-center justify-start">
               <Image
                 src="/menu02.png"
                 alt="Logo"
@@ -1116,7 +1116,7 @@ export default function Home() {
                 height={40}
               />
               <span className="text-xs xl:text-sm font-bold">
-                Image Generator
+                Image<br/>Generator
               </span>
             </div>
           </button>
@@ -1126,7 +1126,7 @@ export default function Home() {
               alert("Coming soon");
             }}
           >
-            <div className="flex flex-col items-center justify-center">
+            <div className="h-20 flex flex-col items-center justify-start">
               <Image
                 src="/menu03.png"
                 alt="Logo"
@@ -1143,7 +1143,7 @@ export default function Home() {
               window.open("https://olgagpt.com/sub/order_list.asp", "_blank");
             }}
           >
-            <div className="flex flex-col items-center justify-center">
+            <div className="h-20 flex flex-col items-center justify-start">
               <Image
                 src="/menu04.png"
                 alt="Logo"
@@ -1160,7 +1160,7 @@ export default function Home() {
               window.open("https://olgagpt.com/main.asp", "_blank");
             }}
           >
-            <div className="flex flex-col items-center justify-center">
+            <div className="h-20 flex flex-col items-center justify-start">
               <Image
                 src="/menu05.png"
                 alt="Logo"
