@@ -343,7 +343,7 @@ export default function Home() {
   }, [ userid ]);
 
 
-  console.log("myImages=", myImages);
+  ///console.log("myImages=", myImages);
 
 
   // deploy ERC721 contract
@@ -571,18 +571,16 @@ export default function Home() {
       </Head>
 
 
-      <main className="flex flex-col items-center justify-center gap-4">
+      <main className="flex flex-col items-center justify-center gap-2">
 
         
         <Image
           src="/logo-chatgpt.png"
           alt="Logo"
-          width={100}
-          height={100}
+          width={50}
+          height={50}
         />
         
-
-
 
         <h1 className={styles.title}>
           Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
@@ -592,7 +590,7 @@ export default function Home() {
         
         {userid != null && userid != 'null' && userid != "" ? (
 
-          <div className="mt-2 flex flex-col items-center justify-center gap-2">
+          <div className="mt-0 flex flex-col items-center justify-center gap-2">
 
             <h3>您的用户ID: {username}</h3>
           
@@ -623,7 +621,7 @@ export default function Home() {
           {/* margin top 10px */}
           {/* 镜像制作费用 50 POWER */}
           <div
-            className="mt-2"
+            className="mt-0"
           >
             <h3>* 镜像制作费用 50 POWER</h3>
           </div>
@@ -773,8 +771,10 @@ export default function Home() {
 
         <div className="xl:w-1/2 flex flex-col items-center justify-center gap-2 ">
 
+          
           <small
-            style = {{display: "none"}}
+            //style = {{display: "none"}}
+            className="hidden"
           >
             Download as:{" "}
             <select
@@ -846,7 +846,7 @@ export default function Home() {
           {!loading && results.length > 0 && userid != null && userid != 'null' && userid != ""  && (
             <button
               disabled={loadingDownload}
-              style = {{marginTop: "20px"}}
+              style = {{marginTop: "10px"}}
               onClick={() => {
 
                 download(results[0].url);
@@ -879,18 +879,18 @@ export default function Home() {
             <>
 
               {erc721ContractAddress != "" && erc721ContractAddress != null && erc721ContractAddress != undefined ? (
-                <div className="mt-2 flex flex-col items-center justify-center gap-2">
+                <div className="mt-0 flex flex-col items-center justify-center gap-2">
                   {/* button for new window goto opensea */}
                   <button
                     onClick={() => {
-                      window.open(`https://opensea.io/assets/matic/${erc721ContractAddress}`, "_blank");
+                      window.open(`https://opensea.io/assets/matic/${erc721ContractAddress}`, "_self");
                     }}
                   >
                     <Image
                       src="/icon-opensea.png"
                       alt="Logo"
-                      width={80}
-                      height={80}
+                      width={50}
+                      height={50}
                     />
                   </button>
                   <span className="text-center text-sm text-gray-500">
