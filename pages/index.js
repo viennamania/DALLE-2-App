@@ -884,6 +884,21 @@ export default function Home() {
                   <button
                     onClick={() => {
                       window.open(`https://opensea.io/assets/matic/${erc721ContractAddress}`, "_self");
+
+
+                      // router to /opensea?userid=${userid}&token=${token}&erc721ContractAddress=${erc721ContractAddress}
+
+                      /*
+                      router.push(
+                        {
+                          pathname: "/opensea",
+                          search: `?userid=${username}&token=${userid}&erc721ContractAddress=${erc721ContractAddress}`,
+                        }
+                      );
+                      */
+
+
+
                     }}
                   >
                     <Image
@@ -1124,7 +1139,7 @@ export default function Home() {
           <button
             onClick={() => {
               // Coming soon
-              window.open("https://olgagpt.unove.space/?userid=" + username + "&token=" + userid, "_self");
+              window.open("https://olgagpt.unove.space/" + "userid=" + username + "/" + "token=" + userid, "_self");
             }}
           >
             <div className="h-20 flex flex-col items-center justify-start">
