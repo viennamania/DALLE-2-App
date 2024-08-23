@@ -1097,104 +1097,109 @@ export default function Home() {
 
       <div className=" fixed bg-white z-50 text-black
         left-0
-        bottom-0 w-full border-t border-gray-200 grid grid-cols-5 gap-0
+        bottom-0 w-full 
       ">
+        <div className="grid grid-cols-5 border border-gray-200 xl:w-1/2 mx-auto">
+
           <button
+            className=" h-24 flex flex-col items-center justify-start"
             onClick={() => {
               // Coming soon
 
               alert("Coming soon");
             }}
           >
-            <div className="h-20 flex flex-col items-center justify-start ">
-              <Image
-                src="/menu01.png"
-                alt="Logo"
-                width={40}
-                height={40}
-              />
-              <span className="text-xs xl:text-sm font-bold">
-                SNS
-              </span>
-            </div>
+            <Image
+              src="/menu01.png"
+              alt="Logo"
+              width={40}
+              height={40}
+            />
+            <span className="text-xs xl:text-sm font-bold">
+              SNS
+            </span>
           </button>
+
+
           <button
+            // selected
+            className=" h-24 flex flex-col items-center justify-start bg-gray-200"
+            /*
             onClick={() => {
               // '/?userid=${userid}&token=${token}'
-
+              
               router.push(
                 {
                   pathname: "/",
                   search: `?userid=${username}&token=${userid}`,
                 }
               );
+              
 
             }}
+            */
           >
-            <div className=" h-20 flex flex-col items-center justify-start">
-              <Image
-                src="/menu02.png"
-                alt="Logo"
-                width={40}
-                height={40}
-              />
-              <span className="text-xs xl:text-sm font-bold">
-                Image<br/>Generator
-              </span>
-            </div>
+            <Image
+              src="/menu02.png"
+              alt="Logo"
+              width={40}
+              height={40}
+            />
+            <span className="text-xs xl:text-sm font-bold">
+              Image<br/>Generator
+            </span>
           </button>
           <button
+            className=" h-24 flex flex-col items-center justify-start"
             onClick={() => {
               // Coming soon
               window.open("https://olgagpt.unove.space/" + userid + "/" + username, "_self");
             }}
           >
-            <div className="h-20 flex flex-col items-center justify-start">
-              <Image
-                src="/menu03.png"
-                alt="Logo"
-                width={40}
-                height={40}
-              />
-              <span className="text-xs xl:text-sm font-bold">
-                Chat GPT
-              </span>
-            </div>
+            <Image
+              src="/menu03.png"
+              alt="Logo"
+              width={40}
+              height={40}
+            />
+            <span className="text-xs xl:text-sm font-bold">
+              Chat GPT
+            </span>
           </button>
           <button
+            className=" h-24 flex flex-col items-center justify-start"
             onClick={() => {
               window.open("https://olgagpt.com/sub/order_list.asp", "_self");
             }}
           >
-            <div className="h-20 flex flex-col items-center justify-start">
-              <Image
-                src="/menu04.png"
-                alt="Logo"
-                width={40}
-                height={40}
-              />
-              <span className="text-xs xl:text-sm font-bold">
-                My NFT
-              </span>
-            </div>
+            <Image
+              src="/menu04.png"
+              alt="Logo"
+              width={40}
+              height={40}
+            />
+            <span className="text-xs xl:text-sm font-bold">
+              My NFT
+            </span>
           </button>
           <button
+            className=" h-24 flex flex-col items-center justify-start"
             onClick={() => {
               window.open("https://olgagpt.com/main.asp", "_self");
             }}
           >
-            <div className="h-20 flex flex-col items-center justify-start">
-              <Image
-                src="/menu05.png"
-                alt="Logo"
-                width={40}
-                height={40}
-              />
-              <span className="text-xs xl:text-sm font-bold">
-                OLGA
-              </span>
-            </div>
+            <Image
+              src="/menu05.png"
+              alt="Logo"
+              width={40}
+              height={40}
+            />
+            <span className="text-xs xl:text-sm font-bold">
+              OLGA
+            </span>
           </button>
+
+        </div>
 
       </div>
 
