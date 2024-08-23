@@ -1139,7 +1139,7 @@ export default function Home() {
           <button
             onClick={() => {
               // Coming soon
-              window.open("https://olgagpt.unove.space/" + "tokne=" + userid + "/" +  + username, "_self");
+              window.open("https://olgagpt.unove.space/" + userid + "/" + username, "_self");
             }}
           >
             <div className="h-20 flex flex-col items-center justify-start">
