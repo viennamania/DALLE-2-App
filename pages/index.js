@@ -578,7 +578,7 @@ export default function Home() {
       </Head>
 
 
-      <main className="flex flex-col items-center justify-center gap-2">
+      <main className="flex flex-col items-center justify-center gap-2 mb-32">
 
         
         <Image
