@@ -71,7 +71,7 @@ export default async function handler(req, res) {
 
         ],
         "animation_url": "",
-        "external_url": "https://image.unove.space"
+        "external_url": "https://image.olgaai.io"
     }
 
     res.status(200).json(nft)

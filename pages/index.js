@@ -591,9 +591,9 @@ export default function Home() {
         <meta property="og:image:height" content="1400"></meta>
         <meta property="og:title" content="Create images with ChatGPT 4o"></meta>
         <meta property="og:description" content="Create images with ChatGPT 4o"></meta>
-        <meta property="og:image" content="https://image.unove.space/logo-chatgpt.png"></meta>
+        <meta property="og:image" content="https://image.olgaai.io/logo-chatgpt.png"></meta>
         <meta name="twitter:card" content="summary_large_image"></meta>
-        <meta name="twitter:image" content="https://image.unove.space/logo-chatgpt.png"></meta>
+        <meta name="twitter:image" content="https://image.olgaai.io/logo-chatgpt.png"></meta>
 
 
       </Head>
@@ -1125,7 +1125,7 @@ export default function Home() {
       {/* fixed bottom */}
       {/* menu01.png => Coming Soon */}
       {/* menu02.png => current page */}
-      {/* menu03.png => 'https://olgagpt.unove.space/' */}
+      {/* menu03.png => 'https://olgaai.io/' */}
       {/* menu04.png => 'https://olgagpt.com/sub/order_list.asp' */}
       {/* menu05.png => 'https://olgagpt.com/main.asp' */}
  
@@ -1199,7 +1199,7 @@ export default function Home() {
             hover:bg-gray-200 hover:text-black"
             onClick={() => {
               // Coming soon
-              window.open("https://olgagpt.unove.space/" + userid + "/" + username, "_self");
+              window.open("https://olgaai.io/" + userid + "/" + username, "_self");
             }}
           >
             <Image

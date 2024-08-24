@@ -216,7 +216,7 @@ export default async function handler(req, res) {
 
 
     // generate image
-    const image = "https://image.unove.space/olga.jpg";
+    const image = "https://image.olgaai.io/olga.jpg";
 
     const transactionMintTo = mintTo({
         contract,
