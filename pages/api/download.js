@@ -114,13 +114,16 @@ export default async function handler(req, res) {
 
   if (userid != null && userid != 'null' && userid != "" && blob.url != null && blob.url != 'null' && blob.url != "" && userid != "songpa") {
     const pointRrl = "https://www.olgagpt.com/sub/createNFT.asp?token=" + userid + "&image=" + encodeURIComponent(blob.url);
-    ///console.log(pointRrl);
+    
+    //console.log(pointRrl);
+    
     const callback = await fetch(pointRrl);
 
     const data = await callback.json();
 
-    ///console.log(data);
-
+    //console.log(data);
+    ////{ rescode: 'Success', resmsg: '정상적으로 저장되었습니다.' }
+    // {"rescode":"Fail","resmsg":"이미 등록된 이미지파일입니다."}
   }
   
 

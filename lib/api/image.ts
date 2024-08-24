@@ -175,6 +175,9 @@ export async function updateOneByImage(data: any) {
   }
 
 
+  const saleInfo = data.saleInfo;
+
+
   const tokenid = parseInt(data.tokenid);
 
   const client = await clientPromise;
@@ -189,6 +192,7 @@ export async function updateOneByImage(data: any) {
         erc721ContractAddress: data.erc721ContractAddress,
         tokenid: tokenid,
         updatedAt: new Date().toISOString(),
+        saleInfo: saleInfo,
       },
     },
   );
