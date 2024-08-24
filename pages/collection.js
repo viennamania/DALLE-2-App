@@ -947,7 +947,7 @@ export default function Home() {
             //className=" h-24 flex flex-col items-center justify-start  bg-cadetblue "
 
             className="
-              h-24 flex flex-col items-center justify-start text-white
+              h-24 flex flex-col items-center justify-start
             "
 
             
@@ -999,7 +999,7 @@ export default function Home() {
 
           <button
             className=" h-24 flex flex-col items-center justify-start
-            hover:bg-gray-200 hover:text-black"
+            text-white"
             style = {{backgroundColor: "cadetblue"}}
             /*
             onClick={() => {
