@@ -42,11 +42,12 @@ import {
   findOneByUserid,
   insertOne as insertOneWallet,
   updateERC721ContractAddress,
-} from '../../lib/api/wallet';
+} from '../../../lib/api/wallet';
 
 import {
+  findOneByImage,
   updateOneByImage,
-} from '../../lib/api/image';
+} from '../../../lib/api/image';
 import { token } from 'thirdweb/extensions/vote';
 
 
@@ -97,7 +98,19 @@ export default async function handler(req, res) {
 
   // get parameters from the request
 
+  ///console.log(req.query);
+
+
   const userid = req.query.token;
+
+  console.log("userid: ", userid);
+
+
+
+  const username = req.query.userid;
+
+
+
 
   console.log("userid: ", userid);
 
@@ -148,6 +161,31 @@ export default async function handler(req, res) {
       message: "Wallet data not found",
     });
   }
+
+
+  // check claimed NFT exists by image
+
+  const existingData = await findOneByImage(
+    {
+      image: image,
+    }
+  );
+
+  if (existingData) {
+      
+    return res.status(200).json({
+      result: "success",
+      message: "Already minted",
+      tokenId: existingData.tokenid,
+      opensea: `https://opensea.io/assets/matic/${existingWalletData.erc721ContractAddress}/${existingData.tokenid}`,
+    });
+
+  }
+
+
+
+
+
 
  
   const walletPrivateKey = existingWalletData.walletPrivateKey;
@@ -278,7 +316,10 @@ export default async function handler(req, res) {
       transactionHash: sendData.transactionHash,
       erc721ContractAddress: erc721ContractAddress,
       tokenid: tokenid,
+      openurl: `https://opensea.io/assets/matic/${erc721ContractAddress}/${tokenid}`,
+     
     });
+
 
   } catch (error) {
 
