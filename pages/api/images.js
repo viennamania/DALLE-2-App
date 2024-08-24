@@ -272,7 +272,9 @@ export default async function handler(req, res) {
   randomModel = 1;
 
   if (isReal == "true") {
-    randomModel = 4;
+    // randomModel is 3 or 4 or 5
+    
+    randomModel = Math.floor(Math.random() * 3) + 3;
   }
 
   if (randomModel == 0) {
@@ -283,15 +285,18 @@ export default async function handler(req, res) {
     model = "playgroundai/playground-v2.5-1024px-aesthetic:a45f82a1382bed5c7aeb861dac7c7d191b0fdf74d8d57c4a0e6ed7d4d0bf7d24";
   } else if (randomModel == 2) {
     hosting = "fal";
-    model = "fal-ai/flux-realism";
+    model = "fal-ai/flux-pro";
+
   } else if (randomModel == 3) {
     hosting = "fal";
-    model = "fal-ai/flux-pro";
+    model = "fal-ai/flux-realism";
   } else if (randomModel == 4) {
     hosting = "fal";
     model = "fal-ai/flux/dev";
+  } else if (randomModel == 5) {
+    hosting = "fal";
+    model = "fal-ai/flux/schnell";
   }
-
 
 
   let output = [];
@@ -307,7 +312,9 @@ export default async function handler(req, res) {
 
 
 
-    const data = await fal.subscribe("fal-ai/flux-realism", {
+    //const data = await fal.subscribe("fal-ai/flux-realism", {
+    const data = await fal.subscribe(model, {
+
       input: {
         ///seed: 4072637067,
         prompt: englishPrompt,
