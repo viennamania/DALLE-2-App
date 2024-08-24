@@ -944,12 +944,18 @@ export default function Home() {
       {/* menu05.png => 'https://olgagpt.com/main.asp' */}
  
 
-      <div className=" fixed bg-white z-50 text-black
-        left-0
-        bottom-0 w-full 
+      <div className=" fixed z-50 text-black
+        left-0 right-0 
+        bottom-0
+        bg-white
+        flex flex-col items-center justify-center gap-2
+        
       ">
-        <div className="grid grid-cols-5 border border-gray-200 lg:w-1/2 xl:w-1/2 mx-auto gap-2">
-
+        <div className="grid grid-cols-5 border border-gray-200 gap-2
+          md:w-1/2 xl:w-2/5
+          pl-2 pr-2
+        ">
+          
           <button
             className=" h-24 flex flex-col items-center justify-start
             hover:bg-gray-200 hover:text-black"

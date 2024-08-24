@@ -1139,6 +1139,8 @@ export default function Home() {
       ">
         <div className="grid grid-cols-5 border border-gray-200 gap-2
           md:w-1/2 xl:w-2/5
+
+          pl-2 pr-2
         ">
 
           <button
