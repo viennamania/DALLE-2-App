@@ -931,24 +931,12 @@ export default function Home() {
 
               {erc721ContractAddress != "" && erc721ContractAddress != null && erc721ContractAddress != undefined ? (
                 <div className="mt-0 flex flex-col items-center justify-center gap-2">
+                  
                   {/* button for new window goto opensea */}
+                  {/*
                   <button
                     onClick={() => {
                       window.open(`https://opensea.io/assets/matic/${erc721ContractAddress}`, "_self");
-
-
-                      // router to /opensea?userid=${userid}&token=${token}&erc721ContractAddress=${erc721ContractAddress}
-
-                      /*
-                      router.push(
-                        {
-                          pathname: "/opensea",
-                          search: `?userid=${username}&token=${userid}&erc721ContractAddress=${erc721ContractAddress}`,
-                        }
-                      );
-                      */
-
-
 
                     }}
                   >
@@ -962,12 +950,14 @@ export default function Home() {
                   <span className="text-center text-sm text-gray-500">
                     {erc721ContractAddress}
                   </span>
+                  */}
+
                 </div>
               ) : (
                 <div className="mt-2 text-center text-sm text-gray-500 p-2">
           
                   {/* button for deploy ERC721 contract */}
-
+                  
                   <button
                     disabled={loadingDeployErc721Contract}
                     onClick={() => {
@@ -985,6 +975,7 @@ export default function Home() {
                     }
                     
                   </button>
+                  
 
                 </div>
               )}
