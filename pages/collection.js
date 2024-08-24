@@ -592,7 +592,14 @@ export default function Home() {
 
         
 
-
+        <div className="flex flex-col items-center justify-center gap-2 mt-4">
+          <span className="text-center text-sm text-gray-500">
+            您的用户ID: 
+            <span className="text-[#d3a947] text-lg font-bold">
+            {' '}{username}
+            </span>
+          </span>
+        </div>
 
 
         <div className="xl:w-1/2 flex flex-col items-center justify-center gap-2 ">
