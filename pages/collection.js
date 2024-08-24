@@ -339,7 +339,17 @@ export default function Home() {
       axios
         .get(`/api/getImages?userid=${userid}`)
         .then((res) => {
-          setMyImages(res.data);
+          
+          //setMyImages(res.data);
+          // select all where erc721ContractAddress, tokenid is not null
+
+          setMyImages(
+            res.data.filter((myImage) => {
+              return myImage.erc721ContractAddress !== null && myImage.erc721ContractAddress !== undefined && myImage.erc721ContractAddress !== "" && myImage.tokenid !== null && myImage.tokenid !== undefined && myImage.tokenid !== "";
+            })
+          );
+
+
         })
         .catch((err) => {
           console.log(err);
@@ -581,197 +591,6 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center gap-2 mb-32">
 
         
-        <Image
-          src="/logo-chatgpt.png"
-          alt="Logo"
-          width={50}
-          height={50}
-        />
-        
-
-        <h1 className={styles.title}>
-          Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
-        </h1>
-
-        {/* if userid is not null, show userid */}
-        
-        {userid != null && userid != 'null' && userid != "" ? (
-
-          <div className="mt-0 flex flex-col items-center justify-center gap-2">
-
-            <h3>您的用户ID: {username}</h3>
-          
-
-            {/*}
-            {totalSupply > 0 && erc721ContractAddress != "" ? (
-              <a
-                href={`https://opensea.io/assets/matic/${erc721ContractAddress}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/icon-opensea.png"
-                  alt="Logo"
-                  width={32}
-                  height={32}
-                />
-              </a>
-            ) : ( <></> )}
-             */}
-
-          </div>
-          
-        ) : ( <></> )}
-        
-
-
-          {/* margin top 10px */}
-          {/* 镜像制作费用 50 POWER */}
-          <div
-            className="mt-0"
-          >
-            <h3>* 镜像制作费用 50 POWER</h3>
-          </div>
-
-
-
-     
-          <div
-            className="mt-4 w-full lg:w-1/2 xl:w-1/2 flex flex-col xl:flex-row items-center justify-center gap-2 border border-gray-200 rounded-lg p-2"
-          >
-          
-            {/*
-            <input
-              id="token"
-              type="text"
-              value={token}
-              onChange={(e) => setToken(e.target.value)}
-              placeholder={process.env.OPENAI_API_KEY}
-            />
-            */}
-
-            {/* chatgpt logo small image */}
-            {/* align vertical center */}
-            {/* round full light gray border */}
-            {/* padding 1px */}
-            {/* when loading show rotating loading image */}
-
-            <div className="w-full flex flex-row items-center justify-center gap-2">
-              
-              {loading ? (
-                <Image
-                  style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
-                  src="/chatgpt-loading.gif"
-                  alt="Logo"
-                  width={28}
-                  height={28}
-                />
-              ) : (
-
-                <Image
-                  style = {{verticalAlign: "middle", border: "1px solid #ddd", borderRadius: "50%", padding: "4px"}}
-                  src="/logo-chatgpt.png"
-                  alt="Logo"
-                  width={28}
-                  height={28}
-                />
-
-              )}
-
-              {/* width 80% */}
-              {loading ? (
-                
-                
-                <input
-                  disabled
-                  style = {{width: "80%"}}
-                  id="prompt"
-                  type="text"
-                  value={prompt}
-                  //placeholder="Prompt"
-                  placeholder="Loading..."
-                />
-
-
-
-              ) : (
-                <input
-                  className=" w-full"
-                  id="prompt"
-                  type="text"
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  //placeholder="Prompt"
-                  placeholder="您想要制作的图像消息 ChatGPT 4o"
-                />
-              )}
-
-            </div>
-
-
-            <div className=" xl:w-52 flex flex-row xl:flex-col items-center justify-center gap-2">
-
-              {/* hidden */}
-              <input
-                style = {{display: "none"}}
-                id="number"
-                type="number"
-                value={number}
-                onChange={(e) => setNumber(e.target.value)}
-                placeholder="Number of images"
-                max="10"
-              />
-
-              {/* check box for real picture */}
-
-              <div className="mb-2 text-sm flex flex-row items-center justify-center gap-2">
-                <input
-                  type="checkbox"
-                  id="checkIsRealPicture"
-                  value={checkIsRealPicture}
-                  onChange={(e) => setCheckIsRealPicture(e.target.checked)}
-                />
-                真实图片
-              </div>
-
-
-              {/*}
-              <button onClick={getImages}>Get {number} Images</button>
-              */}
-              {loading ? (
-                <button hidden>创建镜像</button>
-              ) : (
-                <div className="flex flex-row items-center justify-center gap-2">
-                  <button
-                    disabled={loading || prompt === ""}
-                    onClick={getImages}>创建镜像
-                  </button>
-                  {/* reset button */}
-                  <button
-                    onClick={() => {
-                      setResults([]);
-                      setPrompt("");
-                      setNumber(1);
-                      setCheckIsRealPicture(false);
-                    }}
-                  >
-                    重置
-                  </button>
-
-                </div>
-              )}
-
-
-
-            </div>
-
-
-
-          </div>
-        
-        <div>
-
-        </div>
 
 
 
@@ -1131,9 +950,9 @@ export default function Home() {
               h-24 flex flex-col items-center justify-start text-white
             "
 
-            style = {{backgroundColor: "cadetblue"}}
+            
              
-            /*
+            
             onClick={() => {
               // '/?userid=${userid}&token=${token}'
               
@@ -1146,7 +965,7 @@ export default function Home() {
               
 
             }}
-            */
+            
           >
             <Image
               src="/menu02.png"
@@ -1181,15 +1000,12 @@ export default function Home() {
           <button
             className=" h-24 flex flex-col items-center justify-start
             hover:bg-gray-200 hover:text-black"
+            style = {{backgroundColor: "cadetblue"}}
+            /*
             onClick={() => {
-              // '/collection?userid=${userid}&token=${token}'
-              router.push(
-                {
-                  pathname: "/collection",
-                  search: `?userid=${username}&token=${userid}`,
-                }
-              );
+              
             }}
+            */
           >
             <Image
               src="/menu04.png"
