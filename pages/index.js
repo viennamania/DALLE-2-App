@@ -171,7 +171,7 @@ export default function Home() {
 
         // get my images from api
 
-        /*
+        
         
         axios
           .get(`/api/getImages?userid=${userid}`)
@@ -184,7 +184,7 @@ export default function Home() {
           }
         );
         
-        */
+        
         
 
 
