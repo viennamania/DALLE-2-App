@@ -146,7 +146,7 @@ export default function Home() {
 
 
 
-        
+        /*
         const link = document.createElement("a");
 
         link.href = res.data.result;
@@ -154,7 +154,7 @@ export default function Home() {
         link.download = `${prompt}.${type.toLowerCase()}`;
 
         link.click();
-
+        */
         
 
 
