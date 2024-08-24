@@ -193,7 +193,7 @@ export default function Home() {
         if (userid != null && userid != 'null' && userid != "" ) {
 
 
-          window.open("https://olgagpt.com/sub/deposit_request_krw.asp", "_self");
+          //window.open("https://olgagpt.com/sub/deposit_request_krw.asp", "_self");
 
         }
 
@@ -551,6 +551,27 @@ export default function Home() {
   }
 
 
+  // POWER balance
+  const [powerBalance, setPowerBalance] = useState(0);
+  // 
+  // https://www.olgagpt.com/sub/pointBalance.asp?balance=POWER&token=06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4
+
+  // {"rescode":"Success","balance":"POWER","token":"06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4","amount":"1096"}
+
+  useEffect(() => {
+    if (userid != null && userid != 'null' && userid != "" ) {
+      axios
+        .post(`/api/pointBalance`, {balance: "POWER", token: userid})
+        .then((res) => {
+          setPowerBalance(res.data.amount);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  } } , [ userid ]);
+          
+
+          
 
 
 
@@ -599,7 +620,30 @@ export default function Home() {
 
           <div className="mt-0 flex flex-col items-center justify-center gap-2">
 
-            <h3>您的用户ID: {username}</h3>
+          <div className="flex flex-row items-center justify-center gap-2 mt-4">
+            <span className="text-center text-sm text-gray-500">
+              您的用户ID: 
+              <span className="text-[#d3a947] text-lg font-bold">
+              {' '}{username}
+              </span>
+            </span>
+
+            {/* POWER balance */}
+            {/* https://www.olgagpt.com/sub/pointBalance.asp?balance=POWER&token=06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4 */}
+
+            <div className="flex flex-row items-center justify-center gap-2">
+              <span className="text-center text-sm text-gray-500">
+                您的POWER余额: 
+                <span className="text-[#d3a947] text-lg font-bold">
+                {' '}{powerBalance}
+                </span>
+              </span>
+            </div>
+
+
+
+
+          </div>
           
 
             {/*}
