@@ -1133,7 +1133,7 @@ export default function Home() {
       <div className=" fixed z-50 text-black
         left-0 right-0 
         bottom-0
-
+        bg-white
         flex flex-col items-center justify-center gap-2
         
       ">
