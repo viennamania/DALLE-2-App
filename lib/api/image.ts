@@ -276,3 +276,34 @@ export async function deleteOneByImage(data: any) {
   };
 
 }
+
+
+
+
+// find all (image) by userid ordr by createdAt desc recent 5 images
+export async function findAllNFTsByUserid(data: any) {
+  
+  ///console.log('findAllByUserid data: ' + JSON.stringify(data));
+
+  if (!data.userid) {
+    return null;
+  }
+
+  const client = await clientPromise;
+  const collection = client.db('vienna').collection('images');
+
+  // select erc721ContractAddress is not null and not empty string and not undefined
+
+  const result = await collection.find<ImageProps>(
+    {
+      userid: data.userid,
+      erc721ContractAddress:
+      {
+        $ne: '',
+      }
+    },
+
+  ).sort({updatedAt: -1}).toArray();
+
+  return result;
+}

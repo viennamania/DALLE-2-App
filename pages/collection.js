@@ -337,18 +337,13 @@ export default function Home() {
     if (userid != null && userid != 'null' && userid != "" ) {
       setLoadingMyImages(true);
       axios
-        .get(`/api/getImages?userid=${userid}`)
+        
+        //.get(`/api/getImages?userid=${userid}`)
+
+        .get(`/api/getNFTs?userid=${userid}`)
         .then((res) => {
           
-          //setMyImages(res.data);
-          // select all where erc721ContractAddress, tokenid is not null
-
-          setMyImages(
-            res.data.filter((myImage) => {
-              return myImage.erc721ContractAddress !== null && myImage.erc721ContractAddress !== undefined && myImage.erc721ContractAddress !== "" && myImage.tokenid !== null && myImage.tokenid !== undefined && myImage.tokenid !== "";
-            })
-          );
-
+          setMyImages(res.data);
 
         })
         .catch((err) => {
