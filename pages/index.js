@@ -133,78 +133,83 @@ export default function Home() {
 
   function download(url) {
 
-    setLoadingDownload(true);
-
-    axios
-      .post(`/api/download`, {prompt: prompt, url: url, type: type, userid: userid })
-      .then((res) => {
+    if (confirm("您确定要下载到相册吗？")) {
 
 
-        ///console.log("res.data.result=", res.data.result);
+      setLoadingDownload(true);
+
+      axios
+        .post(`/api/download`, {prompt: prompt, url: url, type: type, userid: userid })
+        .then((res) => {
+
+
+          ///console.log("res.data.result=", res.data.result);
 
 
 
 
 
-        /*
-        const link = document.createElement("a");
+          /*
+          const link = document.createElement("a");
 
-        link.href = res.data.result;
+          link.href = res.data.result;
 
-        link.download = `${prompt}.${type.toLowerCase()}`;
+          link.download = `${prompt}.${type.toLowerCase()}`;
 
-        link.click();
-        */
-        
-
-
-        
-        // save image to local album in mobile
-
-        // res.data.result is base64 image
-
-        ////console.log("res.data.result=", res.data.result);
-
-        
-    
+          link.click();
+          */
+          
 
 
-        // get my images from api
+          
+          // save image to local album in mobile
 
-        
-        
-        axios
-          .get(`/api/getImages?userid=${userid}`)
-          .then((res) => {
-            setMyImages(res.data);
+          // res.data.result is base64 image
 
-          })
-          .catch((err) => {
-            console.log(err);
+          ////console.log("res.data.result=", res.data.result);
+
+          
+      
+
+
+          // get my images from api
+
+          
+          
+          axios
+            .get(`/api/getImages?userid=${userid}`)
+            .then((res) => {
+              setMyImages(res.data);
+
+            })
+            .catch((err) => {
+              console.log(err);
+            }
+          );
+          
+          
+          
+
+
+
+
+          if (userid != null && userid != 'null' && userid != "" ) {
+
+
+            //window.open("https://olgagpt.com/sub/deposit_request_krw.asp", "_self");
+
           }
-        );
-        
-        
-        
 
+          setLoadingDownload(false);
+          
 
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoadingDownload(false);
+        });
 
-
-        if (userid != null && userid != 'null' && userid != "" ) {
-
-
-          //window.open("https://olgagpt.com/sub/deposit_request_krw.asp", "_self");
-
-        }
-
-        setLoadingDownload(false);
-        
-
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoadingDownload(false);
-      });
+    }
 
   }
 
@@ -586,38 +591,58 @@ export default function Home() {
   // {"rescode":"Success","balance":"POWER","token":"06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4","amount":"1096"}
 
   useEffect(() => {
-    if (userid != null && userid != 'null' && userid != "" ) {
-      axios
-        .post(`/api/pointBalance`, {balance: "POWER", token: userid})
-        .then((res) => {
 
-          //console.log("res.data", res.data);
-          /*
-          {
-              "rescode": "Fail",
-              "resmsg": "정상적으로 발급된 토큰이 아닙니다."
-          }
+    const fetchData = async () => {
+
+      if (userid != null && userid != 'null' && userid != "" ) {
+
+        axios
+          .post(`/api/pointBalance`, {balance: "POWER", token: userid})
+          .then((res) => {
+
+            //console.log("res.data", res.data);
+            /*
             {
-              "rescode": "Success",
-              "balance": "POWER",
-              "token": "06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4",
-              "amount": "46"
-          }
-          */
+                "rescode": "Fail",
+                "resmsg": "정상적으로 발급된 토큰이 아닙니다."
+            }
+              {
+                "rescode": "Success",
+                "balance": "POWER",
+                "token": "06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4",
+                "amount": "46"
+            }
+            */
 
-          if (res.data.rescode === "Success") {
-            setPowerBalance(res.data.amount);
-            setLoginSession(res.data.token);
-          } else {
-            setPowerBalance(0);
-          }
+            if (res.data.rescode === "Success") {
+              setPowerBalance(res.data.amount);
+              setLoginSession(res.data.token);
+            } else {
+              setPowerBalance(0);
+            }
 
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-  } } , [ userid ]);
-          
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+   
+      } else {
+        setPowerBalance(0);
+      }
+
+    };
+
+    fetchData();
+
+    // interval 1 second
+    const interval = setInterval(() => {
+      fetchData();
+    }, 1000);
+
+    return () => clearInterval(interval);
+
+  }, [userid]);
 
           
 
@@ -681,28 +706,28 @@ export default function Home() {
 
           <div className="mt-0 flex flex-col items-center justify-center gap-2">
 
-          <div className="flex flex-row items-center justify-center gap-2 mt-4">
-            <span className="text-center text-sm text-gray-500">
-              您的用户ID: 
-              <span className="text-[#d3a947] text-lg font-bold">
-              {' '}{username}
+          <div className="flex flex-row items-center justify-center gap-5 mt-4">
+
+            <div className="flex flex-row items-center justify-center gap-2">
+              <span className="text-center text-sm text-gray-500">
+                ID: 
               </span>
-            </span>
+              <span className="text-[#d3a947] text-xl font-bold">
+                {' '}{username}
+              </span>
+            </div>
 
             {/* POWER balance */}
             {/* https://www.olgagpt.com/sub/pointBalance.asp?balance=POWER&token=06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4 */}
 
             <div className="flex flex-row items-center justify-center gap-2">
               <span className="text-center text-sm text-gray-500">
-                您的POWER余额: 
-                <span className="text-[#d3a947] text-lg font-bold">
+                POWER:
+              </span>
+              <span className="text-[#d3a947] text-2xl font-bold">
                 {' '}{powerBalance}
-                </span>
               </span>
             </div>
-
-
-
 
           </div>
           
@@ -732,11 +757,15 @@ export default function Home() {
 
           {/* margin top 10px */}
           {/* 镜像制作费用 50 POWER */}
+          {/*
           <div
             className="mt-0"
           >
             <h3>* 镜像制作费用 50 POWER</h3>
           </div>
+          */}
+
+      
 
 
 
@@ -957,31 +986,42 @@ export default function Home() {
           {/* margin top 20px */}
           {loginSession != ""
           && !loading && results.length > 0 && userid != null && userid != 'null' && userid != ""  && (
-            <button
-              disabled={loadingDownload}
-              style = {{marginTop: "10px"}}
-              onClick={() => {
 
-                download(results[0].url);
+            <div className="mt-4 flex flex-row items-center justify-center gap-2">
+              <button
+                disabled={loadingDownload}
+                style = {{marginTop: "10px"}}
+                onClick={() => {
 
-
-
-
-                //window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
+                  download(results[0].url);
 
 
 
 
-                } }
-            >
-              {
-              loadingDownload ?
-                <span>下载中...</span>
-                :
-                <span>下载并退出</span>
+                  //window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
 
-              }
-            </button>
+
+
+
+                  } }
+              >
+                {
+                loadingDownload ?
+                  <span>下载中...</span>
+                  :
+                  <span>下载并退出</span>
+
+                }
+              </button>
+
+              {/* * 镜像制作费用 50 POWER*/}
+              <div className="text-center text-sm text-gray-500">
+                * 镜像制作费用 50 POWER
+              </div>
+
+
+
+            </div>
           )}
 
       
