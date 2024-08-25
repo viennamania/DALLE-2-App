@@ -556,6 +556,7 @@ export default function Home() {
   }
 
 
+  const [loginSession, setLoginSession] = useState("");
 
   // POWER balance
   const [powerBalance, setPowerBalance] = useState(0);
@@ -568,7 +569,27 @@ export default function Home() {
       axios
         .post(`/api/pointBalance`, {balance: "POWER", token: userid})
         .then((res) => {
-          setPowerBalance(res.data.amount);
+
+          /*
+          {
+              "rescode": "Fail",
+              "resmsg": "정상적으로 발급된 토큰이 아닙니다."
+          }
+            {
+              "rescode": "Success",
+              "balance": "POWER",
+              "token": "06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4",
+              "amount": "46"
+          }
+          */
+
+          if (res.data.rescode === "Success") {
+            setPowerBalance(res.data.amount);
+            setLoginSession(res.data.token);
+          } else {
+            setPowerBalance(0);
+          }
+
         })
         .catch((err) => {
           console.log(err);
@@ -602,22 +623,48 @@ export default function Home() {
 
       <main className="flex flex-col items-center justify-center gap-2 mb-32">
 
+
+        <Image
+          src="/logo-chatgpt.png"
+          alt="Logo"
+          width={50}
+          height={50}
+        />
         
 
-        <div className="flex flex-row items-center justify-center gap-2 mt-4">
-          <span className="text-center text-sm text-gray-500">
-            您的用户ID: 
-            <span className="text-[#d3a947] text-lg font-bold">
-            {' '}{username}
+        <h1 className={styles.title}>
+          Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
+        </h1>
+        
+        {/* login button */}
+        {!loginSession ? (
+          <button
+            onClick={() => {
+              //window.open("https://olgagpt.com/sub/login.asp", "_self");
+              window.open("https://olgagpt.com/login.asp", "_self");
+            }}
+          >
+            登录
+          </button>
+        ) : (
+
+
+          <div className="flex flex-row items-center justify-center gap-2 mt-4">
+            <span className="text-center text-sm text-gray-500">
+              您的用户ID: 
+              <span className="text-[#d3a947] text-lg font-bold">
+              {' '}{username}
+              </span>
             </span>
-          </span>
 
-          {/* POWER balance */}
-          {/* https://www.olgagpt.com/sub/pointBalance.asp?balance=POWER&token=06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4 */}
-
+            {/* POWER balance */}
+            {/* https://www.olgagpt.com/sub/pointBalance.asp?balance=POWER&token=06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4 */}
 
 
-        </div>
+
+          </div>
+
+        )}
 
 
         <div className="xl:w-1/2 flex flex-col items-center justify-center gap-2 ">

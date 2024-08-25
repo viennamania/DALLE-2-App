@@ -575,7 +575,7 @@ export default function Home() {
 
 
 
-
+  const [loginSession, setLoginSession] = useState("");
 
   // POWER balance
   const [powerBalance, setPowerBalance] = useState(0);
@@ -589,7 +589,28 @@ export default function Home() {
       axios
         .post(`/api/pointBalance`, {balance: "POWER", token: userid})
         .then((res) => {
-          setPowerBalance(res.data.amount);
+
+          //console.log("res.data", res.data);
+          /*
+          {
+              "rescode": "Fail",
+              "resmsg": "정상적으로 발급된 토큰이 아닙니다."
+          }
+            {
+              "rescode": "Success",
+              "balance": "POWER",
+              "token": "06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4",
+              "amount": "46"
+          }
+          */
+
+          if (res.data.rescode === "Success") {
+            setPowerBalance(res.data.amount);
+            setLoginSession(res.data.token);
+          } else {
+            setPowerBalance(0);
+          }
+
         })
         .catch((err) => {
           console.log(err);
@@ -640,9 +661,22 @@ export default function Home() {
           Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
         </h1>
 
+        {/* login button */}
+        {!loginSession && (
+          <button
+            onClick={() => {
+              //window.open("https://olgagpt.com/sub/login.asp", "_self");
+              window.open("https://olgagpt.com/login.asp", "_self");
+            }}
+          >
+            登录
+          </button>
+        )}
+
         {/* if userid is not null, show userid */}
         
-        {userid != null && userid != 'null' && userid != "" ? (
+        {loginSession != ""
+          && userid != null && userid != 'null' && userid != "" ? (
 
           <div className="mt-0 flex flex-col items-center justify-center gap-2">
 
