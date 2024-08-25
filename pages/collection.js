@@ -648,20 +648,13 @@ export default function Home() {
           </button>
         ) : (
 
-
-          <div className="flex flex-row items-center justify-center gap-2 mt-4">
+          <div className="mt-2 flex flex-row items-center justify-center gap-2">
             <span className="text-center text-sm text-gray-500">
-              您的用户ID: 
-              <span className="text-[#d3a947] text-lg font-bold">
-              {' '}{username}
-              </span>
+              ID: 
             </span>
-
-            {/* POWER balance */}
-            {/* https://www.olgagpt.com/sub/pointBalance.asp?balance=POWER&token=06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4 */}
-
-
-
+            <span className="text-[#d3a947] text-2xl font-bold">
+              {' '}{username}
+            </span>
           </div>
 
         )}
@@ -903,7 +896,7 @@ export default function Home() {
 
                   {/* myImage.created_at */}
                   <div className="text-center text-xs xl:text-sm text-gray-500 p-1"> 
-                    {new Date(myImage.createdAt).toLocaleString()}
+                    {new Date(myImage.updatedAt).toLocaleString()}
                   </div>
                   {/* prompt */}
                   <div className="text-center text-xs xl:text-sm text-gray-500 p-2"> 

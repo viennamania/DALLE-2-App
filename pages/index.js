@@ -706,13 +706,13 @@ export default function Home() {
 
           <div className="mt-0 flex flex-col items-center justify-center gap-2">
 
-          <div className="flex flex-row items-center justify-center gap-5 mt-4">
+          <div className="flex flex-row items-center justify-center gap-5 mt-2">
 
             <div className="flex flex-row items-center justify-center gap-2">
               <span className="text-center text-sm text-gray-500">
                 ID: 
               </span>
-              <span className="text-[#d3a947] text-xl font-bold">
+              <span className="text-[#d3a947] text-2xl font-bold">
                 {' '}{username}
               </span>
             </div>
@@ -1015,8 +1015,15 @@ export default function Home() {
               </button>
 
               {/* * 镜像制作费用 50 POWER*/}
-              <div className="text-center text-sm text-gray-500">
-                * 镜像制作费用 50 POWER
+              <div className="flex flex-row items-center justify-center gap-2">
+                <span
+                  className="text-sm text-gray-500"
+                >* 镜像制作费用</span>
+                {' '}<span className="text-[#d3a947] font-bold text-2xl">50</span>
+                {' '}<span
+                  className="text-sm text-gray-500"
+                >
+                  POWER</span>
               </div>
 
 
@@ -1191,21 +1198,33 @@ export default function Home() {
 
                       {myImage.erc721ContractAddress === "" || myImage.erc721ContractAddress === null || myImage.erc721ContractAddress === undefined ? (
                         
-                        <div className="flex flex-row items-center justify-center gap-2">
-                          <button
-                            disabled={loadingMintNFTs[index]}
-                            onClick={() => mintNFT(myImage.image, myImage.prompt, index)}
-                            className={`
-                              ${loadingMintNFTs[index] ? "bg-gray-200" : "bg-blue-500"
-                              } text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-                          >
-                            {
-                              //loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint"
-                              // chinese
-                              loadingMintNFTs[myImages.indexOf(myImage)] ? "铸造中..." : "铸造"
-                            }
+                        <div className="flex flex-col items-center justify-center gap-2">
 
-                          </button>
+                          <div className="flex flex-row items-center justify-center gap-2">
+
+                            <span className=" text-xs font-bold text-[#d3a947]">
+                              价格 : 100 POWER
+                            </span>
+
+                            <button
+                              disabled={loadingMintNFTs[index]}
+                              onClick={() => mintNFT(myImage.image, myImage.prompt, index)}
+                              className={`
+                                ${loadingMintNFTs[index] ? 
+                                //"bg-gray-200" : "bg-blue-500"
+                                "bg-gray-200" : "bg-[#d3a947]"
+                                } text-white text-xs px-4 rounded focus:outline-none focus:shadow-outline mb-0`}
+                            >
+                              {
+                                //loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint"
+                                // chinese
+                                loadingMintNFTs[myImages.indexOf(myImage)] ? "铸造中..." :
+                                  "铸造"
+                              }
+
+                            </button>
+
+                          </div>
 
                           {/* delete button */}
                           <button
