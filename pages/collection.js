@@ -977,6 +977,23 @@ export default function Home() {
 
 
 
+        {/* https://olgagpt.com/sub/point_bonus_w.asp */}
+        {/* iframe */}
+        {/*
+        <iframe
+          src="https://olgagpt.com/sub/point_bonus_w.asp"
+          className="xl:w-1/2 h-96"
+
+          //style = {{position: "fixed", bottom: "0", left: "0", right: "0", zIndex: "-1"}}
+        >
+        </iframe>
+        */}
+
+     
+
+
+
+
       </main>
 
       {/* footer */}
@@ -1117,7 +1134,11 @@ export default function Home() {
 
         </div>
 
+
+
+
       </div>
+
 
 
       {/*

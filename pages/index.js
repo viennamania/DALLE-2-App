@@ -1057,59 +1057,82 @@ export default function Home() {
           
 
             {myImages.map((myImage, index) => {
+
+
               return (
+
+
                 <div
                   key={myImage._id}
                   className="border border-gray-200 rounded-lg overflow-hidden flex flex-col items-center justify-center gap-2"
                 >
-                  <Image
-                    // when click image, preview image
-                    onClick={() => {
-                      window.open(myImage.image, "_blank");
-                    } }
-                    
-                    src={myImage.image}
-                    alt="My Image"
-                    width={400}
-                    height={400}
-                    //onClick={() => download(myImage.image)}
-                    // object-fit: cover;
 
-                    //style = {{objectFit: "cover"}}
+                  {/* opensea logo is located top and left side of image overlapping */}
 
-                    //className={styles.imgPreview}
-                    /*
-                    .imgPreview {
-                      width: 100%;
-                      border-radius: 10px;
-                    }
+                  <div  className="relative w-full h-full">
 
-                    .imgPreview:hover,
-                    .imgPreview:focus,
-                    .imgPreview:active {
-                      transform: scale(1.1);
-                      cursor: pointer;
-                      transition-duration: 1s;
-                    }
-                    */
+                    {myImage.erc721ContractAddress !== "" && myImage.erc721ContractAddress !== null && myImage.erc721ContractAddress !== undefined && (
+                      <Image
+                        className="absolute top-1 left-1"
+                        src="/icon-opensea.png"
+                        alt="Logo"
+                        width={20}
+                        height={20}
+                      />
+                    )}
 
-                    className="
-                    hover:scale-110
-                    cursor-pointer
-                    transition-transform
-                    duration-1000
-                    "
-                  
+                    <Image
+                      // when click image, preview image
+                      onClick={() => {
+                        window.open(myImage.image, "_blank");
+                      } }
+                      
+                      src={myImage.image}
+                      alt="My Image"
+                      width={400}
+                      height={400}
+                      //onClick={() => download(myImage.image)}
+                      // object-fit: cover;
 
-                    style = {
-                      {
-                        objectFit: "cover",
-                        width: "100%",
-                        height: "100%",
+                      //style = {{objectFit: "cover"}}
+
+                      //className={styles.imgPreview}
+                      /*
+                      .imgPreview {
+                        width: 100%;
+                        border-radius: 10px;
                       }
-                    }
 
-                  />
+                      .imgPreview:hover,
+                      .imgPreview:focus,
+                      .imgPreview:active {
+                        transform: scale(1.1);
+                        cursor: pointer;
+                        transition-duration: 1s;
+                      }
+                      */
+
+                      className="
+                      hover:scale-110
+                      cursor-pointer
+                      transition-transform
+                      duration-1000
+                      "
+                    
+
+                      style = {
+                        {
+                          objectFit: "cover",
+                          width: "100%",
+                          height: "100%",
+                        }
+                      }
+
+                    />
+
+                  </div>
+
+
 
                   {/* myImage.created_at */}
                   <div className="text-center text-xs xl:text-sm text-gray-500 p-1"> 
@@ -1165,6 +1188,17 @@ export default function Home() {
 
 
                       ) : (
+                        <div className="text-center text-xs xl:text-sm text-gray-500 p-2">
+
+                        {/* OpenSea Logo */}
+                        {/*
+                        <Image
+                          src="/icon-opensea.png"
+                          alt="Logo"
+                          width={20}
+                          height={20}
+                        />
+                      
                         <button
                           // goto opensea
                           onClick={() => {
@@ -1179,6 +1213,8 @@ export default function Home() {
                           />
                         
                         </button>
+                        */}
+                        </div>
                       )}
 
                     </>
