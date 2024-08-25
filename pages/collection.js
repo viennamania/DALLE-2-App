@@ -1101,7 +1101,7 @@ export default function Home() {
             className=" h-24 flex flex-col items-center justify-start
             hover:bg-gray-200 hover:text-black"
             onClick={() => {
-              window.open("https://olgagpt.com/main.asp", "_self");
+              window.open("https://olgagpt.com/main.asp", "_parent");
             }}
           >
             <Image
