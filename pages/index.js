@@ -206,10 +206,6 @@ export default function Home() {
         setLoadingDownload(false);
       });
 
-
-
-      
-
   }
 
 
@@ -549,6 +545,36 @@ export default function Home() {
       }
 
   }
+
+
+
+  //downloadToAlbum(myImage.image, myImage.prompt);
+  const downloadToAlbum = (image, prompt) => {
+
+    if (confirm("您确定要下载到相册吗？")) {
+        
+        // download image to local album in mobile
+
+        
+        const link = document.createElement("a");
+
+        link.href = image;
+
+        link.download = `${prompt}.${type.toLowerCase()}`;
+
+        link.click();
+        
+
+
+  
+      }
+
+  };
+
+
+
+
+
 
 
   // POWER balance
@@ -999,6 +1025,10 @@ export default function Home() {
                   className="border border-gray-200 rounded-lg overflow-hidden flex flex-col items-center justify-center gap-2"
                 >
                   <Image
+                    // when click image, preview image
+                    onClick={() => {
+                      window.open(myImage.image, "_blank");
+                    } }
                     
                     src={myImage.image}
                     alt="My Image"
@@ -1068,7 +1098,12 @@ export default function Home() {
                               ${loadingMintNFTs[index] ? "bg-gray-200" : "bg-blue-500"
                               } text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
                           >
-                            {loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint"}
+                            {
+                              //loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint"
+                              // chinese
+                              loadingMintNFTs[myImages.indexOf(myImage)] ? "铸造中..." : "铸造"
+                            }
+
                           </button>
 
                           {/* delete button */}
@@ -1079,7 +1114,11 @@ export default function Home() {
                               ${loadingDeleteMyImage[index] ? "bg-gray-200" : "bg-red-500"
                               } text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
                           >
-                            {loadingDeleteMyImage[myImages.indexOf(myImage)] ? "Deleting..." : "Delete"}
+                            {
+                              ////loadingDeleteMyImage[myImages.indexOf(myImage)] ? "Deleting..." : "Delete"
+                              // chinese
+                              loadingDeleteMyImage[myImages.indexOf(myImage)] ? "删除中..." : "删除"
+                            }
                           </button>
 
 
@@ -1109,6 +1148,25 @@ export default function Home() {
 
                   )}
 
+                  {/* download from cloud image myImage.image to local album in mobile */}
+                  {/*
+                  <button
+                    className="text-sm text-white bg-blue-500 p-2 rounded-lg"
+                    onClick={
+                      () => {
+                        
+                        downloadToAlbum(myImage.image, myImage.prompt);
+
+                      }
+                    }
+                  >
+                    下载到相册
+                  </button>
+
+                  */}
+
+
+
                 </div>
               );
             })}
@@ -1116,6 +1174,7 @@ export default function Home() {
           </div>
 
         )}
+
 
 
 
