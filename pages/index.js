@@ -576,6 +576,7 @@ export default function Home() {
 
 
   const [loginSession, setLoginSession] = useState("");
+  console.log("loginSession=", loginSession);
 
   // POWER balance
   const [powerBalance, setPowerBalance] = useState(0);
@@ -662,7 +663,7 @@ export default function Home() {
         </h1>
 
         {/* login button */}
-        {!loginSession && (
+        {loginSession === "" && (
           <button
             onClick={() => {
               //window.open("https://olgagpt.com/sub/login.asp", "_self");
@@ -954,7 +955,8 @@ export default function Home() {
           {/* download button */}
           {/* download image and anchor goto https://www.olgagpt.com/sub/deposit_request_krw.asp new window */}
           {/* margin top 20px */}
-          {!loading && results.length > 0 && userid != null && userid != 'null' && userid != ""  && (
+          {loginSession != ""
+          && !loading && results.length > 0 && userid != null && userid != 'null' && userid != ""  && (
             <button
               disabled={loadingDownload}
               style = {{marginTop: "10px"}}
@@ -986,7 +988,8 @@ export default function Home() {
 
 
           {/* erc721ContractAddress */}
-          {walletAddress && walletAddress != "" && (
+          {loginSession != ""
+          && walletAddress && walletAddress != "" && (
             <>
 
               {erc721ContractAddress != "" && erc721ContractAddress != null && erc721ContractAddress != undefined ? (
@@ -1046,7 +1049,8 @@ export default function Home() {
 
 
         {/* if userid is 'songpa', show my images */}
-        {userid != null && userid != 'null' && userid != "" && (
+        {loginSession != ""
+        && userid != null && userid != 'null' && userid != "" && (
 
           <div className="
           xl:w-1/2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-4">
