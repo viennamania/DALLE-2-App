@@ -102,28 +102,45 @@ export default async function handler(req, res) {
 
         // remove Original prompt: from translated text
 
-        {"role": "system", "content": "Translate this to English: " + prompt
-          + " and generate just translated text in English. If this prompt: " + prompt + " is already in English, please respond with just the original prompt."
-          + " If you are not sure, please respond with just the original prompt."
+        {"role": "system", "content": " Translate this prompt: " + prompt + " to English."
+          + " response with just translated text in English."
+          + " remove: Original prompt: from translated text."
+        },
+
+        {"role": "user", "content": " Translate this prompt: " + prompt + " to English."
+          + " response with just translated text in English."
+          + " remove: Original prompt: from translated text."
+        },
+
+        
+        /*
+        {"role": "system", "content": " If this prompt: " + prompt + " is not English, translate it to English and generate just translated text in English."
+          + " If this prompt: " + prompt + " is already in English, please respond with just the original prompt."
+
+          + " If you are not sure, translate it to English and generate just translated text in English."
 
           + " remove Original prompt: from translated text."
 
           + " remove Translated text in English: from translated text."
 
           + " remove original prompt: from translated text."
-        
+
+
         },
 
-        {"role": "user", "content": "Translate this to English: " + prompt
-          + " and generate just translated text in English. If this prompt: " + prompt + " is already in English, please respond with just the original prompt."},
+        {"role": "user", "content": " If this prompt: " + prompt + " is not English, translate it to English and generate just translated text in English."
+          + " If this prompt: " + prompt + " is already in English, please respond with just the original prompt."
+          + " If you are not sure, translate it to English and generate just translated text in English."
+
+          + " remove Original prompt: from translated text."
+
+          + " remove Translated text in English: from translated text."
+
+          + " remove original prompt: from translated text."
 
 
-        // 프롬프트를 영어로 번역하고 영어로 번역된 텍스트만 생성하십시오. 이 프롬프트가 이미 영어로 된 경우 원래 프롬프트만으로 응답하십시오.
-
-        // 번역하십시오: "이것을 영어로 번역하십시오: " + prompt + " 및 영어로 번역된 텍스트만 생성하십시오. 이 프롬프트: " + prompt + "가 이미 영어로 된 경우 원래 프롬프트만으로 응답하십시오.
-
-        // The original prompt is already in English. Please respond with just the original prompt.
-
+        },
+        */
 
        
 
