@@ -91,7 +91,7 @@ export default function Home() {
         
         ////.post(`/api/images?t=${token}&p=${prompt}&n=${number}`)
 
-        .post(`/api/images?p=${prompt}&n=${number}&userid=${userid}&real=${checkIsRealPicture}`)
+        .post(`/api/images?p=${prompt}&n=${number}&userid=${userid}&username=${username}&real=${checkIsRealPicture}`)
 
 
         .then((res) => {

@@ -85,13 +85,15 @@ prompt
 "온라인경마장에서 베팅하는 사람들"
 */}
 
-        <div className={styles.grid}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
           {promptList.map((item) => (
-            <div key={item._id} className={styles.card}>
+            <div key={item._id}
+              className="p-4 border border-gray-200 rounded-lg shadow-lg" >
+                
               <p>{item.createdAt}</p>
               <p>{item.prompt}</p>
               <p>{item.englishPrompt}</p>
-              <p>{item?.userid}</p>
+              <p>{item?.username}</p>
             </div>
           ))}
 

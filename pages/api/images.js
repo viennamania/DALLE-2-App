@@ -71,6 +71,7 @@ export default async function handler(req, res) {
 
 
   const userid = req.query?.userid;
+  const username = req.query?.username;
 
   const isReal = req.query?.real;
 
@@ -213,9 +214,10 @@ export default async function handler(req, res) {
     englishPrompt: englishPrompt,
     negativePrompt: negative_prompt,
     userid: userid,
+    username: username,
   });
 
-  console.log("resultInsertOne=", resultInsertOne);
+  //console.log("resultInsertOne=", resultInsertOne);
 
 
   let input = {
