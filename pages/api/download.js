@@ -28,11 +28,15 @@ const nanoid = customAlphabet(
 
 export default async function handler(req, res) {
 
-  const userid = req.body?.userid;
+  const prompt = req.body?.prompt;
+
+  const englishPrompt = req.body?.englishPrompt;
 
   const url = req.body.url;
 
-  const prompt = req.body.prompt;
+  const userid = req.body?.userid;
+
+  const username = req.body?.username;
 
   const type = req.body.type;
 
@@ -99,7 +103,9 @@ export default async function handler(req, res) {
 
   const result = await insertOneImage({
     userid: userid,
+    username: username,
     prompt: prompt,
+    englishPrompt: englishPrompt,
     url: url,
     image: image,
     erc721ContractAddress: erc721ContractAddress,

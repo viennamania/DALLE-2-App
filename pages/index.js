@@ -96,7 +96,7 @@ export default function Home() {
 
         .then((res) => {
 
-          //console.log("res=", res);
+          //console.log("res.data.result=", res.data.result);
 
           setResults(res.data.result);
           setLoading(false);
@@ -131,7 +131,7 @@ export default function Home() {
 
   const [loadingDownload, setLoadingDownload] = useState(false);
 
-  function download(url) {
+  function download(prompt, englishPrompt, url, type, userid, username) {
 
     if (confirm("您确定要下载到相册吗？")) {
 
@@ -139,7 +139,14 @@ export default function Home() {
       setLoadingDownload(true);
 
       axios
-        .post(`/api/download`, {prompt: prompt, url: url, type: type, userid: userid })
+        .post(`/api/download`, {
+          prompt,
+          englishPrompt,
+          url,
+          type,
+          userid,
+          username,
+        })
         .then((res) => {
 
 
@@ -993,7 +1000,14 @@ export default function Home() {
                 style = {{marginTop: "10px"}}
                 onClick={() => {
 
-                  download(results[0].url);
+                  download(
+                    results[0].prompt,
+                    results[0].englishPrompt,
+                    results[0].url,
+                    type,
+                    userid,
+                    username
+                  );
 
 
 

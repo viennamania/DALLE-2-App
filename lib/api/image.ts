@@ -3,6 +3,7 @@ import clientPromise from '../mongodb';
 export interface ImageProps {
   _id: string;
   prompt: string;
+  englishPrompt: string;
   image: string;
   erc721ContractAddress: string;
   tokenid: number;
@@ -52,6 +53,7 @@ export async function insertOne(data: any) {
     {
       userid: data.userid,
       prompt: data.prompt,
+      englishPrompt: data.englishPrompt,
       url: data.url,
       image: data.image,
       erc721ContractAddress: data.erc721ContractAddress,
@@ -207,6 +209,29 @@ export async function updateOneByImage(data: any) {
   };
 
 }
+
+
+
+
+// find all (image) by userid ordr by createdAt desc recent 5 images
+export async function findAll(data: any) {
+  
+
+  const client = await clientPromise;
+  const collection = client.db('vienna').collection('images');
+
+  const result = await collection.find<ImageProps>(
+    {
+    },
+  ).sort({createdAt: -1}).toArray();
+
+
+  //console.log('findAll result: ' + JSON.stringify(result));
+
+
+  return result;
+}
+
 
 
 // find all (image) by userid ordr by createdAt desc recent 5 images

@@ -398,7 +398,11 @@ export default async function handler(req, res) {
 
   
   output.forEach((element) => {
-    result.push({ url: element });
+    result.push({
+      prompt: prompt,
+      englishPrompt: englishPrompt,
+      url: element
+    });
   } );
   
 
