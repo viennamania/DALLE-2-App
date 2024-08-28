@@ -213,7 +213,7 @@ export async function updateOneByImage(data: any) {
 
 
 
-// find all (image) by userid ordr by createdAt desc recent 5 images
+// find all (image) by userid ordr by createdAt desc recent 100 images
 export async function findAll(data: any) {
   
 
@@ -223,7 +223,7 @@ export async function findAll(data: any) {
   const result = await collection.find<ImageProps>(
     {
     },
-  ).sort({createdAt: -1}).toArray();
+  ).sort({createdAt: -1}).limit(100).toArray();
 
 
   //console.log('findAll result: ' + JSON.stringify(result));
