@@ -153,6 +153,25 @@ export default function Home() {
               </div>
 
               <p>{item?.username}</p>
+
+              {/* opensea link */}
+              {item.erc721ContractAddress !== "" && item.erc721ContractAddress !== null && item.erc721ContractAddress !== undefined && (
+                <a
+                  href={`https://opensea.io/assets/matic/${item.erc721ContractAddress}/${item.tokenid}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div className="flex flex-row items-center gap-2 mt-2">
+                    <Image
+                      src="/icon-opensea.png"
+                      alt="Logo"
+                      width={20}
+                      height={20}
+                    />
+                    <p>OpenSea</p>
+                  </div>
+                </a>
+              )}
             </div>
           ))}
 
