@@ -74,16 +74,16 @@ export default function Home() {
         {/* prompt list */}
         {/*
         
-createdAt
-: 
-"2024-08-18T08:20:44.319Z"
-englishPrompt
-: 
-"People betting at the online horse racing track"
-prompt
-: 
-"온라인경마장에서 베팅하는 사람들"
-*/}
+        createdAt
+        : 
+        "2024-08-18T08:20:44.319Z"
+        englishPrompt
+        : 
+        "People betting at the online horse racing track"
+        prompt
+        : 
+        "온라인경마장에서 베팅하는 사람들"
+        */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
           {promptList.map((item) => (
