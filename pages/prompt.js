@@ -90,7 +90,13 @@ prompt
             <div key={item._id}
               className="p-4 border border-gray-200 rounded-lg shadow-lg" >
                 
-              <p>{item.createdAt}</p>
+              <p>
+
+                {
+                  (new Date(item.createdAt)).toLocaleString()
+                }
+
+              </p>
               <p>{item.prompt}</p>
               <p>{item.englishPrompt}</p>
               <p>{item?.username}</p>

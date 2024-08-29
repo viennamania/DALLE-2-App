@@ -82,7 +82,11 @@ export default function Home() {
               className="p-4 border border-gray-200 rounded-lg shadow-lg flex flex-col items-center"
             >
                 
-              <p>{item.createdAt}</p>
+              <p>
+                {
+                  (new Date(item.createdAt)).toLocaleString()
+                }
+              </p>
               <p>{item.prompt}</p>
               <p>{item.englishPrompt}</p>
 
