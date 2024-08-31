@@ -307,7 +307,7 @@ export default async function handler(req, res) {
 
   let hosting = "";
 
-  let randomModel = Math.floor(Math.random() * 5) + 0;
+  let randomModel = Math.floor(Math.random() * 6) + 0;
   //console.log("randomModel=", randomModel);
 
   //randomModel = 3;
@@ -316,7 +316,7 @@ export default async function handler(req, res) {
   if (isReal == "true") {
     // randomModel is 5 or 6 or 7
     
-    randomModel = Math.floor(Math.random() * 3) + 5;
+    randomModel = Math.floor(Math.random() * 2) + 6;
   }
 
   console.log("randomModel=", randomModel);
@@ -341,18 +341,21 @@ export default async function handler(req, res) {
     hosting = "replicate";
     model = "bytedance/sdxl-lightning-4step:5f24084160c9089501c1b3545d9be3c27883ae2239b6f412990e82d4a6210f8f";
 
-
-
   } else if (randomModel == 5) {
     hosting = "fal";
-    model = "fal-ai/flux-realism";
-  } else if (randomModel == 6) {
+    model = "fal-ai/flux/schnell";
+  
+
+    
+  }  else if (randomModel == 6) {
     hosting = "fal";
-    model = "fal-ai/flux/dev";
+    model = "fal-ai/flux-realism";
+
   } else if (randomModel == 7) {
     hosting = "fal";
-    model = "fal-ai/flux/schnell";
-  } 
+    model = "fal-ai/flux/dev";
+  }
+
 
 
   let output = [];
