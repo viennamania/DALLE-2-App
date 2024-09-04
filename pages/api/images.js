@@ -307,16 +307,16 @@ export default async function handler(req, res) {
 
   let hosting = "";
 
-  let randomModel = Math.floor(Math.random() * 6) + 0;
+  let randomModel = Math.floor(Math.random() * 7) + 0;
   //console.log("randomModel=", randomModel);
 
-  //randomModel = 3;
+  //randomModel = 6;
 
 
   if (isReal == "true") {
     // randomModel is 5 or 6 or 7
     
-    randomModel = Math.floor(Math.random() * 2) + 6;
+    randomModel = Math.floor(Math.random() * 2) + 10;
   }
 
   console.log("randomModel=", randomModel);
@@ -345,13 +345,18 @@ export default async function handler(req, res) {
     hosting = "fal";
     model = "fal-ai/flux/schnell";
   
+  } else if (randomModel == 6) {
+    hosting = "fal";
+    model = "fal-ai/fast-lcm-diffusion";
+
+
 
     
-  }  else if (randomModel == 6) {
+  }  else if (randomModel == 10) {
     hosting = "fal";
     model = "fal-ai/flux-realism";
 
-  } else if (randomModel == 7) {
+  } else if (randomModel == 11) {
     hosting = "fal";
     model = "fal-ai/flux/dev";
   }
@@ -408,7 +413,7 @@ export default async function handler(req, res) {
   );
   */
 
-  console.log(output);
+  //console.log(output);
 
 
   // openai image generation result format
