@@ -880,12 +880,12 @@ export default function Home() {
               <button onClick={getImages}>Get {number} Images</button>
               */}
               {loading ? (
-                <button hidden>创建镜像</button>
+                <button hidden>生成图片</button>
               ) : (
                 <div className="flex flex-row items-center justify-center gap-2">
                   <button
                     disabled={loading || prompt === ""}
-                    onClick={getImages}>创建镜像
+                    onClick={getImages}>生成图片
                   </button>
                   {/* reset button */}
                   <button
@@ -1023,7 +1023,7 @@ export default function Home() {
                 loadingDownload ?
                   <span>下载中...</span>
                   :
-                  <span>下载并退出</span>
+                  <span>将图片铸造成NFT</span>
 
                 }
               </button>

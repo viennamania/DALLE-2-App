@@ -756,7 +756,7 @@ export default function Home() {
               loadingDownload ?
                 <span>下载中...</span>
                 :
-                <span>下载并退出</span>
+                <span>将图片铸造成NFT</span>
 
               }
             </button>
