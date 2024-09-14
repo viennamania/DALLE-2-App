@@ -17,6 +17,10 @@ export default async function handler(req, res) {
 
   const images = await findAll();
 
+  console.log("images", images);
+
+  
+
   res.status(200).json(images);
 
 

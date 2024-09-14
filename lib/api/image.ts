@@ -9,6 +9,7 @@ export interface ImageProps {
   tokenid: number;
   createdAt: string;
   updatedAt: string;
+
 }
 
 export async function insertOne(data: any) {
@@ -220,11 +221,24 @@ export async function findAll(data: any) {
   const client = await clientPromise;
   const collection = client.db('vienna').collection('images');
 
+  // _id, userid, prompt, englishPrompt, image, erc721ContractAddress, tokenid, createdAt
+
   try {
-    const result = await collection.find<ImageProps>(
+    const result = await collection.find (
+      {},
       {
-      },
-    ).sort({createdAt: -1}).limit(200).toArray();
+        projection: {
+          _id: 1,
+          userid: 1,
+          prompt: 1,
+          englishPrompt: 1,
+          image: 1,
+          erc721ContractAddress: 1,
+          tokenid: 1,
+          createdAt: 1,
+        }
+      }
+    ).sort({createdAt: -1}).limit(500).toArray();
 
 
     ///console.log('findAll result: ' + JSON.stringify(result));
