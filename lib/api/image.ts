@@ -268,13 +268,26 @@ export async function findAllByUserid(data: any) {
   const client = await clientPromise;
   const collection = client.db('vienna').collection('images');
 
-  const result = await collection.find<ImageProps>(
+  const result = await collection.find(
     {
       userid: data.userid,
     },
-
+    {
+      projection: {
+        _id: 1,
+        userid: 1,
+        prompt: 1,
+        englishPrompt: 1,
+        image: 1,
+        erc721ContractAddress: 1,
+        tokenid: 1,
+        createdAt: 1,
+      }
+    },
 
   ).sort({createdAt: -1}).toArray();
+
+  ///console.log('findAllByUserid result: ' + JSON.stringify(result));
 
   return result;
 }
