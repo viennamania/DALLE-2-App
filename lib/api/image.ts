@@ -224,7 +224,7 @@ export async function findAll(data: any) {
     const result = await collection.find<ImageProps>(
       {
       },
-    ).sort({createdAt: -1}).limit(500).toArray();
+    ).sort({createdAt: -1}).limit(200).toArray();
 
 
     ///console.log('findAll result: ' + JSON.stringify(result));
@@ -237,7 +237,7 @@ export async function findAll(data: any) {
 
 
   return null;
-  
+
 }
 
 
