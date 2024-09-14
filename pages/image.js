@@ -46,17 +46,33 @@ export default function Home() {
   const [imageList, setImageList] = useState([]);
   useEffect(() => {
       
+      /*
       axios
         .get(`/api/getAllImages`)
         .then((res) => {
 
-          console.log("res.data", res.data);
+          ///console.log("res.data", res.data);
 
           setImageList(res.data);
+
         })
         .catch((err) => {
           console.log(err);
         });
+      */
+
+      const fetchData = async () => {
+        try {
+          const res = await fetch(`/api/getAllImages`);
+          const data = await res.json();
+          setImageList(data);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      fetchData();
+
   
     }, []);
 
