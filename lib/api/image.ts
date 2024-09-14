@@ -220,16 +220,24 @@ export async function findAll(data: any) {
   const client = await clientPromise;
   const collection = client.db('vienna').collection('images');
 
-  const result = await collection.find<ImageProps>(
-    {
-    },
-  ).sort({createdAt: -1}).limit(300).toArray();
+  try {
+    const result = await collection.find<ImageProps>(
+      {
+      },
+    ).sort({createdAt: -1}).limit(500).toArray();
 
 
-  //console.log('findAll result: ' + JSON.stringify(result));
+    ///console.log('findAll result: ' + JSON.stringify(result));
+
+    return result;
+
+  } catch (error) {
+    console.log('findAll error: ' + error);
+  }
 
 
-  return result;
+  return null;
+  
 }
 
 
