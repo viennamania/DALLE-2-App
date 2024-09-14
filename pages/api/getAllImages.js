@@ -1,11 +1,6 @@
-
-
 import {
   findAll
 } from '../../lib/api/image';
-
-
-
 
 export default async function handler(req, res) {
 
