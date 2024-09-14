@@ -354,7 +354,7 @@ export async function findAllNFTsByUserid(data: any) {
 
   // select erc721ContractAddress is not null and not empty string and not undefined
 
-  const result = await collection.find<ImageProps>(
+  const result = await collection.find(
     {
       userid: data.userid,
       erc721ContractAddress:
@@ -362,7 +362,18 @@ export async function findAllNFTsByUserid(data: any) {
         $ne: '',
       }
     },
-
+    {
+      projection: {
+        _id: 1,
+        userid: 1,
+        prompt: 1,
+        englishPrompt: 1,
+        image: 1,
+        erc721ContractAddress: 1,
+        tokenid: 1,
+        createdAt: 1,
+      }
+    },
   ).sort({updatedAt: -1}).toArray();
 
   return result;
