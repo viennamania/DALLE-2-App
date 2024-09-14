@@ -2,6 +2,13 @@ import {
   findAll
 } from '../../lib/api/image';
 
+
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+}
+
 export default async function handler(req, res) {
 
 
