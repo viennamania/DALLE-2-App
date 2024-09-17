@@ -61,7 +61,7 @@ export default async function handler(req, res) {
 
 
 
-  let englishPrompt = '';
+ 
 
   // translate prompt to english using OpenAI API
   
@@ -89,6 +89,7 @@ export default async function handler(req, res) {
 
 
 
+  let englishPrompt = '';
 
   //if (!isEnglish) {
 
@@ -103,12 +104,16 @@ export default async function handler(req, res) {
 
         // remove Original prompt: from translated text
 
-        {"role": "system", "content": " Translate this prompt: " + prompt + " to English."
+        {
+          "role": "system",
+          "content": " Translate this prompt: " + prompt + " to English."
           + " response with just translated text in English."
           + " remove: Original prompt: from translated text."
         },
 
-        {"role": "user", "content": " Translate this prompt: " + prompt + " to English."
+        {
+          "role": "user",
+          "content": " Translate this prompt: " + prompt + " to English."
           + " response with just translated text in English."
           + " remove: Original prompt: from translated text."
         },
@@ -150,6 +155,8 @@ export default async function handler(req, res) {
       stream: true,
     });
 
+    
+    
     for await (const chunk of completion) {
       
       //console.log(
@@ -159,17 +166,17 @@ export default async function handler(req, res) {
 
       /*
       "
-  Please
-  create
-  a
-  woman
-  with
-  a
-  beautiful
-  figure
-  standing
-  ."
-  undefined
+      Please
+      create
+      a
+      woman
+      with
+      a
+      beautiful
+      figure
+      standing
+      ."
+      undefined
       */
 
       
