@@ -700,8 +700,9 @@ export default function Home() {
       
       <div
         className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4
-        bg-gradient-to-r from-green-400 to-blue-500
-      ">
+          bg-gradient-to-b from-yellow-200 to-yellow-500
+        "
+      >
 
 
           <div className='flex flex-row items-center'>
