@@ -602,7 +602,7 @@ export default function Home() {
   return (
 
 
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto">
 
       <Head>
         <title>Create Images With GhatGPT 4o</title>
@@ -620,8 +620,32 @@ export default function Home() {
 
       </Head>
 
+      <div
+        className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4
+          bg-gradient-to-b from-yellow-200 to-yellow-500
+        "
+      >
 
-      <main className="flex flex-col items-center justify-center gap-2 mb-32">
+
+          <div className='flex flex-row items-center'>
+            <Image
+              
+              //src="/icon-chatgpt-dark.png"
+              src="/icon-olga-dark.png"
+              alt="Next Chat"
+              width={35}
+              height={35}
+            />
+
+            <span className="text-lg font-bold ml-2">ChatGPT</span>
+          </div>
+
+
+      </div>
+
+
+
+      <main className="flex flex-col items-center justify-center gap-2 mb-32 p-4">
 
 
         <Image
@@ -643,12 +667,27 @@ export default function Home() {
               //window.open("https://olgagpt.com/sub/login.asp", "_self");
               window.open("https://olgagpt.com/login.asp", "_self");
             }}
+            className="
+            bg-gradient-to-r from-green-400 to-blue-500
+            hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600
+            "
           >
-            登录
+            <div className="flex flex-row items-center justify-center gap-2">
+              <Image
+                src="/icon-olga-dark.png"
+                alt="Logo"
+                width={24}
+                height={24}
+              />
+              <span className="text-white">登录</span>
+            </div>
+         
           </button>
         ) : (
 
           <div className="mt-2 flex flex-row items-center justify-center gap-2">
+            {/* dot */}
+            
             <span className="text-center text-sm text-gray-500">
               ID: 
             </span>
@@ -711,7 +750,7 @@ export default function Home() {
                       
                     key={result.url}
 
-                      className="w-full border border-gray-200 rounded-lg overflow-hidden"
+                      className="w-full border border-gray-200 rounded-xl overflow-hidden"
                     >
                       <img
                         className={styles.imgPreview}
@@ -847,7 +886,7 @@ export default function Home() {
               return (
                 <div
                   key={myImage._id}
-                  className="border border-gray-200 rounded-lg overflow-hidden flex flex-col items-center justify-center gap-2"
+                  className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2"
                 >
                   <Image
                     
