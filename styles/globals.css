@@ -46,3 +46,89 @@ button:hover {
   cursor: pointer;
   color: white;
 }
+
+
+
+
+.animate-spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s linear infinite;
+}
+
+
+.green-link {
+}
+
+.green-link:hover .green-btn {
+  background-color: #0fff50;
+  color: #050801;
+  box-shadow: 0px 0px 5px #0fff50, 0px 0px 15px #0fff50, 0px 0px 25px #0fff50,
+    0px 0px 10px #0fff50;
+}
+
+.green-btn {
+  color: #0fff50;
+  border: 1.5px solid #0fff50;
+  border-radius: 7px;
+  transition: all 0.3s ease-in-out;
+}
+.green-btn:hover {
+  background-color: #0fff50;
+  color: #050801;
+  box-shadow: 0px 0px 5px #0fff50, 0px 0px 25px #0fff50, 0px 0px 50px #0fff50,
+    0px 0px 100px #0fff50;
+}
+
+.gold-link {
+}
+
+.gold-link:hover .gold-btn {
+  background-color: #ffc000;
+  color: #ffffff;
+  box-shadow: 0px 0px 5px #ffc000, 0px 0px 15px #ffc000, 0px 0px 25px #ffc000,
+    0px 0px 10px #ffc000;
+}
+
+.gold-btn {
+  border: 1.5px solid #ffc000;
+  border-radius: 7px;
+  color: #ffc000;
+  transition: all 0.3s ease-in-out;
+}
+.gold-btn:hover {
+  background-color: #ffc000;
+  color: #ffffff;
+  /*
+  box-shadow: 0px 0px 5px #ffc000, 0px 0px 25px #ffc000, 0px 0px 50px #ffc000,
+  0px 0px 100px #ffc000;
+  */
+}
+
+.gold-btn:disabled {
+  background-color: #ffc000;
+  color: #ffffff;
+  box-shadow: 0px 0px 5px #ffc000, 0px 0px 25px #ffc000, 0px 0px 50px #ffc000,
+    0px 0px 100px #ffc000;
+}
+
+.gold-btn-active {
+  background-color: #ffc000;
+  color: #ffffff;
+  box-shadow: 0px 0px 5px #ffc000, 0px 0px 25px #ffc000, 0px 0px 50px #ffc000,
+    0px 0px 100px #ffc000;
+}

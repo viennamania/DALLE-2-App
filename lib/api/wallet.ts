@@ -53,6 +53,34 @@ export async function insertOne(data: any) {
 }
 
 
+// findOne
+export async function findOne(data: any) {
+
+  console.log('findOne data: ' + JSON.stringify(data));
+
+  if (!data.userid) {
+    return null;
+  }
+
+
+  const client = await clientPromise;
+  const collection = client.db('vienna').collection('wallets');
+
+  const result = await collection.findOne<WalletProps>(
+    {
+      userid: data.userid,
+    },
+  );
+
+  ///console.log('findOne result: ' + JSON.stringify(result));
+
+
+  return result;
+
+}
+
+
+
 
 
 export async function findOneByUserid(data: any) {

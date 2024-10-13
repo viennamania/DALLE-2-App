@@ -18,6 +18,10 @@ import { PutBlobResult } from '@vercel/blob';
 
 import { usePathname, useRouter } from 'next/navigation'
 
+///import { UserIcon } from "../components/icons/UserIcon";
+
+
+
 
 export default function Home() {
 
@@ -471,7 +475,11 @@ export default function Home() {
 
         //toast.error("Failed to mint NFT");
 
-        setLoadingMintNFTs( false );
+        setLoadingMintNFTs(
+            loadingMintNFTs.map((value, i) => {
+                return i === index ? false : value;
+            }
+        ));
 
       }
 
@@ -550,7 +558,11 @@ export default function Home() {
 
           //toast.error("Failed to delete image");
 
-          setLoadingDeleteMyImage( false );
+          setLoadingDeleteMyImage(
+              loadingDeleteMyImage.map((value, i) => {
+                  return i === index ? false : value;
+              }
+          ));
 
         }
 
@@ -660,7 +672,7 @@ export default function Home() {
   return (
 
 
-    <div className="container mx-auto p-4">
+    <div className="">
 
       <Head>
         <title>Create Images With GhatGPT 4o</title>
@@ -678,8 +690,43 @@ export default function Home() {
 
       </Head>
 
+      {/*
+      <div
+        className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl
+        bg-yellow-400
+      ">
+      */}
 
-      <main className="flex flex-col items-center justify-center gap-2 mb-32">
+      
+      <div
+        className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4
+        bg-gradient-to-r from-green-400 to-blue-500
+      ">
+
+
+          <div className='flex flex-row items-center'>
+            <Image
+              
+              //src="/icon-chatgpt-dark.png"
+              src="/icon-olga-dark.png"
+              alt="Next Chat"
+              width={35}
+              height={35}
+            />
+
+            <span className="text-lg font-bold ml-2">ChatGPT</span>
+          </div>
+
+
+      </div>
+      
+
+
+
+
+
+
+      <main className="flex flex-col items-center justify-center gap-2 mb-32 p-4">
 
         
         <Image
@@ -693,17 +740,39 @@ export default function Home() {
         <h1 className={styles.title}>
           Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
         </h1>
+        
+
+
 
         {/* login button */}
+
         {loginSession === "" && (
+
+
           <button
             onClick={() => {
               //window.open("https://olgagpt.com/sub/login.asp", "_self");
               window.open("https://olgagpt.com/login.asp", "_self");
             }}
+            className="
+            bg-gradient-to-r from-green-400 to-blue-500
+            hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600
+            "
           >
-            登录
+            <div className="flex flex-row items-center justify-center gap-2">
+              <Image
+                src="/icon-olga-dark.png"
+                alt="Logo"
+                width={24}
+                height={24}
+              />
+              <span className="text-white">登录</span>
+            </div>
+         
           </button>
+
+
+
         )}
 
         {/* if userid is not null, show userid */}
@@ -858,7 +927,9 @@ export default function Home() {
                 id="number"
                 type="number"
                 value={number}
-                onChange={(e) => setNumber(e.target.value)}
+                onChange={(e) => setNumber(
+                  Number(e.target.value)
+                )}
                 placeholder="Number of images"
                 max="10"
               />
@@ -869,7 +940,9 @@ export default function Home() {
                 <input
                   type="checkbox"
                   id="checkIsRealPicture"
-                  value={checkIsRealPicture}
+                  value={
+                    checkIsRealPicture.toString()
+                  }
                   onChange={(e) => setCheckIsRealPicture(e.target.checked)}
                 />
                 真实图片
@@ -1431,12 +1504,20 @@ export default function Home() {
             hover:bg-gray-200 hover:text-black"
             onClick={() => {
               // '/collection?userid=${userid}&token=${token}'
+              /*
               router.push(
                 {
                   pathname: "/collection",
                   search: `?userid=${username}&token=${userid}`,
                 }
               );
+              */
+
+              window.open(
+                "/collection?userid=" + username + "&token=" + userid,
+                "_self"
+              );
+
             }}
           >
             <Image
