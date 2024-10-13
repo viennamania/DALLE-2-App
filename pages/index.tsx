@@ -847,7 +847,13 @@ export default function Home() {
 
      
           <div
-            className="mt-4 w-full lg:w-1/2 xl:w-1/2 flex flex-col xl:flex-row items-center justify-center gap-2 border border-gray-200 rounded-lg p-2"
+            className="mt-4 w-full lg:w-1/2 xl:w-1/2 flex flex-col xl:flex-row items-center justify-center gap-2
+            rounded-xl border-2 border-sky-500 p-4
+
+            bg-gradient-to-r from-yellow-400
+            
+
+            "
           >
           
             {/*
@@ -892,11 +898,14 @@ export default function Home() {
               {loading ? (
                 
                 
-                <input
+                <textarea
+                  className=" w-full rounded-xl border-2 border-sky-500 p-2"
                   disabled
                   style = {{width: "80%"}}
                   id="prompt"
-                  type="text"
+                  
+                  //type="text"
+
                   value={prompt}
                   //placeholder="Prompt"
                   placeholder="Loading..."
@@ -905,21 +914,24 @@ export default function Home() {
 
 
               ) : (
-                <input
-                  className=" w-full"
+                <textarea
+                  className=" w-full rounded-xl border-2 border-sky-500 p-2"
                   id="prompt"
-                  type="text"
+                  
+                  //type="text"
+
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   //placeholder="Prompt"
                   placeholder="您想要制作的图像消息 ChatGPT 4o"
+                  
                 />
               )}
 
             </div>
 
 
-            <div className=" xl:w-52 flex flex-row xl:flex-col items-center justify-center gap-2">
+            <div className=" xl:w-60 flex flex-row xl:flex-col items-center justify-center gap-2">
 
               {/* hidden */}
               <input
@@ -958,7 +970,22 @@ export default function Home() {
                 <div className="flex flex-row items-center justify-center gap-2">
                   <button
                     disabled={loading || prompt === ""}
-                    onClick={getImages}>生成图片
+                    onClick={getImages}
+                    className="
+                    bg-gradient-to-r from-green-400 to-blue-500
+                    hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600
+                    "
+                  >
+                    <div className="flex flex-row items-center justify-center gap-2">
+                      <Image
+                        src="/icon-ai-image.png"
+                        alt="Logo"
+                        width={24}
+                        height={24}
+                      />
+                      <span className="text-white">生成图片</span>
+                    </div>
+                  
                   </button>
                   {/* reset button */}
                   <button
@@ -968,6 +995,10 @@ export default function Home() {
                       setNumber(1);
                       setCheckIsRealPicture(false);
                     }}
+                    className="
+                    bg-gradient-to-r from-green-400 to-blue-500
+                    hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600
+                    "
                   >
                     重置
                   </button>
@@ -1041,7 +1072,7 @@ export default function Home() {
                       
                     key={result.url}
 
-                      className="w-full border border-gray-200 rounded-lg overflow-hidden"
+                      className="w-full border border-gray-200 rounded-xl overflow-hidden"
                     >
                       <img
                         className={styles.imgPreview}
@@ -1067,7 +1098,24 @@ export default function Home() {
           {loginSession != ""
           && !loading && results.length > 0 && userid != null && userid != 'null' && userid != ""  && (
 
-            <div className="mt-4 flex flex-row items-center justify-center gap-2">
+            <div className="mt-4 flex flex-col items-center justify-center gap-2">
+              
+              {/* * 镜像制作费用 50 POWER*/}
+              <div className="flex flex-row items-center justify-center gap-2">
+                {/* dot */}
+                <span className="text-[#d3a947] text-2xl">•</span>
+                {' '}
+                <span
+                  className="text-sm text-gray-500"
+                >镜像制作费用</span>
+                {' '}<span className="text-[#d3a947] font-bold text-2xl">50</span>
+                {' '}<span
+                  className="text-sm text-gray-500"
+                >
+                  POWER</span>
+              </div>
+
+
               <button
                 disabled={loadingDownload}
                 style = {{marginTop: "10px"}}
@@ -1082,36 +1130,33 @@ export default function Home() {
                     username
                   );
 
-
-
-
-                  //window.open("https://www.olgagpt.com/sub/deposit_request_krw.asp", "_blank");
-
-
-
-
-                  } }
+                } }
+                className="
+                bg-gradient-to-r from-green-400 to-blue-500
+                hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600
+                "
               >
+
                 {
                 loadingDownload ?
                   <span>下载中...</span>
                   :
-                  <span>将图片铸造成NFT</span>
+                  <div className="flex flex-row items-center justify-center gap-2">
+                    <Image
+                      src="/logo-opensea.png"
+                      alt="Logo"
+                      width={24}
+                      height={24}
+                    />
+                    <span className="text-white">
+                      将图片铸造成NFT
+                    </span>
+                  </div>
 
                 }
               </button>
 
-              {/* * 镜像制作费用 50 POWER*/}
-              <div className="flex flex-row items-center justify-center gap-2">
-                <span
-                  className="text-sm text-gray-500"
-                >* 镜像制作费用</span>
-                {' '}<span className="text-[#d3a947] font-bold text-2xl">50</span>
-                {' '}<span
-                  className="text-sm text-gray-500"
-                >
-                  POWER</span>
-              </div>
+
 
 
 
@@ -1198,7 +1243,7 @@ export default function Home() {
 
                 <div
                   key={myImage._id}
-                  className="border border-gray-200 rounded-lg overflow-hidden flex flex-col items-center justify-center gap-2"
+                  className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2"
                 >
 
                   {/* opensea logo is located top and left side of image overlapping */}
