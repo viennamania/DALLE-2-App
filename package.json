@@ -23,7 +23,7 @@
     "react-dom": "18.2.0",
     "replicate": "^0.32.0",
     "sharp": "^0.32.5",
-    "thirdweb": "^5.46.1"
+    "thirdweb": "^5.61.6"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
