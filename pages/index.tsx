@@ -22,6 +22,29 @@ import { usePathname, useRouter } from 'next/navigation'
 
 
 
+import { createThirdwebClient } from "thirdweb";
+import { ConnectButton } from "thirdweb/react";
+
+import { createWallet } from "thirdweb/wallets";
+
+const client = createThirdwebClient({
+  clientId: "980fc843a32b4172b465b766a7459af1",
+});
+
+
+const wallets = [
+  createWallet("io.metamask"),
+  createWallet("com.coinbase.wallet"),
+  createWallet("pro.tokenpocket"),
+];
+
+
+
+
+
+
+
+
 
 export default function Home() {
 
@@ -741,9 +764,19 @@ export default function Home() {
         <h1 className={styles.title}>
           Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
         </h1>
+
+        
+        {/*
+        <ConnectButton
+          client={client}
+          wallets={wallets}
+          connectButton={{ label: "Connect" }}
+          connectModal={{ size: "compact" }}
+        />
+        */}
         
 
-
+     
 
         {/* login button */}
 
