@@ -23,9 +23,20 @@ import { usePathname, useRouter } from 'next/navigation'
 
 
 import { createThirdwebClient } from "thirdweb";
-import { ConnectButton } from "thirdweb/react";
 
-import { createWallet } from "thirdweb/wallets";
+
+import {polygon } from "thirdweb/chains";
+
+import {
+  ConnectButton,
+  useActiveWallet,
+  useActiveAccount,
+  useConnectModal,
+  useAutoConnect,
+  useDisconnect,
+} from 'thirdweb/react';
+import {createWallet, walletConnect} from 'thirdweb/wallets';
+
 
 const client = createThirdwebClient({
   clientId: "980fc843a32b4172b465b766a7459af1",
@@ -41,12 +52,43 @@ const wallets = [
 
 
 
-
+const chain = polygon;
 
 
 
 
 export default function Home() {
+
+  
+  useAutoConnect({client, wallets});
+  const {connect} = useConnectModal();
+  const {disconnect} = useDisconnect();
+  const wallet = useActiveWallet();
+
+  ///console.log("wallet=", wallet);
+
+  const activeAccount = useActiveAccount();
+
+  ///console.log("activeAccount=", activeAccount);
+
+  const connectWallet = async () => {
+    await connect({
+      chain,
+      client,
+      wallets,
+      size: 'compact',
+      showThirdwebBranding: false,
+    });
+  };
+
+  const disconnectWallet = () => {
+    if (wallet) {
+      disconnect(wallet);
+    }
+  };
+
+  
+
 
   // get parameter from url
 
@@ -770,10 +812,45 @@ export default function Home() {
         <ConnectButton
           client={client}
           wallets={wallets}
-          connectButton={{ label: "Connect" }}
+          theme={"light"}
+          connectButton={{ label: "Connect Wallet" }}
           connectModal={{ size: "compact" }}
         />
         */}
+
+        {wallet && (
+          <div className="flex flex-row items-center justify-center gap-2">
+            <span className="text-sm text-gray-500">Connected with</span>
+            <span className="text-sm leading-[21px] text-[#918E99]">
+              {activeAccount.address.slice(0, 4)}...
+              {activeAccount.address.slice(-4)}
+          </span>
+          </div>
+        )}
+        
+        {!wallet ? (
+          <button
+            onClick={connectWallet}
+            className="
+              h-10 rounded-[100px] bg-[#FFFFFF] px-6 py-2.5 leading-[20.8px] text-[#04080F]
+
+              "
+            >
+            Connect Wallet
+          </button>
+        ) : (
+          <button
+            onClick={disconnectWallet}
+            className="
+              h-10 rounded-[100px] bg-[#FFFFFF] px-6 py-2.5 leading-[20.8px] text-[#04080F]
+
+              "
+            >
+            Disconnect Wallet
+          </button>
+        )}
+        
+        
         
 
      
