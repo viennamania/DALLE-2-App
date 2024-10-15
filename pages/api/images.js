@@ -321,9 +321,11 @@ export default async function handler(req, res) {
 
 
   if (isReal == "true") {
-    // randomModel is 5 or 6 or 7
+    // randomModel is 10, 11
     
     randomModel = Math.floor(Math.random() * 2) + 10;
+
+    //randomModel = 12;
   }
 
   console.log("randomModel=", randomModel);
@@ -337,8 +339,8 @@ export default async function handler(req, res) {
     model = "playgroundai/playground-v2.5-1024px-aesthetic:a45f82a1382bed5c7aeb861dac7c7d191b0fdf74d8d57c4a0e6ed7d4d0bf7d24";
   
   } else if (randomModel == 2) {
-    hosting = "fal";
-    model = "fal-ai/flux-pro";
+    hosting = "replicate";
+    model = "bytedance/sdxl-lightning-4step:5f24084160c9089501c1b3545d9be3c27883ae2239b6f412990e82d4a6210f8f";
 
   } else if (randomModel == 3) {
     hosting = "replicate";
@@ -366,6 +368,10 @@ export default async function handler(req, res) {
   } else if (randomModel == 11) {
     hosting = "fal";
     model = "fal-ai/flux/dev";
+  
+  } else if (randomModel == 12) {
+    hosting = "fal";
+    model = "fal-ai/flux-pro/v1.1"; //  fal-ai/flux-pro/v1.1
   }
 
 
