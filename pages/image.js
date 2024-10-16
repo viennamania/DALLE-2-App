@@ -78,11 +78,11 @@ export default function Home() {
   
 
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 xl:gap-2">
           {imageList &&
           imageList.map((item) => (
             <div key={item._id}
-              className="p-4 border border-gray-200 rounded-lg shadow-lg flex flex-col items-center"
+              className="p-4 border border-gray-200 rounded-xl shadow-xl flex flex-col items-center"
             >
                 
               <p>
@@ -95,7 +95,7 @@ export default function Home() {
 
 
               <div  className="relative
-                w-72 h-72 rounded-lg overflow-hidden bg-gray-200 mt-2"
+                w-72 h-72 rounded-xl overflow-hidden bg-gray-200 mt-2"
               >
 
                 {item.erc721ContractAddress !== "" && item.erc721ContractAddress !== null && item.erc721ContractAddress !== undefined && (
