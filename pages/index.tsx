@@ -1445,9 +1445,11 @@ export default function Home() {
 
                           <div className="flex flex-row items-center justify-center gap-2">
 
+                            {/*
                             <span className=" text-xs font-bold text-[#d3a947]">
                               价格 : 100 POWER
                             </span>
+                            */}
 
                             <button
                               disabled={loadingMintNFTs[index]}
