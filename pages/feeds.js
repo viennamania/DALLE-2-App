@@ -94,7 +94,14 @@ export default function Home() {
       })
       .then((res) => {
 
-        toast.success('Liked!');
+        //toast.success('Liked!'); // chinese language
+
+        // chinese language
+        toast.success('喜欢！');
+
+
+
+
 
         console.log(res);
         if (res.data.result === "success") {
