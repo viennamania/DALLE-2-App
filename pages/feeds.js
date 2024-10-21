@@ -280,6 +280,7 @@ export default function Home() {
 
               </div>
 
+              
               <p>
                 {
                   item.prompt?.length > 100 ?
@@ -288,7 +289,9 @@ export default function Home() {
                 }
               </p>
 
+              {/*}
               <p>{item?.username}</p>
+              */}
 
               {/* opensea link */}
               {item.erc721ContractAddress !== "" && item.erc721ContractAddress !== null && item.erc721ContractAddress !== undefined && (
