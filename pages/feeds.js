@@ -18,7 +18,6 @@ import { PutBlobResult } from '@vercel/blob';
 import { usePathname, useRouter } from 'next/navigation'
 
 import { useAnimation, motion } from "framer-motion";
-import { set } from "react-hook-form";
 
 // toasts
 import { toast } from 'react-toastify';
@@ -240,16 +239,10 @@ export default function Home() {
           {imageList &&
           imageList.map((item) => (
             <div key={item._id}
-              className="
-                w-full border border-gray-200 rounded-xl shadow-xl flex flex-col items-center justify-start gap-4
-                "
+              className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2"
             >
 
-              <div
-                className="relative
-                  w-72 h-72 rounded-xl overflow-hidden
-                "
-              >
+         
 
                 {item.erc721ContractAddress !== "" && item.erc721ContractAddress !== null && item.erc721ContractAddress !== undefined && (
                   <Image
@@ -310,10 +303,6 @@ export default function Home() {
                   }
 
                 />
-
-              </div>
-
-
 
 
               <div className="w-full flex flex-col items-start justify-start gap-2 p-4">
@@ -434,29 +423,6 @@ export default function Home() {
 
 
                 </div>
-
-
-
-
-                {/*
-                <p>
-                  {
-                    item?.username ? item?.username
-                    : item.userid && item.userid.length > 10 ? item.userid.substring(0, 10) + "..."
-                    : item.userid
-                  }
-                </p>
-                */}
-
-                {/* prompt */}
-                {/*}
-                <p>{item.prompt}</p>
-                <p>{item.englishPrompt}</p>
-                */}
-
-
-
-
                 
                 <div className="w-full flex flex-row items-center justify-between gap-2
                 ">
@@ -466,31 +432,6 @@ export default function Home() {
                     : item.prompt
                   }
                 </div>
-
-                {/*}
-                <p>{item?.username}</p>
-                */}
-
-                {/* opensea link */}
-                {/*
-                {item.erc721ContractAddress !== "" && item.erc721ContractAddress !== null && item.erc721ContractAddress !== undefined && (
-                  <a
-                    href={`https://opensea.io/assets/matic/${item.erc721ContractAddress}/${item.tokenid}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <div className="flex flex-row items-center gap-2 mt-2">
-                      <Image
-                        src="/icon-opensea.png"
-                        alt="Logo"
-                        width={20}
-                        height={20}
-                      />
-                      <p>OpenSea</p>
-                    </div>
-                  </a>
-                )}
-                */}
 
               </div>
 

@@ -18,6 +18,13 @@ import { PutBlobResult } from '@vercel/blob';
 
 import { usePathname, useRouter } from 'next/navigation'
 
+import { useAnimation, motion } from "framer-motion";
+
+// toasts
+import { toast } from 'react-toastify';
+
+
+
 
 export default function Home() {
 
@@ -880,18 +887,17 @@ export default function Home() {
         && userid != null && userid != 'null' && userid != "" && (
 
           <div className="
-          xl:w-1/2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-4">
+          xl:w-1/2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-4">
           
 
-            {myImages.map((myImage, index) => {
-              return (
+            {myImages.map((item, index) => (
                 <div
-                  key={myImage._id}
+                  key={item._id}
                   className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2"
                 >
                   <Image
                     
-                    src={myImage.image}
+                    src={item.image}
                     alt="My Image"
                     width={400}
                     height={400}
@@ -934,75 +940,143 @@ export default function Home() {
 
                   />
 
-                  {/* myImage.created_at */}
-                  <div className="text-center text-xs xl:text-sm text-gray-500 p-1"> 
-                    {new Date(myImage.updatedAt).toLocaleString()}
-                  </div>
-                  {/* prompt */}
-                  <div className="text-center text-xs xl:text-sm text-gray-500 p-2"> 
-                    {myImage.prompt}
-                  </div>
 
-                  {/* mint NFT button */}
-
-                  {erc721ContractAddress !== "" && erc721ContractAddress !== null && erc721ContractAddress !== undefined && (
-
-                    <>
-
-                      {myImage.erc721ContractAddress === "" || myImage.erc721ContractAddress === null || myImage.erc721ContractAddress === undefined ? (
-                        
-                        <div className="flex flex-row items-center justify-center gap-2">
-                          <button
-                            disabled={loadingMintNFTs[index]}
-                            onClick={() => mintNFT(myImage.image, myImage.prompt, index)}
-                            className={`
-                              ${loadingMintNFTs[index] ? "bg-gray-200" : "bg-blue-500"
-                              } text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-                          >
-                            {loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint"}
-                          </button>
-
-                          {/* delete button */}
-                          <button
-                            disabled={loadingDeleteMyImage[index]}
-                            onClick={() => deleteMyImage(myImage.image, index)}
-                            className={`
-                              ${loadingDeleteMyImage[index] ? "bg-gray-200" : "bg-red-500"
-                              } text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-                          >
-                            {loadingDeleteMyImage[myImages.indexOf(myImage)] ? "Deleting..." : "Delete"}
-                          </button>
+                  <div className="w-full flex flex-col items-start justify-start gap-2 p-4">
+                    
 
 
-                        </div>
-                      
+                    <div className="w-full flex flex-row items-between justify-start gap-2">
 
-
-                      ) : (
-                        <button
-                          // goto opensea
-                          onClick={() => {
-                            window.open(`https://opensea.io/assets/matic/${myImage.erc721ContractAddress}/${myImage.tokenid}`, "_blank");
-                          }}
-                        >
+                      <div className="w-full flex flex-col items-start justify-between gap-2
+                        text-xs xl:text-xs
+                        text-black
+                      ">
+                        <div className="flex flex-row items-center gap-2">
                           <Image
-                            src="/icon-opensea.png"
-                            alt="Logo"
+                            src="/olga/images/timeline.svg"
+                            alt="date"
                             width={20}
                             height={20}
                           />
+                          {
+                            (new Date(item?.updatedAt)).toLocaleString()
+                          }
+                        </div>
+                        <div className="flex flex-row items-center gap-2">
+                          <Image
+                            src="/olga/images/avatar.svg"
+                            alt="user"
+                            width={20}
+                            height={20}
+                          />
+                          <span className="text-xs xl:text-sm font-bold">
+                          {
+                          item?.username && item?.username.length > 5 ? item?.username.substring(0, 5) + "..."
+                          : item.userid && item.userid.length > 5 ? item.userid.substring(0, 5) + "..."
+                          : item.userid
+                          }
+                          </span>
+                        </div>
+                      </div>
+
+
+
+                      <div className="flex flex-row items-center justify-center gap-2">
+                                
+                        {
+                          //item?.userid === userid ? (
+                          false ? (
+
+                          <motion.img
+                            className="relative w-10 h-10 overflow-hidden shrink-0"
+                            alt=""
+                            src="/olga/images/heart3line.svg"
+                            whileHover={{ scale: 1.3 }}
+                            whileTap={{ scale: 0.8 }}
+                          />
+                        ) : (
+
+
+                          <button
+                            type="button"
+        
+                            onClick={ () => {
+                              
+                              /*
+                              if (item?.likeYn) {
+                                
+                                unlikeNft(item._id)
+
+
+                              } else {
+                                
+                                likeNft(item._id)
+
+                              }
+                              */
+                            likeNft(item._id)
+                            
+                            } }
+                          >
+                            {item?.likes > 0 ? (
+                              <motion.img
+                                className="relative w-10 h-10 overflow-hidden shrink-0"
+                                alt=""
+                                src="/olga/images/heart3fill.svg"
+                                whileHover={{ scale: 1.3 }}
+                                whileTap={{ scale: 0.8 }}
+                              />
+                            ) : (
+                              <motion.img
+                                className="relative w-10 h-10 overflow-hidden shrink-0"
+                                alt=""
+                                src="/olga/images/heart3line.svg"
+                                whileHover={{ scale: 1.3 }}
+                                whileTap={{ scale: 0.8 }}
+                              />
+                            ) }
                         
-                        </button>
-                      )}
 
-                    </>
+                          </button>
+
+                        )}
+
+                        <div className="relative">
+                          {item?.likes > 0 ? (
+                            <span className="text-lg">
+                              {item?.likes}
+                            </span>
+                          ) : (
+                            <span className="text-sm">
+                              0
+                            </span>
+                          )}
+                        </div>
+
+                      </div>
 
 
-                  )}
+
+
+                    </div>
+                    
+                    <div className="w-full flex flex-row items-center justify-between gap-2
+                    ">
+                      {
+                        item.prompt?.length > 100 ?
+                        item.prompt?.substring(0, 100) + "..."
+                        : item.prompt
+                      }
+                    </div>
+
+                  </div>
+
+
+
 
                 </div>
-              );
-            })}
+
+            ))}
 
           </div>
 
