@@ -191,8 +191,8 @@ export default function Home() {
                   />
                   <span className="text-xs xl:text-sm font-bold">
                   {
-                  item?.username ? item?.username
-                  : item.userid && item.userid.length > 10 ? item.userid.substring(0, 5) + "..."
+                  item?.username && item?.username.length > 5 ? item?.username.substring(0, 5) + "..."
+                  : item.userid && item.userid.length > 5 ? item.userid.substring(0, 5) + "..."
                   : item.userid
                   }
                   </span>
