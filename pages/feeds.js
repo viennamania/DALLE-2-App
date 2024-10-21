@@ -74,7 +74,8 @@ export default function Home() {
   return (
 
 
-    <div className="w-full h-full items-center justify-center bg-gray-100">
+    <div className="container
+    w-full h-full items-center justify-center bg-gray-100">
 
 
 
@@ -226,7 +227,7 @@ export default function Home() {
                   */
 
                   className="
-                  rounded-xl
+
                   hover:scale-110
                   cursor-pointer
                   transition-transform
