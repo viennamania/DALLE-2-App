@@ -16,6 +16,9 @@ export async function insertOne(data: any) {
 
   //console.log('insertOne data: ' + JSON.stringify(data));
 
+  if (!data.userid) {
+    return null;
+  }
 
   if (!data.prompt) {
     return null;
@@ -337,6 +340,42 @@ export async function deleteOneByImage(data: any) {
 
 }
 
+
+
+// find all Nfts
+export async function findAllNFTs(data: any) {
+    
+  ///console.log('findAllNFTs data: ' + JSON.stringify(data));
+
+  const client = await clientPromise;
+  const collection = client.db('vienna').collection('images');
+
+  // select erc721ContractAddress is not null and not empty string and not undefined
+
+  const result = await collection.find(
+    {
+      erc721ContractAddress:
+      {
+        $ne: '',
+      }
+    },
+    {
+      projection: {
+        _id: 1,
+        userid: 1,
+        username: 1,
+        prompt: 1,
+        englishPrompt: 1,
+        image: 1,
+        erc721ContractAddress: 1,
+        tokenid: 1,
+        createdAt: 1,
+      }
+    },
+  ).sort({createdAt: -1}).toArray();
+
+  return result;
+}
 
 
 

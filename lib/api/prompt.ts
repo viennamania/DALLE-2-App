@@ -11,6 +11,10 @@ export async function insertOne(data: any) {
 
   //console.log('insertOne data: ' + JSON.stringify(data));
 
+  if (!data.userid) {
+    return null;
+  }
+
   if (!data.prompt) {
     return null;
   }
@@ -20,6 +24,7 @@ export async function insertOne(data: any) {
   }
 
   const userid = data.userid;
+  const username = data?.username;
 
 
 
@@ -34,6 +39,7 @@ export async function insertOne(data: any) {
       englishPrompt: data.englishPrompt,
       negativePrompt: data.negativePrompt,
       userid: userid,
+      username: username,
       createdAt: new Date().toISOString(),
     }
   );
