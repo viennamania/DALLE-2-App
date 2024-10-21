@@ -52,23 +52,55 @@ export default function Home() {
   // get image list from api
   const [imageList, setImageList] = useState([]);
   useEffect(() => {
-      
-      
-      axios
-        .get(`/api/getAllNFTs`)
-        .then((res) => {
+          
+    axios
+      .get(`/api/getAllNFTs`)
+      .then((res) => {
 
-          console.log("res.data", res.data);
+        ///console.log("res.data", res.data);
 
-          setImageList(res.data);
+        setImageList(res.data);
 
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-     
-  
-    }, []);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    
+
+  }, []);
+
+
+  const likeNft = (imageid) => {
+
+    console.log("likeNft imageid=", imageid);
+    console.log("likeNft userid=", userid);
+
+    axios
+      .post(`/api/likeNft`, {
+        imageid: imageid,
+        userid: userid,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const unlikeNft = (imageid) => {
+    axios
+      .post(`/api/unlikeNft`, {
+        imageid: imageid,
+        userid: userid,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
 
 
@@ -312,11 +344,12 @@ export default function Home() {
                           
                           if (item?.likeYn) {
                             
-                            //unlike()
+                            unlikeNft(item._id)
+
 
                           } else {
                             
-                            //like()
+                            likeNft(item._id)
 
                           }
                         

@@ -1,4 +1,5 @@
 import clientPromise from '../mongodb';
+import { ObjectId } from 'mongodb';
 
 export interface ImageProps {
   _id: string;
@@ -11,6 +12,7 @@ export interface ImageProps {
   updatedAt: string;
   userid: string;
   username: string;
+  likes: number;
 
 }
 
@@ -374,6 +376,7 @@ export async function findAllNFTs(data: any) {
         tokenid: 1,
         createdAt: 1,
         updatedAt: 1,
+        likes: 1,
 
       }
     },
@@ -422,4 +425,69 @@ export async function findAllNFTsByUserid(data: any) {
   ).sort({updatedAt: -1}).toArray();
 
   return result;
+}
+
+
+
+
+
+
+
+
+
+
+// update image by image
+export async function likeOneByImage(data: any) {
+  
+  console.log('linkeOneByImage data: ' + JSON.stringify(data));
+
+ 
+
+  if (!data.imageid) {
+    return null;
+  }
+
+  if (!data.userid) {
+    return null;
+  }
+
+
+  const client = await clientPromise;
+  const collection = client.db('vienna').collection('images');
+
+  // likes count plus one
+  // if likes is null, set likes to 1
+  const result = await collection.updateOne(
+    {
+      _id: new ObjectId(data.imageid),
+    },
+
+    // if likes is not exist, set likes to 1
+    // if likes is exist, increment likes by 1
+    {
+      $inc: {likes: 1},
+    },
+
+  );
+
+  if (!result) {
+    return null;
+  }
+
+
+  // add imageLike
+  const collectionImageLikes = client.db('vienna').collection('imageLikes');
+  const resultImageLikes = await collectionImageLikes.insertOne(
+    {
+      imageid: data.imageid,
+      userid: data.userid,
+      createdAt: new Date().toISOString(),
+    }
+  );
+
+
+  return {
+    result: resultImageLikes,
+  };
+
 }
