@@ -20,6 +20,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 ///import { UserIcon } from "../components/icons/UserIcon";
 
+import { toast } from 'react-toastify';
 
 
 import { createThirdwebClient } from "thirdweb";
@@ -36,6 +37,8 @@ import {
   useDisconnect,
 } from 'thirdweb/react';
 import {createWallet, walletConnect} from 'thirdweb/wallets';
+
+
 
 
 const client = createThirdwebClient({
@@ -167,10 +170,19 @@ export default function Home() {
 
           //console.log("res.data.result=", res.data.result);
 
-          setResults(res.data.result);
-          setLoading(false);
+          if (res.data.result.length === 0) {
+            toast.error("没有找到图片");
+            setError(true);
+          } else {
+            toast.success("成功生成图片");
+
+            setResults(res.data.result);
+            setLoading(false);
+          }
         })
         .catch((err) => {
+
+          toast.error("生成图片失败");
 
           setLoading(false);
           setError(true);
@@ -217,6 +229,12 @@ export default function Home() {
           username,
         })
         .then((res) => {
+
+          if (res.data.result === "") {
+            toast.error("下载失败");
+          } else {
+            toast.success("成功下载图片");
+          }
 
 
           ///console.log("res.data.result=", res.data.result);
@@ -416,7 +434,15 @@ export default function Home() {
       axios
         .get(`/api/getImages?userid=${userid}`)
         .then((res) => {
-          setMyImages(res.data);
+          if (res.data.length > 0) {
+
+            
+            setMyImages(res.data);
+          } else {
+            
+          
+          }
+
         })
         .catch((err) => {
           console.log(err);
@@ -446,6 +472,9 @@ export default function Home() {
       axios
         .get(`/api/deployErc721Contract?userid=${userid}`)
         .then((res) => {
+
+          toast.success("成功部署ERC721合约");
+
           setErc721ContractAddress(res.data.erc721ContractAddress);
           setLoadingDeployErc721Contract(false);
         })
@@ -591,7 +620,9 @@ export default function Home() {
               throw new Error("Failed to delete image");
           }
 
-          const data = await response.json();
+          toast.success("成功删除图片");
+
+          ///const data = await response.json();
 
           setLoadingDeleteMyImage(
               loadingDeleteMyImage.map((value, i) => {
@@ -1085,6 +1116,7 @@ export default function Home() {
                     className="
                     bg-gradient-to-r from-green-400 to-blue-500
                     hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600
+                    rounded-xl border-2 border-sky-500 p-2
                     "
                   >
                     <div className="flex flex-row items-center justify-center gap-2">
@@ -1109,6 +1141,7 @@ export default function Home() {
                     className="
                     bg-gradient-to-r from-green-400 to-blue-500
                     hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600
+                    rounded-xl border-2 border-sky-500 p-2
                     "
                   >
                     重置
@@ -1245,6 +1278,7 @@ export default function Home() {
                 className="
                 bg-gradient-to-r from-green-400 to-blue-500
                 hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600
+                rounded-xl border-2 border-sky-500 p-2
                 "
               >
 
@@ -1320,7 +1354,9 @@ export default function Home() {
                     }}
                     className={`
                       ${loadingDeployErc721Contract ? "bg-gray-200" : "bg-blue-500"
-                      } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                      } text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline
+                        rounded-xl border-2 border-sky-500 p-2 
+                      `}
                   >
                     {loadingDeployErc721Contract ?
                       "部署中..." :
@@ -1354,7 +1390,9 @@ export default function Home() {
 
                 <div
                   key={myImage._id}
-                  className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2"
+                  className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2
+                  pb-4
+                  "
                 >
 
                   {/* opensea logo is located top and left side of image overlapping */}
@@ -1441,7 +1479,7 @@ export default function Home() {
 
                       {myImage.erc721ContractAddress === "" || myImage.erc721ContractAddress === null || myImage.erc721ContractAddress === undefined ? (
                         
-                        <div className="flex flex-col items-center justify-center gap-2">
+                        <div className="flex flex-row items-center justify-center gap-2">
 
                           <div className="flex flex-row items-center justify-center gap-2">
 
@@ -1458,7 +1496,9 @@ export default function Home() {
                                 ${loadingMintNFTs[index] ? 
                                 //"bg-gray-200" : "bg-blue-500"
                                 "bg-gray-200" : "bg-[#d3a947]"
-                                } text-white text-xs px-4 rounded focus:outline-none focus:shadow-outline mb-0`}
+                                } text-white text-sm px-4 rounded focus:outline-none focus:shadow-outline mb-0
+                                  p-2 
+                                `}
                             >
                               {
                                 //loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint"
@@ -1583,7 +1623,7 @@ export default function Home() {
           <button
             className=" h-24 flex flex-col items-center justify-start
             hover:bg-gray-200 hover:text-black
-            px-2"
+            p-2"
 
             onClick={() => {
               router.push(
@@ -1609,7 +1649,7 @@ export default function Home() {
 
             className="
               h-24 flex flex-col items-center justify-start text-white
-              px-2
+              p-2
             "
 
             style = {{backgroundColor: "cadetblue"}}
@@ -1629,7 +1669,7 @@ export default function Home() {
           <button
             className=" h-24 flex flex-col items-center justify-start
             hover:bg-gray-200 hover:text-black
-            px-2"
+            p-2"
             onClick={() => {
               // Coming soon
               window.open("https://olgaai.io/" + userid + "/" + username, "_self");
@@ -1681,7 +1721,7 @@ export default function Home() {
           <button
             className=" h-24 flex flex-col items-center justify-start
             hover:bg-gray-200 hover:text-black
-            px-2"
+            p-2"
             onClick={() => {
               window.open("https://olgagpt.com/main.asp", "_parent");
             }}
