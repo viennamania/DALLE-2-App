@@ -999,24 +999,6 @@ export default function Home() {
 
                           <button
                             type="button"
-        
-                            onClick={ () => {
-                              
-                              /*
-                              if (item?.likeYn) {
-                                
-                                unlikeNft(item._id)
-
-
-                              } else {
-                                
-                                likeNft(item._id)
-
-                              }
-                              */
-                            likeNft(item._id)
-                            
-                            } }
                           >
                             {item?.likes > 0 ? (
                               <motion.img

@@ -54,7 +54,7 @@ export default function Home() {
   ///const [likes , setLikes] = useState([]);
 
 
-  const [sort, setSort] = useState("latest");
+  const [sort, setSort] = useState("popular"); // latest, popular
 
 
   // get image list from api
@@ -242,26 +242,7 @@ export default function Home() {
 
         {/* select sort (latest, popular) */}
         <div className="w-full flex flex-row items-center justify-center gap-4 mt-4">
-          <button
-            className={`
-              py-2 px-4 rounded text-white font-bold
-              ${sort === "latest" ? "bg-red-500 hover:bg-red-700" : "bg-gray-200 hover:bg-gray-400"}
-              `}
-            onClick={() => {
-              setSort("latest");
-              axios
-                .get(`/api/getAllNFTs?sort=latest`)
-                .then((res) => {
-                  setImageList(res.data);
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
-            }}
-          >
-            {/*Latest chinese language*/}
-            最新
-          </button>
+
           <button
             className={`
               py-2 px-4 rounded text-white font-bold
@@ -282,6 +263,28 @@ export default function Home() {
             {/*Popular chinese language*/}
             热门
           </button>
+
+          <button
+            className={`
+              py-2 px-4 rounded text-white font-bold
+              ${sort === "latest" ? "bg-red-500 hover:bg-red-700" : "bg-gray-200 hover:bg-gray-400"}
+              `}
+            onClick={() => {
+              setSort("latest");
+              axios
+                .get(`/api/getAllNFTs?sort=latest`)
+                .then((res) => {
+                  setImageList(res.data);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }}
+          >
+            {/*Latest chinese language*/}
+            最新
+          </button>
+
         </div>
 
         {/* image list */}
