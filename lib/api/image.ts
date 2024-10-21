@@ -373,9 +373,11 @@ export async function findAllNFTs(data: any) {
         erc721ContractAddress: 1,
         tokenid: 1,
         createdAt: 1,
+        updatedAt: 1,
+
       }
     },
-  ).sort({createdAt: -1}).toArray();
+  ).sort({updatedAt: -1}).toArray();
 
   return result;
 }
@@ -414,6 +416,7 @@ export async function findAllNFTsByUserid(data: any) {
         erc721ContractAddress: 1,
         tokenid: 1,
         createdAt: 1,
+        updatedAt: 1,
       }
     },
   ).sort({updatedAt: -1}).toArray();

@@ -58,7 +58,7 @@ export default function Home() {
         .get(`/api/getAllNFTs`)
         .then((res) => {
 
-          ///console.log("res.data", res.data);
+          console.log("res.data", res.data);
 
           setImageList(res.data);
 
@@ -270,7 +270,7 @@ export default function Home() {
                         height={20}
                       />
                       {
-                        (new Date(item.createdAt)).toLocaleString()
+                        (new Date(item?.updatedAt)).toLocaleString()
                       }
                     </div>
                     <div className="flex flex-row items-center gap-2">
