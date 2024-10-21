@@ -152,71 +152,36 @@ export default function Home() {
 
 
         {/* image list */}
+
+
+        <div className="
+          xl:w-1/2 grid grid-cols-1 xl:grid-cols-3 gap-4 mt-4 p-4
+          w-full
+        ">
+        
+          
+
   
 
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
+        {/*
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
           gap-4 xl:gap-2 p-4
           w-full
         ">
+        */}
           {imageList &&
           imageList.map((item) => (
             <div key={item._id}
               className="
-                w-full p-4 border border-gray-200 rounded-xl shadow-xl flex flex-col items-center justify-start gap-4
-              "
+                w-full border border-gray-200 rounded-xl shadow-xl flex flex-col items-center justify-start gap-4
+                "
             >
-              
-              <p className="w-full flex flex-row items-center justify-between gap-2
-                text-xs xl:text-sm
-                text-black
-              ">
-                <div className="flex flex-row items-center gap-2">
-                <Image
-                  src="/olga/images/timeline.svg"
-                  alt="date"
-                  width={20}
-                  height={20}
-                />
-                {
-                  (new Date(item.createdAt)).toLocaleString()
-                }
-                </div>
-                <div className="flex flex-row items-center gap-2">
-                  <Image
-                    src="/olga/images/avatar.svg"
-                    alt="user"
-                    width={20}
-                    height={20}
-                  />
-                  <span className="text-xs xl:text-sm font-bold">
-                  {
-                  item?.username && item?.username.length > 5 ? item?.username.substring(0, 5) + "..."
-                  : item.userid && item.userid.length > 5 ? item.userid.substring(0, 5) + "..."
-                  : item.userid
-                  }
-                  </span>
-                </div>
-              </p>
-              {/*
-              <p>
-                {
-                  item?.username ? item?.username
-                  : item.userid && item.userid.length > 10 ? item.userid.substring(0, 10) + "..."
-                  : item.userid
-                }
-              </p>
-              */}
 
-              {/* prompt */}
-              {/*}
-              <p>{item.prompt}</p>
-              <p>{item.englishPrompt}</p>
-              */}
-
-
-              <div  className="relative
-                w-72 h-72 rounded-xl overflow-hidden bg-gray-200 mt-2"
+              <div
+                className="relative
+                  w-72 h-72 rounded-xl overflow-hidden
+                "
               >
 
                 {item.erc721ContractAddress !== "" && item.erc721ContractAddress !== null && item.erc721ContractAddress !== undefined && (
@@ -261,6 +226,7 @@ export default function Home() {
                   */
 
                   className="
+                  rounded-xl
                   hover:scale-110
                   cursor-pointer
                   transition-transform
@@ -280,37 +246,98 @@ export default function Home() {
 
               </div>
 
+
+
+
+              <div className="w-full flex flex-col items-start justify-start gap-2 p-4">
               
-              <p>
-                {
-                  item.prompt?.length > 100 ?
-                  item.prompt?.substring(0, 100) + "..."
-                  : item.prompt
-                }
-              </p>
-
-              {/*}
-              <p>{item?.username}</p>
-              */}
-
-              {/* opensea link */}
-              {item.erc721ContractAddress !== "" && item.erc721ContractAddress !== null && item.erc721ContractAddress !== undefined && (
-                <a
-                  href={`https://opensea.io/assets/matic/${item.erc721ContractAddress}/${item.tokenid}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <div className="flex flex-row items-center gap-2 mt-2">
+                <div className="w-full flex flex-row xl:flex-col items-start justify-between gap-2
+                  text-xs xl:text-xs
+                  text-black
+                ">
+                  <div className="flex flex-row items-center gap-2">
                     <Image
-                      src="/icon-opensea.png"
-                      alt="Logo"
+                      src="/olga/images/timeline.svg"
+                      alt="date"
                       width={20}
                       height={20}
                     />
-                    <p>OpenSea</p>
+                    {
+                      (new Date(item.createdAt)).toLocaleString()
+                    }
                   </div>
-                </a>
-              )}
+                  <div className="flex flex-row items-center gap-2">
+                    <Image
+                      src="/olga/images/avatar.svg"
+                      alt="user"
+                      width={20}
+                      height={20}
+                    />
+                    <span className="text-xs xl:text-sm font-bold">
+                    {
+                    item?.username && item?.username.length > 5 ? item?.username.substring(0, 5) + "..."
+                    : item.userid && item.userid.length > 5 ? item.userid.substring(0, 5) + "..."
+                    : item.userid
+                    }
+                    </span>
+                  </div>
+                </div>
+                {/*
+                <p>
+                  {
+                    item?.username ? item?.username
+                    : item.userid && item.userid.length > 10 ? item.userid.substring(0, 10) + "..."
+                    : item.userid
+                  }
+                </p>
+                */}
+
+                {/* prompt */}
+                {/*}
+                <p>{item.prompt}</p>
+                <p>{item.englishPrompt}</p>
+                */}
+
+
+
+
+                
+                <div className="w-full flex flex-row items-center justify-between gap-2
+                ">
+                  {
+                    item.prompt?.length > 100 ?
+                    item.prompt?.substring(0, 100) + "..."
+                    : item.prompt
+                  }
+                </div>
+
+                {/*}
+                <p>{item?.username}</p>
+                */}
+
+                {/* opensea link */}
+                {/*
+                {item.erc721ContractAddress !== "" && item.erc721ContractAddress !== null && item.erc721ContractAddress !== undefined && (
+                  <a
+                    href={`https://opensea.io/assets/matic/${item.erc721ContractAddress}/${item.tokenid}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <div className="flex flex-row items-center gap-2 mt-2">
+                      <Image
+                        src="/icon-opensea.png"
+                        alt="Logo"
+                        width={20}
+                        height={20}
+                      />
+                      <p>OpenSea</p>
+                    </div>
+                  </a>
+                )}
+                */}
+
+              </div>
+
             </div>
           ))}
 
