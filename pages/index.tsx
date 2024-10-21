@@ -533,8 +533,13 @@ export default function Home() {
         });
 
         if (!response.ok) {
-            throw new Error("Failed to mint NFT");
+
+
+
+          throw new Error("Failed to mint NFT");
         }
+
+        toast.success("成功铸造NFT");
 
 
         const data = await response.json();
@@ -863,8 +868,8 @@ export default function Home() {
           <button
             onClick={connectWallet}
             className="
-              h-10 rounded-[100px] bg-[#FFFFFF] px-6 py-2.5 leading-[20.8px] text-[#04080F]
-
+              h-10 bg-[#FFFFFF] px-6 text-[#04080F]
+              rounded-xl border-2 border-sky-500 py-2
               "
             >
             Connect Wallet
@@ -873,8 +878,8 @@ export default function Home() {
           <button
             onClick={disconnectWallet}
             className="
-              h-10 rounded-[100px] bg-[#FFFFFF] px-6 py-2.5 leading-[20.8px] text-[#04080F]
-
+              h-10 bg-[#FFFFFF] px-6 text-[#04080F]
+              rounded-xl border-2 border-sky-500 py-2
               "
             >
             Disconnect Wallet
