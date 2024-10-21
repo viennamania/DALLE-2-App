@@ -526,8 +526,8 @@ export default function Home() {
             //selected
             className=" h-24 flex flex-col items-center justify-start text-white
               p-2
+              bg-blue-500 hover:bg-blue-700
             "
-            style = {{backgroundColor: "cadetblue"}}
           >
             <Image
               src="/menu01.png"

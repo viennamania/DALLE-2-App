@@ -670,6 +670,7 @@ export default function Home() {
             className="
             bg-gradient-to-r from-green-400 to-blue-500
             hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600
+            text-white px-6 py-2 rounded-xl border-2 border-sky-500
             "
           >
             <div className="flex flex-row items-center justify-center gap-2">
@@ -1079,6 +1080,7 @@ export default function Home() {
             className="
               h-24 flex flex-col items-center justify-start
               p-2
+              hover:bg-gray-200 hover:text-black
             "
 
             
@@ -1132,13 +1134,9 @@ export default function Home() {
           <button
             className=" h-24 flex flex-col items-center justify-start
             text-white
-            p-2"
-            style = {{backgroundColor: "cadetblue"}}
-            /*
-            onClick={() => {
-              
-            }}
-            */
+            p-2
+            bg-blue-500 hover:bg-blue-700
+            "
           >
             <Image
               src="/menu04.png"
