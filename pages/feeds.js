@@ -17,6 +17,8 @@ import { PutBlobResult } from '@vercel/blob';
 
 import { usePathname, useRouter } from 'next/navigation'
 
+import { useAnimation, motion } from "framer-motion";
+
 
 export default function Home() {
 
@@ -252,37 +254,119 @@ export default function Home() {
 
               <div className="w-full flex flex-col items-start justify-start gap-2 p-4">
               
-                <div className="w-full flex flex-row xl:flex-col items-start justify-between gap-2
-                  text-xs xl:text-xs
-                  text-black
-                ">
-                  <div className="flex flex-row items-center gap-2">
-                    <Image
-                      src="/olga/images/timeline.svg"
-                      alt="date"
-                      width={20}
-                      height={20}
-                    />
-                    {
-                      (new Date(item.createdAt)).toLocaleString()
-                    }
+
+
+                <div className="w-full flex flex-row items-between justify-start gap-2">
+
+                  <div className="w-full flex flex-col items-start justify-between gap-2
+                    text-xs xl:text-xs
+                    text-black
+                  ">
+                    <div className="flex flex-row items-center gap-2">
+                      <Image
+                        src="/olga/images/timeline.svg"
+                        alt="date"
+                        width={20}
+                        height={20}
+                      />
+                      {
+                        (new Date(item.createdAt)).toLocaleString()
+                      }
+                    </div>
+                    <div className="flex flex-row items-center gap-2">
+                      <Image
+                        src="/olga/images/avatar.svg"
+                        alt="user"
+                        width={20}
+                        height={20}
+                      />
+                      <span className="text-xs xl:text-sm font-bold">
+                      {
+                      item?.username && item?.username.length > 5 ? item?.username.substring(0, 5) + "..."
+                      : item.userid && item.userid.length > 5 ? item.userid.substring(0, 5) + "..."
+                      : item.userid
+                      }
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex flex-row items-center gap-2">
-                    <Image
-                      src="/olga/images/avatar.svg"
-                      alt="user"
-                      width={20}
-                      height={20}
-                    />
-                    <span className="text-xs xl:text-sm font-bold">
-                    {
-                    item?.username && item?.username.length > 5 ? item?.username.substring(0, 5) + "..."
-                    : item.userid && item.userid.length > 5 ? item.userid.substring(0, 5) + "..."
-                    : item.userid
-                    }
-                    </span>
+
+
+
+                  <div className="flex flex-row items-center justify-center gap-2">
+                            
+                    {item?.userid === userid ? (
+                      <motion.img
+                        className="relative w-10 h-10 overflow-hidden shrink-0"
+                        alt=""
+                        src="/olga/images/heart3line.svg"
+                        whileHover={{ scale: 1.3 }}
+                        whileTap={{ scale: 0.8 }}
+                      />
+                    ) : (
+
+
+                      <button
+                        type="button"
+    
+                        onClick={ () => {
+                          
+                          if (item?.likeYn) {
+                            
+                            //unlike()
+
+                          } else {
+                            
+                            //like()
+
+                          }
+                        
+                        } }
+                      >
+                        {item?.likeYn ? (
+                          <motion.img
+                            className="relative w-10 h-10 overflow-hidden shrink-0"
+                            alt=""
+                            src="/olga/images/heart3fill.svg"
+                            whileHover={{ scale: 1.3 }}
+                            whileTap={{ scale: 0.8 }}
+                          />
+                        ) : (
+                          <motion.img
+                            className="relative w-10 h-10 overflow-hidden shrink-0"
+                            alt=""
+                            src="/olga/images/heart3line.svg"
+                            whileHover={{ scale: 1.3 }}
+                            whileTap={{ scale: 0.8 }}
+                          />
+                        ) }
+                    
+
+                      </button>
+
+                    )}
+
+                    <div className="relative">
+                      {item?.likeCount > 0 ? (
+                        <span className="text-sm">
+                          {item?.likeCount}
+                        </span>
+                      ) : (
+                        <span className="text-sm">
+                          0
+                        </span>
+                      )}
+                    </div>
+
                   </div>
+
+
+
+
                 </div>
+
+
+
+
                 {/*
                 <p>
                   {
