@@ -20,6 +20,10 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useAnimation, motion } from "framer-motion";
 import { set } from "react-hook-form";
 
+// toasts
+import { toast } from 'react-toastify';
+
+
 
 export default function Home() {
 
@@ -89,6 +93,9 @@ export default function Home() {
         userid: userid,
       })
       .then((res) => {
+
+        toast.success('Liked!');
+
         console.log(res);
         if (res.data.result === "success") {
           setImageList(
@@ -404,7 +411,7 @@ export default function Home() {
 
                     <div className="relative">
                       {item?.likes > 0 ? (
-                        <span className="text-sm">
+                        <span className="text-lg">
                           {item?.likes}
                         </span>
                       ) : (
@@ -510,7 +517,9 @@ export default function Home() {
 
           <button
             //selected
-            className=" h-24 flex flex-col items-center justify-start text-white"
+            className=" h-24 flex flex-col items-center justify-start text-white
+              p-2
+            "
             style = {{backgroundColor: "cadetblue"}}
           >
             <Image
@@ -527,7 +536,8 @@ export default function Home() {
 
           <button
             className="
-              h-24 flex flex-col items-center justify-start hover:bg-gray-200 hover:text-black
+              h-24 flex flex-col items-center justify-start hover:bg-gray-200 hover:text-black   
+              p-2
             "
 
             onClick={() => {
@@ -550,7 +560,9 @@ export default function Home() {
 
           <button
             className=" h-24 flex flex-col items-center justify-start
-            hover:bg-gray-200 hover:text-black"
+            hover:bg-gray-200 hover:text-black
+            p-2
+          "
             onClick={() => {
               // Coming soon
               window.open("https://olgaai.io/" + userid + "/" + username, "_self");
@@ -569,7 +581,8 @@ export default function Home() {
 
           <button
             className=" h-24 flex flex-col items-center justify-start
-            hover:bg-gray-200 hover:text-black"
+            hover:bg-gray-200 hover:text-black
+            p-2"
             onClick={() => {
               // '/collection?userid=${userid}&token=${token}'
               /*
@@ -600,7 +613,8 @@ export default function Home() {
           </button>
           <button
             className=" h-24 flex flex-col items-center justify-start
-            hover:bg-gray-200 hover:text-black"
+            hover:bg-gray-200 hover:text-black
+            p-2"
             onClick={() => {
               window.open("https://olgagpt.com/main.asp", "_parent");
             }}

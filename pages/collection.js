@@ -1051,7 +1051,8 @@ export default function Home() {
           
           <button
             className=" h-24 flex flex-col items-center justify-start
-            hover:bg-gray-200 hover:text-black"
+            hover:bg-gray-200 hover:text-black
+            p-2"
 
             onClick={() => {
               router.push(
@@ -1077,6 +1078,7 @@ export default function Home() {
 
             className="
               h-24 flex flex-col items-center justify-start
+              p-2
             "
 
             
@@ -1109,7 +1111,8 @@ export default function Home() {
 
           <button
             className=" h-24 flex flex-col items-center justify-start
-            hover:bg-gray-200 hover:text-black"
+            hover:bg-gray-200 hover:text-black
+            p-2"
             onClick={() => {
               // Coming soon
               window.open("https://olgaai.io/" + userid + "/" + username, "_self");
@@ -1128,7 +1131,8 @@ export default function Home() {
 
           <button
             className=" h-24 flex flex-col items-center justify-start
-            text-white"
+            text-white
+            p-2"
             style = {{backgroundColor: "cadetblue"}}
             /*
             onClick={() => {
@@ -1148,7 +1152,8 @@ export default function Home() {
           </button>
           <button
             className=" h-24 flex flex-col items-center justify-start
-            hover:bg-gray-200 hover:text-black"
+            hover:bg-gray-200 hover:text-black
+            p-2"
             onClick={() => {
               window.open("https://olgagpt.com/main.asp", "_parent");
             }}

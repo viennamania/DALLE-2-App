@@ -1169,8 +1169,8 @@ export default function Home() {
               <Image
                 src="/chatbot-loading.gif"
                 alt="Logo"
-                width={400}
-                height={200}
+                width={200}
+                height={100}
               />
               
           ) : (
@@ -1582,7 +1582,8 @@ export default function Home() {
 
           <button
             className=" h-24 flex flex-col items-center justify-start
-            hover:bg-gray-200 hover:text-black"
+            hover:bg-gray-200 hover:text-black
+            px-2"
 
             onClick={() => {
               router.push(
@@ -1608,6 +1609,7 @@ export default function Home() {
 
             className="
               h-24 flex flex-col items-center justify-start text-white
+              px-2
             "
 
             style = {{backgroundColor: "cadetblue"}}
@@ -1626,7 +1628,8 @@ export default function Home() {
 
           <button
             className=" h-24 flex flex-col items-center justify-start
-            hover:bg-gray-200 hover:text-black"
+            hover:bg-gray-200 hover:text-black
+            px-2"
             onClick={() => {
               // Coming soon
               window.open("https://olgaai.io/" + userid + "/" + username, "_self");
@@ -1645,7 +1648,8 @@ export default function Home() {
 
           <button
             className=" h-24 flex flex-col items-center justify-start
-            hover:bg-gray-200 hover:text-black"
+            hover:bg-gray-200 hover:text-black
+            px-2"
             onClick={() => {
               // '/collection?userid=${userid}&token=${token}'
               /*
@@ -1676,7 +1680,8 @@ export default function Home() {
           </button>
           <button
             className=" h-24 flex flex-col items-center justify-start
-            hover:bg-gray-200 hover:text-black"
+            hover:bg-gray-200 hover:text-black
+            px-2"
             onClick={() => {
               window.open("https://olgagpt.com/main.asp", "_parent");
             }}

@@ -4,6 +4,9 @@ import '../styles/globals.css'
 import {ThirdwebProvider} from 'thirdweb/react';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const queryClient = new QueryClient();
 
 
@@ -16,6 +19,7 @@ function MyApp({ Component, pageProps }) {
   return (
 
     <QueryClientProvider client={queryClient}>
+      <ToastContainer />
       <ThirdwebProvider>
         <Component {...pageProps} />
       </ThirdwebProvider>
