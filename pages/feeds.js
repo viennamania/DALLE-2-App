@@ -54,6 +54,9 @@ export default function Home() {
   ///const [likes , setLikes] = useState([]);
 
 
+  const [sort, setSort] = useState("latest");
+
+
   // get image list from api
   const [imageList, setImageList] = useState([]);
 
@@ -61,7 +64,7 @@ export default function Home() {
   useEffect(() => {
           
     axios
-      .get(`/api/getAllNFTs`)
+      .get(`/api/getAllNFTs?sort=${sort}`)
       .then((res) => {
 
         ///console.log("res.data", res.data);
@@ -104,13 +107,31 @@ export default function Home() {
 
         console.log(res);
         if (res.data.result === "success") {
-          setImageList(
-            imageList.map((item) =>
-              item._id === imageid
-                ? { ...item, likes: item.likes + 1 }
-                : item
-            )
-          );
+
+          if (sort === "popular") {
+            setImageList(
+              imageList.map((item) =>
+                item._id === imageid
+                  ? { ...item, likes: item.likes + 1 }
+                  : item
+              )
+              .sort((a, b) => b.likes - a.likes)
+            );
+          } else {
+
+            setImageList(
+
+              imageList.map((item) =>
+                item._id === imageid
+                  ? { ...item, likes: item.likes + 1 }
+                  : item
+              )
+
+            );
+
+          }
+
+
         }
 
       })
@@ -133,6 +154,8 @@ export default function Home() {
       });
   }
 
+
+ 
 
 
 
@@ -216,6 +239,50 @@ export default function Home() {
           </h1>
         </div>
 
+
+        {/* select sort (latest, popular) */}
+        <div className="w-full flex flex-row items-center justify-center gap-4 mt-4">
+          <button
+            className={`
+              py-2 px-4 rounded text-white font-bold
+              ${sort === "latest" ? "bg-red-500 hover:bg-red-700" : "bg-gray-200 hover:bg-gray-400"}
+              `}
+            onClick={() => {
+              setSort("latest");
+              axios
+                .get(`/api/getAllNFTs?sort=latest`)
+                .then((res) => {
+                  setImageList(res.data);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }}
+          >
+            {/*Latest chinese language*/}
+            最新
+          </button>
+          <button
+            className={`
+              py-2 px-4 rounded text-white font-bold
+              ${sort === "popular" ? "bg-red-500 hover:bg-red-700" : "bg-gray-200 hover:bg-gray-400"}
+              `}
+            onClick={() => {
+              setSort("popular");
+              axios
+                .get(`/api/getAllNFTs?sort=popular`)
+                .then((res) => {
+                  setImageList(res.data);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }}
+          >
+            {/*Popular chinese language*/}
+            热门
+          </button>
+        </div>
 
         {/* image list */}
 

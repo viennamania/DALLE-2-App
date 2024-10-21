@@ -9,9 +9,12 @@ import {
 
 export default async function handler(req, res) {
 
+  // sort parameter
+  const sort = req.query.sort;
 
   const images = await findAllNFTs(
     {
+      sort: sort
     }
   );
 

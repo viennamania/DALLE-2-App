@@ -353,18 +353,26 @@ export async function findAllNFTs(data: any) {
     
   ///console.log('findAllNFTs data: ' + JSON.stringify(data));
 
+  const sort = data?.sort || 'latest'; // latest, popular
+
   const client = await clientPromise;
   const collection = client.db('vienna').collection('images');
 
   // select erc721ContractAddress is not null and not empty string and not undefined
 
-  const result = await collection.find(
+
+
+  const result = collection.find(
     {
       erc721ContractAddress:
       {
         $ne: '',
       }
     },
+    // sort by updatedAt desc or likes desc
+
+
+
     {
       projection: {
         _id: 1,
@@ -381,7 +389,13 @@ export async function findAllNFTs(data: any) {
 
       }
     },
-  ).sort({updatedAt: -1}).toArray();
+  //).sort({updatedAt: -1}).toArray();
+
+  ).sort(
+
+    sort === 'latest' ? {updatedAt: -1} : {likes: -1}
+
+  ).toArray();
 
   return result;
 }
