@@ -1689,7 +1689,7 @@ export default function Home() {
           <button
             className=" h-24 flex flex-col items-center justify-start
             hover:bg-gray-200 hover:text-black
-            px-2"
+            p-2"
             onClick={() => {
               // '/collection?userid=${userid}&token=${token}'
               /*
