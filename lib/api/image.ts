@@ -204,6 +204,7 @@ export async function updateOneByImage(data: any) {
         tokenid: tokenid,
         updatedAt: new Date().toISOString(),
         saleInfo: saleInfo,
+        likes: 0,
       },
     },
   );
@@ -420,6 +421,7 @@ export async function findAllNFTsByUserid(data: any) {
         tokenid: 1,
         createdAt: 1,
         updatedAt: 1,
+        likes: 1,
       }
     },
   ).sort({updatedAt: -1}).toArray();

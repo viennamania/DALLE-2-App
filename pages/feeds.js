@@ -18,6 +18,7 @@ import { PutBlobResult } from '@vercel/blob';
 import { usePathname, useRouter } from 'next/navigation'
 
 import { useAnimation, motion } from "framer-motion";
+import { set } from "react-hook-form";
 
 
 export default function Home() {
@@ -47,10 +48,13 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  ///const [likes , setLikes] = useState([]);
 
 
   // get image list from api
   const [imageList, setImageList] = useState([]);
+
+
   useEffect(() => {
           
     axios
@@ -61,6 +65,8 @@ export default function Home() {
 
         setImageList(res.data);
 
+
+
       })
       .catch((err) => {
         console.log(err);
@@ -68,6 +74,8 @@ export default function Home() {
     
 
   }, []);
+
+
 
 
   const likeNft = (imageid) => {
@@ -82,6 +90,16 @@ export default function Home() {
       })
       .then((res) => {
         console.log(res);
+        if (res.data.result === "success") {
+          setImageList(
+            imageList.map((item) =>
+              item._id === imageid
+                ? { ...item, likes: item.likes + 1 }
+                : item
+            )
+          );
+        }
+
       })
       .catch((err) => {
         console.log(err);
@@ -326,7 +344,10 @@ export default function Home() {
 
                   <div className="flex flex-row items-center justify-center gap-2">
                             
-                    {item?.userid === userid ? (
+                    {
+                      //item?.userid === userid ? (
+                      false ? (
+
                       <motion.img
                         className="relative w-10 h-10 overflow-hidden shrink-0"
                         alt=""
@@ -342,6 +363,7 @@ export default function Home() {
     
                         onClick={ () => {
                           
+                          /*
                           if (item?.likeYn) {
                             
                             unlikeNft(item._id)
@@ -352,10 +374,12 @@ export default function Home() {
                             likeNft(item._id)
 
                           }
+                          */
+                         likeNft(item._id)
                         
                         } }
                       >
-                        {item?.likeYn ? (
+                        {item?.likes > 0 ? (
                           <motion.img
                             className="relative w-10 h-10 overflow-hidden shrink-0"
                             alt=""
@@ -379,9 +403,9 @@ export default function Home() {
                     )}
 
                     <div className="relative">
-                      {item?.likeCount > 0 ? (
+                      {item?.likes > 0 ? (
                         <span className="text-sm">
-                          {item?.likeCount}
+                          {item?.likes}
                         </span>
                       ) : (
                         <span className="text-sm">
