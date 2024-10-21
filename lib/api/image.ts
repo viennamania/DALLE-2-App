@@ -9,6 +9,8 @@ export interface ImageProps {
   tokenid: number;
   createdAt: string;
   updatedAt: string;
+  userid: string;
+  username: string;
 
 }
 
@@ -56,6 +58,7 @@ export async function insertOne(data: any) {
   const result = await collection.insertOne(
     {
       userid: data.userid,
+      username: data?.username,
       prompt: data.prompt,
       englishPrompt: data.englishPrompt,
       url: data.url,

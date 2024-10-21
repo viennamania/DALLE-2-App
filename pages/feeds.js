@@ -127,25 +127,86 @@ export default function Home() {
 
 
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+      <main
+        className="flex flex-col items-center justify-center w-full px-20 text-center
+          mb-32
+          bg-gray-100
+        "
+      >
 
         
+
+        <div className="w-full flex flex-col items-center justify-center gap-4 mt-4">
+          <Image
+            src="/logo-chatgpt.png"
+            alt="Logo"
+            width={50}
+            height={50}
+          />
+          
+
+          <h1 className={styles.title}>
+            Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
+          </h1>
+        </div>
+
+
         {/* image list */}
   
 
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 xl:gap-2 p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
+          gap-4 xl:gap-2 p-4
+          w-full
+        ">
           {imageList &&
           imageList.map((item) => (
             <div key={item._id}
-              className="p-4 border border-gray-200 rounded-xl shadow-xl flex flex-col items-center justify-center gap-4"
+              className="
+                w-full p-4 border border-gray-200 rounded-xl shadow-xl flex flex-col items-center justify-start gap-4
+              "
             >
-                
-              <p>
+              
+              <p className="w-full flex flex-row items-center justify-between gap-2
+                text-xs xl:text-sm
+                text-black
+              ">
+                <div className="flex flex-row items-center gap-2">
+                <Image
+                  src="/olga/images/timeline.svg"
+                  alt="date"
+                  width={20}
+                  height={20}
+                />
                 {
                   (new Date(item.createdAt)).toLocaleString()
                 }
+                </div>
+                <div className="flex flex-row items-center gap-2">
+                  <Image
+                    src="/olga/images/avatar.svg"
+                    alt="user"
+                    width={20}
+                    height={20}
+                  />
+                  <span className="text-xs xl:text-sm font-bold">
+                  {
+                  item?.username ? item?.username
+                  : item.userid && item.userid.length > 10 ? item.userid.substring(0, 5) + "..."
+                  : item.userid
+                  }
+                  </span>
+                </div>
               </p>
+              {/*
+              <p>
+                {
+                  item?.username ? item?.username
+                  : item.userid && item.userid.length > 10 ? item.userid.substring(0, 10) + "..."
+                  : item.userid
+                }
+              </p>
+              */}
 
               {/* prompt */}
               {/*}
@@ -255,6 +316,8 @@ export default function Home() {
 
 
 
+
+
       </main>
 
 
@@ -294,17 +357,11 @@ export default function Home() {
             className="
               h-24 flex flex-col items-center justify-start hover:bg-gray-200 hover:text-black
             "
-            onClick={() => {
-              // '/?userid=${userid}&token=${token}'
-              
-              router.push(
-                {
-                  pathname: "/",
-                  search: `?userid=${username}&token=${userid}`,
-                }
-              );
-              
 
+            onClick={() => {
+              router.push(
+                `/?userid=${username}&token=${userid}`
+              );
             }}
 
           >

@@ -1054,9 +1054,9 @@ export default function Home() {
             hover:bg-gray-200 hover:text-black"
 
             onClick={() => {
-              // Coming soon
-
-              alert("Coming soon");
+              router.push(
+                `/feeds?userid=${username}&token=${userid}`
+              );
             }}
           >
             <Image

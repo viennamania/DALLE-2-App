@@ -100,7 +100,7 @@ export default function Home() {
   const userid = searchParams.get('token');
 
 
-  console.log("userid=", userid);
+  //console.log("userid=", userid);
 
   const router = useRouter();
 
@@ -1585,9 +1585,9 @@ export default function Home() {
             hover:bg-gray-200 hover:text-black"
 
             onClick={() => {
-              // Coming soon
-
-              alert("Coming soon");
+              router.push(
+                `/feeds?userid=${username}&token=${userid}`
+              );
             }}
           >
             <Image
@@ -1612,20 +1612,6 @@ export default function Home() {
 
             style = {{backgroundColor: "cadetblue"}}
              
-            /*
-            onClick={() => {
-              // '/?userid=${userid}&token=${token}'
-              
-              router.push(
-                {
-                  pathname: "/",
-                  search: `?userid=${username}&token=${userid}`,
-                }
-              );
-              
-
-            }}
-            */
           >
             <Image
               src="/menu02.png"
@@ -1736,6 +1722,6 @@ export default function Home() {
       */}
 
     </div>
-    
+
   );
 }
