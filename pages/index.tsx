@@ -829,10 +829,9 @@ export default function Home() {
 
 
       <main
-        className="flex flex-col items-center justify-center gap-2 mb-32 p-4
-
+        className="
+        flex flex-col items-center justify-center gap-2 mb-32 p-4
         bg-gradient-to-r from-green-400 to-blue-500
-          
       ">
 
         {/*
@@ -851,7 +850,6 @@ export default function Home() {
 
 
         <div className='flex flex-row gap-5 items-center justify-center p-2'>
-
           <h1 className="text-sm font-semibold text-black">
             <span className='
               bg-white text-black font-semibold

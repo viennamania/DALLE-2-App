@@ -652,59 +652,115 @@ export default function Home() {
 
 
 
-      <main className="flex flex-col items-center justify-center gap-2 mb-32 p-4">
+      <main
+        className="
+        flex flex-col items-center justify-center gap-2 mb-32 p-4
+        bg-gradient-to-r from-green-400 to-blue-500
+      ">
 
-
-        <Image
-          src="/logo-chatgpt.png"
-          alt="Logo"
-          width={50}
-          height={50}
-        />
+        <div className='flex flex-row gap-5 items-center justify-center p-2'>
+          <h1 className="text-sm font-semibold text-black">
+            <span className='
+              bg-white text-black font-semibold
+              p-2
+            '>Create images with
+            </span>
+            
+            <span className="
+              bg-black text-white font-semibold
+              p-2
+            ">ChatGPT 4o</span>
+          </h1>
+        </div>
         
-
-        <h1 className={styles.title}>
-          Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
-        </h1>
-        
-        {/* login button */}
-        {loginSession === "" ? (
+        {loginSession === "" && (
+                     
           <button
+            className='h-20 flex flex-col items-center justify-start p-2
+            border-2 border-yellow-400 rounded-xl
+            hover:bg-yellow-400 hover:text-black
+            '
+            
             onClick={() => {
-              //window.open("https://olgagpt.com/sub/login.asp", "_self");
-              window.open("https://olgagpt.com/login.asp", "_self");
+              window.open("https://olgagpt.com/main.asp",
+                "_parent");
             }}
-            className="
-            bg-gradient-to-r from-green-400 to-blue-500
-            hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600
-            text-white px-6 py-2 rounded-xl border-2 border-sky-500
-            "
           >
+              <Image
+                src="/menu05.png"
+                alt="Logo"
+                width={40}
+                height={40}
+                className='size-10'
+              />
+              {/* login chinse language */}
+              <span className="text-xs xl:text-sm font-bold">
+                OLGA 登录
+              </span>
+          </button>
+
+        )}
+
+
+{loginSession != ""
+          && userid != null && userid != 'null' && userid != "" ? (
+
+          <div className="mt-0 flex flex-col items-center justify-center gap-2">
+
+          <div className="flex flex-row items-center justify-center gap-5 mt-2">
+
             <div className="flex flex-row items-center justify-center gap-2">
               <Image
-                src="/icon-olga-dark.png"
-                alt="Logo"
+                src="/olga/images/avatar.svg"
+                alt="avatar"
                 width={24}
                 height={24}
               />
-              <span className="text-white">登录</span>
+              <span className="text-yellow-400 text-xl font-bold">
+                {' '}{username}
+              </span>
             </div>
-         
-          </button>
-        ) : (
 
-          <div className="mt-2 flex flex-row items-center justify-center gap-2">
-            {/* dot */}
-            
-            <span className="text-center text-sm text-gray-500">
-              ID: 
-            </span>
-            <span className="text-[#d3a947] text-2xl font-bold">
-              {' '}{username}
-            </span>
+            {/* POWER balance */}
+            {/* https://www.olgagpt.com/sub/pointBalance.asp?balance=POWER&token=06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4 */}
+
+            <div className="flex flex-row items-center justify-center gap-2">
+              <Image
+                src="/olga/images/starfill.svg"
+                alt="POWER"
+                width={24}
+                height={24}
+              />
+              <span className="text-yellow-400 text-xl font-bold">
+                {' '}{powerBalance}
+              </span>
+            </div>
+
           </div>
+          
 
-        )}
+            {/*}
+            {totalSupply > 0 && erc721ContractAddress != "" ? (
+              <a
+                href={`https://opensea.io/assets/matic/${erc721ContractAddress}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/icon-opensea.png"
+                  alt="Logo"
+                  width={32}
+                  height={32}
+                />
+              </a>
+            ) : ( <></> )}
+             */}
+
+          </div>
+          
+        ) : ( <></> )}
+
+           
 
 
         <div className="xl:w-1/2 flex flex-col items-center justify-center gap-2 ">
@@ -847,7 +903,7 @@ export default function Home() {
                       height={50}
                     />
                   </button>
-                  <span className="text-center text-sm text-gray-500">
+                  <span className="text-center text-sm text-white">
                     {erc721ContractAddress}
                   </span>
                 </div>
@@ -893,10 +949,12 @@ export default function Home() {
             {myImages.map((item, index) => (
                 <div
                   key={item._id}
-                  className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2"
+                  className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center"
                 >
                   <Image
-                    
+                    onClick={() => {
+                      window.open(item.image, "_blank");
+                    } }
                     src={item.image}
                     alt="My Image"
                     width={400}
@@ -941,7 +999,9 @@ export default function Home() {
                   />
 
 
-                  <div className="w-full flex flex-col items-start justify-start gap-2 p-4">
+                  <div className="w-full flex flex-col items-start justify-start gap-2 p-4
+                  bg-white
+                  ">
                     
 
 

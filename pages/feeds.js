@@ -217,25 +217,25 @@ export default function Home() {
 
 
       <main
-        className="flex flex-col items-center justify-center w-full px-20 text-center
-          mb-32
-          bg-gray-100
-        "
-      >
+        className="
+        flex flex-col items-center justify-center gap-2 mb-32 p-4
+        bg-gradient-to-r from-green-400 to-blue-500
+      ">
 
         
 
-        <div className="w-full flex flex-col items-center justify-center gap-4 mt-4">
-          <Image
-            src="/logo-chatgpt.png"
-            alt="Logo"
-            width={50}
-            height={50}
-          />
-          
-
-          <h1 className={styles.title}>
-            Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
+        <div className='flex flex-row gap-5 items-center justify-center p-2'>
+          <h1 className="text-sm font-semibold text-black">
+            <span className='
+              bg-white text-black font-semibold
+              p-2
+            '>Create images with
+            </span>
+            
+            <span className="
+              bg-black text-white font-semibold
+              p-2
+            ">ChatGPT 4o</span>
           </h1>
         </div>
 
@@ -261,7 +261,9 @@ export default function Home() {
             }}
           >
             {/*Popular chinese language*/}
+            <span className={`${sort === "popular" ? "text-white" : "text-black"}`}>
             热门
+            </span>
           </button>
 
           <button
@@ -282,7 +284,9 @@ export default function Home() {
             }}
           >
             {/*Latest chinese language*/}
+            <span className={`${sort === "latest" ? "text-white" : "text-black"}`}>
             最新
+            </span>
           </button>
 
         </div>
@@ -309,7 +313,9 @@ export default function Home() {
           {imageList &&
           imageList.map((item) => (
             <div key={item._id}
-              className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2"
+              className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2
+              bg-white
+              "
             >
 
          
