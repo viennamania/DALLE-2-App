@@ -828,9 +828,14 @@ export default function Home() {
 
 
 
-      <main className="flex flex-col items-center justify-center gap-2 mb-32 p-4">
+      <main
+        className="flex flex-col items-center justify-center gap-2 mb-32 p-4
 
-        
+        bg-gradient-to-r from-green-400 to-blue-500
+          
+      ">
+
+        {/*
         <Image
           src="/logo-chatgpt.png"
           alt="Logo"
@@ -842,6 +847,27 @@ export default function Home() {
         <h1 className={styles.title}>
           Create images with <span className={styles.titleColor}>ChatGPT 4o</span>
         </h1>
+        */}
+
+
+        <div className='flex flex-row gap-5 items-center justify-center p-2'>
+
+          <h1 className="text-sm font-semibold text-black">
+            <span className='
+              bg-white text-black font-semibold
+              p-2
+            '>Create images with
+            </span>
+            
+            <span className="
+              bg-black text-white font-semibold
+              p-2
+            ">ChatGPT 4o</span>
+          </h1>
+        </div>
+
+
+
 
         
         {/*
@@ -868,11 +894,16 @@ export default function Home() {
           <button
             onClick={connectWallet}
             className="
-              h-10 bg-[#FFFFFF] px-6 text-[#04080F]
+               bg-[#FFFFFF] px-6 text-[#04080F]
               rounded-xl border-2 border-sky-500 py-2
               "
             >
-            Connect Wallet
+            <Image
+              src="/olga/images/logo-tokenpocket.png"
+              alt="Wallet"
+              width={200}
+              height={40}
+            />
           </button>
         ) : (
           <button
@@ -885,17 +916,13 @@ export default function Home() {
             Disconnect Wallet
           </button>
         )}
-        
-        
-        
-
-     
 
         {/* login button */}
-
+        {/*
         {loginSession === "" && (
 
 
+        
           <button
             onClick={() => {
               //window.open("https://olgagpt.com/sub/login.asp", "_self");
@@ -922,6 +949,43 @@ export default function Home() {
 
 
         )}
+        */}
+
+        {loginSession === "" && (
+                     
+          <button
+            className='h-20 flex flex-col items-center justify-start p-2
+            border-2 border-yellow-400 rounded-xl
+            hover:bg-yellow-400 hover:text-black
+            '
+            
+            onClick={() => {
+              window.open("https://olgagpt.com/main.asp",
+                "_parent");
+            }}
+          >
+              <Image
+                src="/menu05.png"
+                alt="Logo"
+                width={40}
+                height={40}
+                className='size-10'
+              />
+              {/* login chinse language */}
+              <span className="text-xs xl:text-sm font-bold">
+                OLGA 登录
+              </span>
+          </button>
+
+        )}
+
+
+
+
+
+
+
+        {/* logout button */}
 
         {/* if userid is not null, show userid */}
         
@@ -933,10 +997,13 @@ export default function Home() {
           <div className="flex flex-row items-center justify-center gap-5 mt-2">
 
             <div className="flex flex-row items-center justify-center gap-2">
-              <span className="text-center text-sm text-gray-500">
-                ID: 
-              </span>
-              <span className="text-[#d3a947] text-2xl font-bold">
+              <Image
+                src="/olga/images/avatar.svg"
+                alt="avatar"
+                width={24}
+                height={24}
+              />
+              <span className="text-yellow-400 text-xl font-bold">
                 {' '}{username}
               </span>
             </div>
@@ -945,10 +1012,13 @@ export default function Home() {
             {/* https://www.olgagpt.com/sub/pointBalance.asp?balance=POWER&token=06eb43de00654b4fb9e2af4ba70e217f1bDbJsIsIxNIjPARc4 */}
 
             <div className="flex flex-row items-center justify-center gap-2">
-              <span className="text-center text-sm text-gray-500">
-                POWER:
-              </span>
-              <span className="text-[#d3a947] text-2xl font-bold">
+              <Image
+                src="/olga/images/starfill.svg"
+                alt="POWER"
+                width={24}
+                height={24}
+              />
+              <span className="text-yellow-400 text-xl font-bold">
                 {' '}{powerBalance}
               </span>
             </div>
@@ -996,13 +1066,16 @@ export default function Home() {
      
           <div
             className="mt-4 w-full lg:w-1/2 xl:w-1/2 flex flex-col xl:flex-row items-center justify-center gap-2
-            rounded-xl border-2 border-sky-500 p-4
-
-            bg-gradient-to-r from-yellow-400
+            rounded-xl border-2 border-white bg-gradient-to-r from-yellow-400 to-yellow-500
+            p-4
             
 
             "
           >
+
+
+
+
           
             {/*
             <input
@@ -1253,12 +1326,12 @@ export default function Home() {
               {/* * 镜像制作费用 50 POWER*/}
               <div className="flex flex-row items-center justify-center gap-2">
                 {/* dot */}
-                <span className="text-[#d3a947] text-2xl">•</span>
+                <span className="text-red-600 text-2xl">•</span>
                 {' '}
                 <span
                   className="text-sm text-gray-500"
                 >镜像制作费用</span>
-                {' '}<span className="text-[#d3a947] font-bold text-2xl">50</span>
+                {' '}<span className="text-yellow-400 font-bold text-2xl">50</span>
                 {' '}<span
                   className="text-sm text-gray-500"
                 >
@@ -1385,6 +1458,7 @@ export default function Home() {
         && userid != null && userid != 'null' && userid != "" && (
 
           <div className="
+          
           xl:w-1/2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-4">
           
 
@@ -1397,6 +1471,7 @@ export default function Home() {
                 <div
                   key={myImage._id}
                   className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2
+                  bg-white
                   pb-4
                   "
                 >
@@ -1506,12 +1581,24 @@ export default function Home() {
                                   p-2 
                                 `}
                             >
-                              {
-                                //loadingMintNFTs[myImages.indexOf(myImage)] ? "Minting..." : "Mint"
-                                // chinese
-                                loadingMintNFTs[myImages.indexOf(myImage)] ? "铸造中..." :
-                                  "铸造"
-                              }
+                              <div className="flex flex-row items-center justify-center gap-2">
+                                <Image
+                                  src="/logo-opensea.png"
+                                  alt="Logo"
+                                  width={20}
+                                  height={20}
+                                  className={`${loadingMintNFTs[index] ? "animate-spin" : ""}`}
+                                />
+                                <span className={`${loadingMintNFTs[index] ? "text-gray-500" : "text-white"}`}>
+                                  {
+         
+                                    loadingMintNFTs[index] ? "铸造中..." :
+                                      "铸造"
+                                  }
+                                </span>
+                              </div>
+
+                  
 
                             </button>
 

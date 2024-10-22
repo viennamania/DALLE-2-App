@@ -19,8 +19,8 @@ function MyApp({ Component, pageProps }) {
   return (
 
     <QueryClientProvider client={queryClient}>
-      <ToastContainer />
       <ThirdwebProvider>
+        <ToastContainer />
         <Component {...pageProps} />
       </ThirdwebProvider>
     </QueryClientProvider>
