@@ -880,8 +880,7 @@ export default function Home() {
 
         {wallet && (
           <div className="flex flex-row items-center justify-center gap-2">
-            <span className="text-sm text-gray-500">Connected with</span>
-            <span className="text-sm leading-[21px] text-[#918E99]">
+            <span className="text-sm text-yellow-400 font-bold">
               {activeAccount.address.slice(0, 4)}...
               {activeAccount.address.slice(-4)}
           </span>
@@ -907,8 +906,10 @@ export default function Home() {
           <button
             onClick={disconnectWallet}
             className="
-              h-10 bg-[#FFFFFF] px-6 text-[#04080F]
-              rounded-xl border-2 border-sky-500 py-2
+              h-10 bg-gradient-to-r from-green-400 to-blue-500
+              hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600
+              text-white px-6 py-2 rounded-xl border-2 border-sky-500
+              text-sm text-center
               "
             >
             Disconnect Wallet

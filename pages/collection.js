@@ -18,7 +18,7 @@ import { PutBlobResult } from '@vercel/blob';
 
 import { usePathname, useRouter } from 'next/navigation'
 
-import { useAnimation, motion } from "framer-motion";
+import { useAnimation, motion, m } from "framer-motion";
 
 // toasts
 import { toast } from 'react-toastify';
@@ -702,7 +702,7 @@ export default function Home() {
         )}
 
 
-{loginSession != ""
+        {loginSession != ""
           && userid != null && userid != 'null' && userid != "" ? (
 
           <div className="mt-0 flex flex-col items-center justify-center gap-2">
@@ -903,8 +903,10 @@ export default function Home() {
                       height={50}
                     />
                   </button>
-                  <span className="text-center text-sm text-white">
-                    {erc721ContractAddress}
+                  <span className="text-center text-sm text-yellow-400 font-bold">
+                    {
+                      erc721ContractAddress.substring(0, 5) + "..." + erc721ContractAddress.substring(erc721ContractAddress.length - 5)
+                    }
                   </span>
                 </div>
               ) : (
@@ -937,13 +939,20 @@ export default function Home() {
 
           )}
 
+        {/* Total: {totalSupply} */}
+        <div className="w-full mt-2 text-start text-sm text-white">
+          总计:{' '}
+          <span className="text-xl text-yellow-400 font-bold">
+          {myImages.length}
+          </span>
+        </div>
 
         {/* if userid is 'songpa', show my images */}
         {loginSession != ""
         && userid != null && userid != 'null' && userid != "" && (
 
           <div className="
-          xl:w-1/2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-4">
+          xl:w-1/2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4">
           
 
             {myImages.map((item, index) => (

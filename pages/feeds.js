@@ -295,7 +295,7 @@ export default function Home() {
 
 
         <div className="
-          xl:w-1/2 grid grid-cols-1 xl:grid-cols-3 gap-4 mt-4 p-4
+          xl:w-1/2 grid grid-cols-1 xl:grid-cols-3 gap-4 mt-4
           w-full
         ">
         
