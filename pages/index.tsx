@@ -830,9 +830,10 @@ export default function Home() {
 
       <main
         className="
-        flex flex-col items-center justify-center gap-2 mb-32 p-4
+        flex flex-col items-center justify-start gap-2 mb-24 p-4 min-h-screen
         bg-gradient-to-r from-green-400 to-blue-500
-      ">
+        "
+      >
 
         {/*
         <Image
@@ -1286,7 +1287,7 @@ export default function Home() {
               
           ) : (
 
-            <>
+            <div className="flex flex-col items-center justify-center gap-2">
 
                 {results.map((result) => {
                   return (
@@ -1305,7 +1306,17 @@ export default function Home() {
                   );
                 })}
 
-            </>
+                {/* Olga login 하면 이미지를 저장할수 있습니다. 중국어로 변경 */}
+                <div className="flex flex-row items-center justify-center gap-2">
+                  {/* dot */}
+                  <span className="text-red-600 text-2xl">•</span>
+                  {' '}
+                  <span
+                    className="text-lg text-yellow-400"
+                  >Olga 登录后，您可以保存图片。</span>
+                </div>
+
+            </div>
 
           )}
 

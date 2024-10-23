@@ -218,7 +218,7 @@ export default function Home() {
 
       <main
         className="
-        flex flex-col items-center justify-center gap-2 mb-32 p-4
+        flex flex-col items-center justify-start gap-2 mb-32 p-4 min-h-screen
         bg-gradient-to-r from-green-400 to-blue-500
       ">
 
