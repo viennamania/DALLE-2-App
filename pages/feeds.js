@@ -331,18 +331,26 @@ export default function Home() {
                   />
                 )}
 
-                <div className=" w-full flex flex-row items-center justify-start p-2 gap-2">
-                      <Image
-                        src="/olga/images/avatar.svg"
-                        alt="user"
-                        width={30}
-                        height={30}
-                      />
-                      <span className="text-xs xl:text-sm font-bold">
-                      {
-                        item?.username
-                      }
-                      </span>
+                <div className=" w-full flex flex-row items-center justify-between p-2 gap-2">
+                      <div className="flex flex-row items-center gap-2">
+                        <Image
+                          src="/olga/images/avatar.svg"
+                          alt="user"
+                          width={30}
+                          height={30}
+                        />
+                        <span className="text-xs xl:text-sm font-bold">
+                        {
+                          item?.username
+                        }
+                        </span>
+                      </div>
+                      {/* follow button */}
+                      <button
+                        className="bg-blue-500 hover:bg-blue-700 text-xs text-white py-2 px-4 rounded"
+                      >
+                        关注
+                      </button>
                 </div>
 
                 <Image
