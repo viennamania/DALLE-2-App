@@ -218,12 +218,12 @@ export default function Home() {
 
       <main
         className="
-        flex flex-col items-center justify-start gap-2 mb-32 p-4 min-h-screen
+        flex flex-col items-center justify-start gap-2 mb-32 p-0 min-h-screen
         bg-gradient-to-r from-green-400 to-blue-500
       ">
 
         
-
+        {/*
         <div className='flex flex-row gap-5 items-center justify-center p-2'>
           <h1 className="text-sm font-semibold text-black">
             <span className='
@@ -238,6 +238,7 @@ export default function Home() {
             ">ChatGPT 4o</span>
           </h1>
         </div>
+        */}
 
 
         {/* select sort (latest, popular) */}
@@ -313,7 +314,7 @@ export default function Home() {
           {imageList &&
           imageList.map((item) => (
             <div key={item._id}
-              className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2
+              className=" overflow-hidden flex flex-col items-center justify-center gap-2
               bg-white
               "
             >
@@ -329,6 +330,20 @@ export default function Home() {
                     height={20}
                   />
                 )}
+
+                <div className=" w-full flex flex-row items-center justify-start p-2 gap-2">
+                      <Image
+                        src="/olga/images/avatar.svg"
+                        alt="user"
+                        width={30}
+                        height={30}
+                      />
+                      <span className="text-xs xl:text-sm font-bold">
+                      {
+                        item?.username
+                      }
+                      </span>
+                </div>
 
                 <Image
                   // when click image, preview image
