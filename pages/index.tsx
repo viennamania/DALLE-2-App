@@ -429,27 +429,35 @@ export default function Home() {
   // loading my images
   const [loadingMyImages, setLoadingMyImages] = useState(false);
   useEffect(() => {
+
     if (userid != null && userid != 'null' && userid != "" ) {
       setLoadingMyImages(true);
       axios
         .get(`/api/getImages?userid=${userid}`)
         .then((res) => {
           if (res.data.length > 0) {
-
             
             setMyImages(res.data);
+
+
+
           } else {
             
           
           }
 
+          setLoadingMyImages(false);
+
         })
         .catch((err) => {
           console.log(err);
+
+          setLoadingMyImages(false);
         }
       );
-      setLoadingMyImages(false);
+      
     }
+
   }, [ userid ]);
 
 
@@ -1476,252 +1484,277 @@ export default function Home() {
           )}
 
 
-        {/* if userid is 'songpa', show my images */}
-        {loginSession != ""
-        && userid != null && userid != 'null' && userid != "" && (
-
-          <div className="flex flex-col items-center justify-center gap-2 mt-4">
-
-            {/* count of my images */}
-            <div className="w-full flex flex-row items-center justify-start gap-2">
-              {/* dot */}
-              <span className="text-red-600 text-2xl">•</span>
-              {' '}
-              <div className="text-center text-sm text-yellow-400 font-bold">
-                <span className="text-white text-xs">我的图片</span>{' '}
-                {myImages.length}
-                <span className="text-white text-xs">张</span>
+            { loadingMyImages ? (
+              <div className="
+                w-full
+                flex flex-row items-center justify-center gap-2">
+                <Image
+                  src="/logo-chatgpt.png"
+                  alt="Logo"
+                  width={24}
+                  height={24}
+                  className="animate-spin"
+                />
+                <span className="text-yellow-400 text-xl font-bold">加载中...</span>
               </div>
-            </div>
+            ) : (
 
-            <div className="
-            
-              xl:w-1/2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4">
-            
+              <>
 
-              {myImages.map((myImage, index) => {
+              {/* if userid is 'songpa', show my images */}
+              {loginSession != ""
+              && userid != null && userid != 'null' && userid != "" && (
 
-
-                return (
+                <div className="w-full flex flex-col items-center justify-center gap-2 mt-4">
 
 
-                  <div
-                    key={myImage._id}
-                    className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2
-                    bg-white
-                    pb-4
-                    "
-                  >
-
-                    {/* opensea logo is located top and left side of image overlapping */}
-
-                    <div  className="relative w-full h-full">
-
-                      {myImage.erc721ContractAddress !== "" && myImage.erc721ContractAddress !== null && myImage.erc721ContractAddress !== undefined && (
-                        <Image
-                          className="absolute top-1 left-1"
-                          src="/icon-opensea.png"
-                          alt="Logo"
-                          width={20}
-                          height={20}
-                        />
-                      )}
-
-                      <Image
-                        // when click image, preview image
-                        onClick={() => {
-                          window.open(myImage.image, "_blank");
-                        } }
-                        
-                        src={myImage.image}
-                        alt="My Image"
-                        width={400}
-                        height={400}
-                        //onClick={() => download(myImage.image)}
-                        // object-fit: cover;
-
-                        //style = {{objectFit: "cover"}}
-
-                        //className={styles.imgPreview}
-                        /*
-                        .imgPreview {
-                          width: 100%;
-                          border-radius: 10px;
-                        }
-
-                        .imgPreview:hover,
-                        .imgPreview:focus,
-                        .imgPreview:active {
-                          transform: scale(1.1);
-                          cursor: pointer;
-                          transition-duration: 1s;
-                        }
-                        */
-
-                        className="
-                        hover:scale-110
-                        cursor-pointer
-                        transition-transform
-                        duration-1000
-                        "
-                      
-
-                        style = {
-                          {
-                            objectFit: "cover",
-                            width: "100%",
-                            height: "100%",
-                          }
-                        }
-
-                      />
-
+                  <div className="w-full flex flex-row items-center justify-start gap-2">
+                    {/* dot */}
+                    <span className="text-red-600 text-2xl">•</span>
+                    {' '}
+                    <div className="text-center">
+                      <span className="text-white text-xs">我的图片</span>{' '}
+                      <span className="text-2xl text-yellow-400 font-bold">{myImages.length}</span>{' '}
+                      <span className="text-white text-xs">张</span>
                     </div>
+                  </div>
+
+
+              
+
+                  <div className="
+                  
+                    xl:w-1/2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+                  
+
+                    {myImages.map((myImage, index) => {
+
+
+                      return (
+
+
+                        <div
+                          key={myImage._id}
+                          className="border border-gray-200 rounded-xl overflow-hidden flex flex-col items-center justify-center gap-2
+                          bg-white
+                          pb-4
+                          "
+                        >
+
+                          {/* opensea logo is located top and left side of image overlapping */}
+
+                          <div  className="relative w-full h-full">
+
+                            {myImage.erc721ContractAddress !== "" && myImage.erc721ContractAddress !== null && myImage.erc721ContractAddress !== undefined && (
+                              <Image
+                                className="absolute top-1 left-1"
+                                src="/icon-opensea.png"
+                                alt="Logo"
+                                width={20}
+                                height={20}
+                              />
+                            )}
+
+                            <Image
+                              // when click image, preview image
+                              onClick={() => {
+                                window.open(myImage.image, "_blank");
+                              } }
+                              
+                              src={myImage.image}
+                              alt="My Image"
+                              width={400}
+                              height={400}
+                              //onClick={() => download(myImage.image)}
+                              // object-fit: cover;
+
+                              //style = {{objectFit: "cover"}}
+
+                              //className={styles.imgPreview}
+                              /*
+                              .imgPreview {
+                                width: 100%;
+                                border-radius: 10px;
+                              }
+
+                              .imgPreview:hover,
+                              .imgPreview:focus,
+                              .imgPreview:active {
+                                transform: scale(1.1);
+                                cursor: pointer;
+                                transition-duration: 1s;
+                              }
+                              */
+
+                              className="
+                              hover:scale-110
+                              cursor-pointer
+                              transition-transform
+                              duration-1000
+                              "
+                            
+
+                              style = {
+                                {
+                                  objectFit: "cover",
+                                  width: "100%",
+                                  height: "100%",
+                                }
+                              }
+
+                            />
+
+                          </div>
 
 
 
-                    {/* myImage.created_at */}
-                    <div className="text-center text-xs xl:text-sm text-gray-500 p-1"> 
-                      {new Date(myImage.createdAt).toLocaleString()}
-                    </div>
-                    {/* prompt */}
-                    <div className="text-center text-xs xl:text-sm text-gray-500 p-2"> 
-                      {myImage.prompt}
-                    </div>
+                          {/* myImage.created_at */}
+                          <div className="text-center text-xs xl:text-sm text-gray-500 p-1"> 
+                            {new Date(myImage.createdAt).toLocaleString()}
+                          </div>
+                          {/* prompt */}
+                          <div className="text-center text-xs xl:text-sm text-gray-500 p-2"> 
+                            {myImage.prompt}
+                          </div>
 
-                    {/* mint NFT button */}
+                          {/* mint NFT button */}
 
-                    {erc721ContractAddress !== "" && erc721ContractAddress !== null && erc721ContractAddress !== undefined && (
+                          {erc721ContractAddress !== "" && erc721ContractAddress !== null && erc721ContractAddress !== undefined && (
 
-                      <>
+                            <>
 
-                        {myImage.erc721ContractAddress === "" || myImage.erc721ContractAddress === null || myImage.erc721ContractAddress === undefined ? (
-                          
-                          <div className="flex flex-row items-center justify-center gap-2">
-
-                            <div className="flex flex-row items-center justify-center gap-2">
-
-                              {/*
-                              <span className=" text-xs font-bold text-[#d3a947]">
-                                价格 : 100 POWER
-                              </span>
-                              */}
-
-                              <button
-                                disabled={loadingMintNFTs[index]}
-                                onClick={() => mintNFT(myImage.image, myImage.prompt, index)}
-                                className={`
-                                  ${loadingMintNFTs[index] ? 
-                                  //"bg-gray-200" : "bg-blue-500"
-                                  "bg-gray-200" : "bg-[#d3a947]"
-                                  } text-white text-sm px-4 rounded focus:outline-none focus:shadow-outline mb-0
-                                    p-2 
-                                  `}
-                              >
+                              {myImage.erc721ContractAddress === "" || myImage.erc721ContractAddress === null || myImage.erc721ContractAddress === undefined ? (
+                                
                                 <div className="flex flex-row items-center justify-center gap-2">
+
+                                  <div className="flex flex-row items-center justify-center gap-2">
+
+                                    {/*
+                                    <span className=" text-xs font-bold text-[#d3a947]">
+                                      价格 : 100 POWER
+                                    </span>
+                                    */}
+
+                                    <button
+                                      disabled={loadingMintNFTs[index]}
+                                      onClick={() => mintNFT(myImage.image, myImage.prompt, index)}
+                                      className={`
+                                        ${loadingMintNFTs[index] ? 
+                                        //"bg-gray-200" : "bg-blue-500"
+                                        "bg-gray-200" : "bg-[#d3a947]"
+                                        } text-white text-sm px-4 rounded focus:outline-none focus:shadow-outline mb-0
+                                          p-2 
+                                        `}
+                                    >
+                                      <div className="flex flex-row items-center justify-center gap-2">
+                                        <Image
+                                          src="/logo-opensea.png"
+                                          alt="Logo"
+                                          width={20}
+                                          height={20}
+                                          className={`${loadingMintNFTs[index] ? "animate-spin" : ""}`}
+                                        />
+                                        <span className={`${loadingMintNFTs[index] ? "text-gray-500" : "text-white"}`}>
+                                          {
+                
+                                            loadingMintNFTs[index] ? "铸造中..." :
+                                              "铸造"
+                                          }
+                                        </span>
+                                      </div>
+
+                          
+
+                                    </button>
+
+                                  </div>
+
+                                  {/* delete button */}
+                                  <button
+                                    disabled={loadingDeleteMyImage[index]}
+                                    onClick={() => deleteMyImage(myImage.image, index)}
+                                    className={`
+                                      ${loadingDeleteMyImage[index] ? "bg-gray-200" : "bg-red-500"
+                                      } text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                                  >
+                                    {
+                                      ////loadingDeleteMyImage[myImages.indexOf(myImage)] ? "Deleting..." : "Delete"
+                                      // chinese
+                                      loadingDeleteMyImage[myImages.indexOf(myImage)] ? "删除中..." : "删除"
+                                    }
+                                  </button>
+
+
+                                </div>
+                              
+
+
+                              ) : (
+                                <div className="text-center text-xs xl:text-sm text-gray-500 p-2">
+
+                                {/* OpenSea Logo */}
+                                {/*
+                                <Image
+                                  src="/icon-opensea.png"
+                                  alt="Logo"
+                                  width={20}
+                                  height={20}
+                                />
+                              
+                                <button
+                                  // goto opensea
+                                  onClick={() => {
+                                    window.open(`https://opensea.io/assets/matic/${myImage.erc721ContractAddress}/${myImage.tokenid}`, "_blank");
+                                  }}
+                                >
                                   <Image
-                                    src="/logo-opensea.png"
+                                    src="/icon-opensea.png"
                                     alt="Logo"
                                     width={20}
                                     height={20}
-                                    className={`${loadingMintNFTs[index] ? "animate-spin" : ""}`}
                                   />
-                                  <span className={`${loadingMintNFTs[index] ? "text-gray-500" : "text-white"}`}>
-                                    {
-          
-                                      loadingMintNFTs[index] ? "铸造中..." :
-                                        "铸造"
-                                    }
-                                  </span>
+                                
+                                </button>
+                                */}
                                 </div>
+                              )}
 
-                    
-
-                              </button>
-
-                            </div>
-
-                            {/* delete button */}
-                            <button
-                              disabled={loadingDeleteMyImage[index]}
-                              onClick={() => deleteMyImage(myImage.image, index)}
-                              className={`
-                                ${loadingDeleteMyImage[index] ? "bg-gray-200" : "bg-red-500"
-                                } text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-                            >
-                              {
-                                ////loadingDeleteMyImage[myImages.indexOf(myImage)] ? "Deleting..." : "Delete"
-                                // chinese
-                                loadingDeleteMyImage[myImages.indexOf(myImage)] ? "删除中..." : "删除"
-                              }
-                            </button>
+                            </>
 
 
-                          </div>
-                        
+                          )}
 
-
-                        ) : (
-                          <div className="text-center text-xs xl:text-sm text-gray-500 p-2">
-
-                          {/* OpenSea Logo */}
+                          {/* download from cloud image myImage.image to local album in mobile */}
                           {/*
-                          <Image
-                            src="/icon-opensea.png"
-                            alt="Logo"
-                            width={20}
-                            height={20}
-                          />
-                        
                           <button
-                            // goto opensea
-                            onClick={() => {
-                              window.open(`https://opensea.io/assets/matic/${myImage.erc721ContractAddress}/${myImage.tokenid}`, "_blank");
-                            }}
+                            className="text-sm text-white bg-blue-500 p-2 rounded-lg"
+                            onClick={
+                              () => {
+                                
+                                downloadToAlbum(myImage.image, myImage.prompt);
+
+                              }
+                            }
                           >
-                            <Image
-                              src="/icon-opensea.png"
-                              alt="Logo"
-                              width={20}
-                              height={20}
-                            />
-                          
+                            下载到相册
                           </button>
+
                           */}
-                          </div>
-                        )}
-
-                      </>
 
 
-                    )}
 
-                    {/* download from cloud image myImage.image to local album in mobile */}
-                    {/*
-                    <button
-                      className="text-sm text-white bg-blue-500 p-2 rounded-lg"
-                      onClick={
-                        () => {
-                          
-                          downloadToAlbum(myImage.image, myImage.prompt);
-
-                        }
-                      }
-                    >
-                      下载到相册
-                    </button>
-
-                    */}
-
-
+                        </div>
+                      );
+                    })}
 
                   </div>
-                );
-              })}
+       
 
-            </div>
+                </div>
 
-          </div>
+              )}
+
+            </>
 
         )}
 

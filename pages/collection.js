@@ -941,12 +941,16 @@ export default function Home() {
 
         {/* Total: {totalSupply} */}
         {loginSession != "" && (
-          <div className="w-full mt-2 text-start text-sm text-white">
-            总计:{' '}
-            <span className="text-xl text-yellow-400 font-bold">
-            {myImages.length}
-            </span>
-          </div>
+            <div className="w-full flex flex-row items-center justify-start gap-2">
+              {/* dot */}
+              <span className="text-red-600 text-2xl">•</span>
+              {' '}
+              <div className="text-center">
+                <span className="text-white text-xs">我的图片</span>{' '}
+                <span className="text-2xl text-yellow-400 font-bold">{myImages.length}</span>{' '}
+                <span className="text-white text-xs">张</span>
+              </div>
+            </div>
         )}
 
         {/* if userid is 'songpa', show my images */}
