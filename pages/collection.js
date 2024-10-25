@@ -990,6 +990,23 @@ export default function Home() {
                         bg-white
                         "
                       >
+
+                        <div className=" w-full flex flex-row items-center justify-between p-2 gap-2">
+                            <div className="flex flex-row items-center gap-2">
+                              <Image
+                                src="/olga/images/avatar.svg"
+                                alt="user"
+                                width={30}
+                                height={30}
+                              />
+                              <span className="text-xs xl:text-sm font-bold">
+                              {
+                                item?.username
+                              }
+                              </span>
+                            </div>
+                        </div>
+                        
                         <Image
                           onClick={() => {
                             window.open(item.image, "_blank");
@@ -1061,21 +1078,7 @@ export default function Home() {
                                   (new Date(item?.updatedAt)).toLocaleString()
                                 }
                               </div>
-                              <div className="flex flex-row items-center gap-2">
-                                <Image
-                                  src="/olga/images/avatar.svg"
-                                  alt="user"
-                                  width={20}
-                                  height={20}
-                                />
-                                <span className="text-xs xl:text-sm font-bold">
-                                {
-                                item?.username && item?.username.length > 5 ? item?.username.substring(0, 5) + "..."
-                                : item.userid && item.userid.length > 5 ? item.userid.substring(0, 5) + "..."
-                                : item.userid
-                                }
-                                </span>
-                              </div>
+
                             </div>
 
 

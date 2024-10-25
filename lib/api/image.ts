@@ -428,6 +428,7 @@ export async function findAllNFTsByUserid(data: any) {
       projection: {
         _id: 1,
         userid: 1,
+        username: 1,
         prompt: 1,
         englishPrompt: 1,
         image: 1,
