@@ -21,6 +21,7 @@ import { useAnimation, motion } from "framer-motion";
 
 // toasts
 import { toast } from 'react-toastify';
+import { set } from "react-hook-form";
 
 
 
@@ -60,9 +61,11 @@ export default function Home() {
   // get image list from api
   const [imageList, setImageList] = useState([]);
 
-
+  const [loadingMyImages, setLoadingMyImages] = useState(false);
   useEffect(() => {
           
+    setLoadingMyImages(true);
+
     axios
       .get(`/api/getAllNFTs?sort=${sort}`)
       .then((res) => {
@@ -71,11 +74,15 @@ export default function Home() {
 
         setImageList(res.data);
 
+        
+        setLoadingMyImages(false);
 
 
       })
       .catch((err) => {
         console.log(err);
+
+        setLoadingMyImages(false);
       });
     
 
@@ -295,238 +302,246 @@ export default function Home() {
         {/* image list */}
 
 
-        <div className="
-          xl:w-1/2 grid grid-cols-1 xl:grid-cols-3 gap-4 mt-4
-          w-full
-        ">
-        
+        { loadingMyImages ? (
+            <div className="
+              w-full
+              flex flex-row items-center justify-center gap-2 mt-4">
+              <Image
+                src="/logo-chatgpt.png"
+                alt="Logo"
+                width={24}
+                height={24}
+                className="animate-spin"
+              />
+              <span className="text-yellow-400 text-xl font-bold">加载中...</span>
+            </div>
+          ) : (
+
+            <>
+
+          <div className="
+            xl:w-1/2 grid grid-cols-1 xl:grid-cols-3 gap-4 mt-4
+            w-full
+          ">
+      
+            {imageList &&
+            imageList.map((item) => (
+              <div key={item._id}
+                className=" overflow-hidden flex flex-col items-center justify-center gap-2
+                bg-white
+                "
+              >
+
           
 
-  
+                  {item.erc721ContractAddress !== "" && item.erc721ContractAddress !== null && item.erc721ContractAddress !== undefined && (
+                    <Image
+                      className="absolute top-1 left-1"
+                      src="/icon-opensea.png"
+                      alt="Logo"
+                      width={20}
+                      height={20}
+                    />
+                  )}
 
-        {/*
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
-          gap-4 xl:gap-2 p-4
-          w-full
-        ">
-        */}
-          {imageList &&
-          imageList.map((item) => (
-            <div key={item._id}
-              className=" overflow-hidden flex flex-col items-center justify-center gap-2
-              bg-white
-              "
-            >
+                  <div className=" w-full flex flex-row items-center justify-between p-2 gap-2">
+                        <div className="flex flex-row items-center gap-2">
+                          <Image
+                            src="/olga/images/avatar.svg"
+                            alt="user"
+                            width={30}
+                            height={30}
+                          />
+                          <span className="text-xs xl:text-sm font-bold">
+                          {
+                            item?.username
+                          }
+                          </span>
+                        </div>
+                        {/* follow button */}
+                        <button
+                          className="bg-blue-500 hover:bg-blue-700 text-xs text-white py-2 px-4 rounded"
+                        >
+                          关注
+                        </button>
+                  </div>
 
-         
-
-                {item.erc721ContractAddress !== "" && item.erc721ContractAddress !== null && item.erc721ContractAddress !== undefined && (
                   <Image
-                    className="absolute top-1 left-1"
-                    src="/icon-opensea.png"
-                    alt="Logo"
-                    width={20}
-                    height={20}
-                  />
-                )}
+                    // when click image, preview image
+                    onClick={() => {
+                      window.open(item.image, "_blank");
+                    } }
+                    
+                    src={item.image}
+                    alt="Image"
+                    width={500}
+                    height={500}
+                    //onClick={() => download(myImage.image)}
+                    // object-fit: cover;
 
-                <div className=" w-full flex flex-row items-center justify-between p-2 gap-2">
+                    //style = {{objectFit: "cover"}}
+
+                    //className={styles.imgPreview}
+                    /*
+                    .imgPreview {
+                      width: 100%;
+                      border-radius: 10px;
+                    }
+
+                    .imgPreview:hover,
+                    .imgPreview:focus,
+                    .imgPreview:active {
+                      transform: scale(1.1);
+                      cursor: pointer;
+                      transition-duration: 1s;
+                    }
+                    */
+
+                    className="
+
+                    hover:scale-110
+                    cursor-pointer
+                    transition-transform
+                    duration-1000
+                    "
+
+
+                    style = {
+                      {
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                      }
+                    }
+
+                  />
+
+
+                <div className="w-full flex flex-col items-start justify-start gap-2 p-4">
+                
+
+
+                  <div className="w-full flex flex-row items-between justify-start gap-2">
+
+                    <div className="w-full flex flex-col items-start justify-between gap-2
+                      text-xs xl:text-xs
+                      text-black
+                    ">
                       <div className="flex flex-row items-center gap-2">
                         <Image
-                          src="/olga/images/avatar.svg"
-                          alt="user"
-                          width={30}
-                          height={30}
+                          src="/olga/images/timeline.svg"
+                          alt="date"
+                          width={20}
+                          height={20}
                         />
-                        <span className="text-xs xl:text-sm font-bold">
                         {
-                          item?.username
+                          (new Date(item?.updatedAt)).toLocaleString()
                         }
-                        </span>
                       </div>
-                      {/* follow button */}
-                      <button
-                        className="bg-blue-500 hover:bg-blue-700 text-xs text-white py-2 px-4 rounded"
-                      >
-                        关注
-                      </button>
-                </div>
 
-                <Image
-                  // when click image, preview image
-                  onClick={() => {
-                    window.open(item.image, "_blank");
-                  } }
-                  
-                  src={item.image}
-                  alt="Image"
-                  width={500}
-                  height={500}
-                  //onClick={() => download(myImage.image)}
-                  // object-fit: cover;
-
-                  //style = {{objectFit: "cover"}}
-
-                  //className={styles.imgPreview}
-                  /*
-                  .imgPreview {
-                    width: 100%;
-                    border-radius: 10px;
-                  }
-
-                  .imgPreview:hover,
-                  .imgPreview:focus,
-                  .imgPreview:active {
-                    transform: scale(1.1);
-                    cursor: pointer;
-                    transition-duration: 1s;
-                  }
-                  */
-
-                  className="
-
-                  hover:scale-110
-                  cursor-pointer
-                  transition-transform
-                  duration-1000
-                  "
+                    </div>
 
 
-                  style = {
-                    {
-                      objectFit: "cover",
-                      width: "100%",
-                      height: "100%",
-                    }
-                  }
 
-                />
-
-
-              <div className="w-full flex flex-col items-start justify-start gap-2 p-4">
-              
-
-
-                <div className="w-full flex flex-row items-between justify-start gap-2">
-
-                  <div className="w-full flex flex-col items-start justify-between gap-2
-                    text-xs xl:text-xs
-                    text-black
-                  ">
-                    <div className="flex flex-row items-center gap-2">
-                      <Image
-                        src="/olga/images/timeline.svg"
-                        alt="date"
-                        width={20}
-                        height={20}
-                      />
+                    <div className="flex flex-row items-center justify-center gap-2">
+                              
                       {
-                        (new Date(item?.updatedAt)).toLocaleString()
-                      }
-                    </div>
+                        //item?.userid === userid ? (
+                        false ? (
 
-                  </div>
-
-
-
-                  <div className="flex flex-row items-center justify-center gap-2">
-                            
-                    {
-                      //item?.userid === userid ? (
-                      false ? (
-
-                      <motion.img
-                        className="relative w-10 h-10 overflow-hidden shrink-0"
-                        alt=""
-                        src="/olga/images/heart3line.svg"
-                        whileHover={{ scale: 1.3 }}
-                        whileTap={{ scale: 0.8 }}
-                      />
-                    ) : (
-
-
-                      <button
-                        type="button"
-    
-                        onClick={ () => {
-                          
-                          /*
-                          if (item?.likeYn) {
-                            
-                            unlikeNft(item._id)
-
-
-                          } else {
-                            
-                            likeNft(item._id)
-
-                          }
-                          */
-                         likeNft(item._id)
-                        
-                        } }
-                      >
-                        {item?.likes > 0 ? (
-                          <motion.img
-                            className="relative w-10 h-10 overflow-hidden shrink-0"
-                            alt=""
-                            src="/olga/images/heart3fill.svg"
-                            whileHover={{ scale: 1.3 }}
-                            whileTap={{ scale: 0.8 }}
-                          />
-                        ) : (
-                          <motion.img
-                            className="relative w-10 h-10 overflow-hidden shrink-0"
-                            alt=""
-                            src="/olga/images/heart3line.svg"
-                            whileHover={{ scale: 1.3 }}
-                            whileTap={{ scale: 0.8 }}
-                          />
-                        ) }
-                    
-
-                      </button>
-
-                    )}
-
-                    <div className="relative">
-                      {item?.likes > 0 ? (
-                        <span className="text-lg">
-                          {item?.likes}
-                        </span>
+                        <motion.img
+                          className="relative w-10 h-10 overflow-hidden shrink-0"
+                          alt=""
+                          src="/olga/images/heart3line.svg"
+                          whileHover={{ scale: 1.3 }}
+                          whileTap={{ scale: 0.8 }}
+                        />
                       ) : (
-                        <span className="text-sm">
-                          0
-                        </span>
+
+
+                        <button
+                          type="button"
+      
+                          onClick={ () => {
+                            
+                            /*
+                            if (item?.likeYn) {
+                              
+                              unlikeNft(item._id)
+
+
+                            } else {
+                              
+                              likeNft(item._id)
+
+                            }
+                            */
+                          likeNft(item._id)
+                          
+                          } }
+                        >
+                          {item?.likes > 0 ? (
+                            <motion.img
+                              className="relative w-10 h-10 overflow-hidden shrink-0"
+                              alt=""
+                              src="/olga/images/heart3fill.svg"
+                              whileHover={{ scale: 1.3 }}
+                              whileTap={{ scale: 0.8 }}
+                            />
+                          ) : (
+                            <motion.img
+                              className="relative w-10 h-10 overflow-hidden shrink-0"
+                              alt=""
+                              src="/olga/images/heart3line.svg"
+                              whileHover={{ scale: 1.3 }}
+                              whileTap={{ scale: 0.8 }}
+                            />
+                          ) }
+                      
+
+                        </button>
+
                       )}
+
+                      <div className="relative">
+                        {item?.likes > 0 ? (
+                          <span className="text-lg">
+                            {item?.likes}
+                          </span>
+                        ) : (
+                          <span className="text-sm">
+                            0
+                          </span>
+                        )}
+                      </div>
+
                     </div>
 
+
+
+
+                  </div>
+                  
+                  <div className="w-full flex flex-row items-center justify-between gap-2
+                  ">
+                    {
+                      item.prompt?.length > 100 ?
+                      item.prompt?.substring(0, 100) + "..."
+                      : item.prompt
+                    }
                   </div>
 
-
-
-
-                </div>
-                
-                <div className="w-full flex flex-row items-center justify-between gap-2
-                ">
-                  {
-                    item.prompt?.length > 100 ?
-                    item.prompt?.substring(0, 100) + "..."
-                    : item.prompt
-                  }
                 </div>
 
               </div>
+            ))}
 
-            </div>
-          ))}
-
-        </div>
+          </div>
 
 
 
+        </>
+        )}
 
 
 

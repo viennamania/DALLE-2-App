@@ -1505,10 +1505,10 @@ export default function Home() {
               {loginSession != ""
               && userid != null && userid != 'null' && userid != "" && (
 
-                <div className="w-full flex flex-col items-center justify-center gap-2 mt-4">
+                <div className="w-full  flex flex-col items-center justify-center gap-2 mt-4">
 
 
-                  <div className="w-full flex flex-row items-center justify-start gap-2">
+                  <div className="w-full xl:w-1/2 flex flex-row items-center justify-start gap-2">
                     {/* dot */}
                     <span className="text-red-600 text-2xl">•</span>
                     {' '}
