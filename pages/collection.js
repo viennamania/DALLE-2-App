@@ -658,11 +658,11 @@ export default function Home() {
 
       <main
         className="
-        flex flex-col items-center justify-start gap-2 mb-32 p-4 min-h-screen
+        flex flex-col items-center justify-start gap-2  min-h-screen
         bg-gradient-to-r from-green-400 to-blue-500
       ">
 
-        <div className='flex flex-row gap-5 items-center justify-center p-2'>
+        <div className='flex flex-row gap-5 items-center justify-center p-2 mt-4'>
           <h1 className="text-sm font-semibold text-black">
             <span className='
               bg-white text-black font-semibold
@@ -960,7 +960,7 @@ export default function Home() {
             </div>
           ) : (
 
-            <>
+            <div className="w-full flex flex-col items-center justify-center gap-2">
         
             {loginSession != ""
             && userid != null && userid != 'null' && userid != "" && (
@@ -968,7 +968,7 @@ export default function Home() {
               <div className="w-full  flex flex-col items-center justify-center gap-2 mt-4">
 
 
-                <div className="w-full xl:w-1/2 flex flex-row items-center justify-start gap-2">
+                <div className="p-4 w-full xl:w-1/2 flex flex-row items-center justify-start gap-2">
                   {/* dot */}
                   <span className="text-red-600 text-2xl">•</span>
                   {' '}
@@ -1165,7 +1165,9 @@ export default function Home() {
 
             )}
 
-            </>
+            <div className="w-full flex flex-col items-center justify-center gap-2 h-20"></div>
+
+            </div>
           )}
 
         {/* https://olgagpt.com/sub/point_bonus_w.asp */}
