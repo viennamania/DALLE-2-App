@@ -186,7 +186,6 @@ export default function Home() {
 
           setLoading(false);
           setError(true);
-
           
           console.log("err=", err);
 
