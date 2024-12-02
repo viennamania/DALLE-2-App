@@ -323,9 +323,10 @@ export default async function handler(req, res) {
   if (isReal == "true") {
     // randomModel is 10, 11
     
-    randomModel = Math.floor(Math.random() * 2) + 10;
+    randomModel = Math.floor(Math.random() * 3) + 10;
 
-    //randomModel = 12;
+    ///randomModel = 13;
+
   }
 
   console.log("randomModel=", randomModel);
@@ -372,6 +373,9 @@ export default async function handler(req, res) {
   } else if (randomModel == 12) {
     hosting = "fal";
     model = "fal-ai/flux-pro/v1.1"; //  fal-ai/flux-pro/v1.1
+  } else if (randomModel == 13) {
+    hosting = "fal";
+    model = "fal-ai/flux-lora";
   }
 
 
