@@ -317,7 +317,7 @@ export default async function handler(req, res) {
   let randomModel = Math.floor(Math.random() * 7) + 0;
   //console.log("randomModel=", randomModel);
 
-  //randomModel = 6;
+  //randomModel = 5;
 
 
   if (isReal == "true") {
@@ -325,7 +325,7 @@ export default async function handler(req, res) {
     
     randomModel = Math.floor(Math.random() * 3) + 10;
 
-    ///randomModel = 13;
+    //randomModel = 13;
 
   }
 
@@ -352,8 +352,18 @@ export default async function handler(req, res) {
     model = "bytedance/sdxl-lightning-4step:5f24084160c9089501c1b3545d9be3c27883ae2239b6f412990e82d4a6210f8f";
 
   } else if (randomModel == 5) {
-    hosting = "fal";
-    model = "fal-ai/flux/schnell";
+    //hosting = "fal";
+    ///model = "fal-ai/flux/schnell";
+
+    //hosting = "replicate";
+    //model = "black-forest-labs/flux-dev";
+
+    //hosting = "fal";
+    //model = "fal-ai/fast-lcm-diffusion";
+
+    hosting = "replicate";
+    model = "bytedance/sdxl-lightning-4step:5f24084160c9089501c1b3545d9be3c27883ae2239b6f412990e82d4a6210f8f";
+
   
   } else if (randomModel == 6) {
     hosting = "fal";
@@ -367,15 +377,25 @@ export default async function handler(req, res) {
     model = "fal-ai/flux-realism";
 
   } else if (randomModel == 11) {
-    hosting = "fal";
-    model = "fal-ai/flux/dev";
+    //hosting = "fal";
+    //model = "fal-ai/flux/dev";
+
+    hosting = "replicate";
+    model = "black-forest-labs/flux-dev";
+
   
   } else if (randomModel == 12) {
     hosting = "fal";
     model = "fal-ai/flux-pro/v1.1"; //  fal-ai/flux-pro/v1.1
+
   } else if (randomModel == 13) {
-    hosting = "fal";
-    model = "fal-ai/flux-lora";
+    
+    //hosting = "fal";
+    //model = "fal-ai/flux-lora";
+
+    hosting = "replicate";
+    model = "black-forest-labs/flux-dev";
+
   }
 
 
